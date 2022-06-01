@@ -1,0 +1,40 @@
+# http port set
+server:
+  port: 8989
+  
+
+spring:
+#File size
+  servlet:
+    multipart:
+      max-file-size: 1KB
+      max-request-size: 1KB
+#oracle Connect       
+  datasource:
+     driver-class-name: oracle.jdbc.driver.OracleDriver
+     url:  jdbc:oracle:thin:@localhost:1521/xe
+     username: S20220604
+     password: tiger
+#ORM jpa:
+  jpa:
+    hibernate:
+      ddl-auto: none #create
+    properties:
+      hibernate:
+        show-sql: true
+        format_sql: true
+        
+  #view resolver(Template -> JSP Use)
+  mvc:
+    view:
+      prefix: /WEB-INF/views/
+      suffix: .jsp
+   
+# Mybatis
+mybatis:
+  # dto Location
+  # type-aliases-package: com.oracle.oBootMybatis03.model
+  # xml Location
+
+  config-location: classpath:configuration.xml
+  mapper-locations: classpath:mappers/*.xml    
