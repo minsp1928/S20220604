@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class MainLoginController {
 	 private static final Logger logger = LoggerFactory.getLogger(MainLoginController.class);
-		
+//--------------------------main----------------------------\\		
 		@RequestMapping(value = "header")
 		public String header() {
 			
@@ -25,6 +25,12 @@ public class MainLoginController {
 		public String list() {
 			
 			return "base/footer";
+		}
+//--------------------------login----------------------------\\
+		@RequestMapping(value = "login")
+		public String login() {
+			
+			return "mainLoginPms/login";   //로그인.jsp
 		}
 		
 
