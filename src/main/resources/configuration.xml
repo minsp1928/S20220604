@@ -6,6 +6,7 @@
 	<typeAliases>
 		<!-- <typeAlias alias="Emp" 	type="com.oracle.oBootMybatis01.model.Emp"/>
 		<typeAlias alias="Dept" type="com.oracle.oBootMybatis01.model.Dept"/> -->
-		</typeAliases>
+		<typeAlias alias="Message" type="com.oracle.S20220604.model.Message"/>
+	</typeAliases>
 
 </configuration>

@@ -55,7 +55,6 @@
 
 	function wsOpen(){
 		console.log("wsOpen  location.host: " + location.host);
-		alert("1.  wsOpen");
 		var wsUri = "ws://" +  location.host + "${pageContext.request.contextPath}/chating";
 		// WebSocket 프로토콜을 사용하여 통신하기 위해서는 WebSocket객체를 생성.
 		// 객체는 자동으로 서버로의 연결 -> 서버프로그램으로 가서 등록한다.
@@ -66,14 +65,11 @@
 		
 	function wsEvt() {
 		console.log(" wsEvt  start... ");
-		alert("3.wsEvt  start... ");
 		//소켓이 열리면 동작 
 		ws.onopen = function(data){ // onopen : 이벤트소스와의 연결 열릴 때 이벤트발생 [서버센트이벤트]connection이 맺어지면 실행된다.
 						// 여기에 담긴 data는 뭐지?? 
-		alert("6이전 data 가 뭔지? "+ data); //[object Event]  이라고 출력됨
 		console.log("wsEvt  소켓이 열리면 초기화 세팅하기..");
-			alert("6 wsEvt,소켓이 열리면 초기화 세팅하기.. ");
-			}
+		}
 		
 		//메시지를 받으면 동작 
 		// 서버에서도 데이터를 json형태로 전달해주기떄문에 받은 데이터를 json.parse메서드를 활용해서 파싱해야한다. 
@@ -82,7 +78,6 @@
 			
 			var msg = data.data; //?? data. data가 의미하는게 뭐지??
 			var memberSave = false;
-			alert(" 7. 15. ws.onmessage->"+msg)
 			if(msg != null && msg.trim() != ''){
 				memberSave = false;
 				// JSON 오브젝트를 자바스크립트 오브젝트로 변환
@@ -118,7 +113,6 @@
 					}
 					}else if(memberSave = true){
 			//		}else if(jsonMsg.type = "userSave"){
-					alert("16. userSave");
 					$('#member_sub').remove();
 					// 멤버가 더 있어서 여기userSave가 동작하면 여기 그 콤보박스 생긴걸 지우고 새로이 다시 셀렉트 박스 생성해줌
 					
@@ -126,7 +120,7 @@
 					// div로 감싸주면 재정의시 삭제(Refresh)후 다시 생성 
 					//var str = " <div id='member_sub' class='member_sub'> ";
 					var str = " ";
-					str  += " <select name='member' id='member_sub' class='member_sub'> ";
+					/* str  += " <select name='member' id='member_sub' class='member_sub'> ";
 					str  += " <option value='ALL'>전체 </option> "; 
 					$(jsonMsg).each(
 						function(){
@@ -141,7 +135,7 @@
 						}
 					);
 					str += " </select>"
-					str += " </div><p>"
+					str += " </div><p>" */
 					$('#member').append(str);	
 					memberSave = false;
 				
@@ -159,49 +153,21 @@
 		});
 	}
 
-	function chatName(){
+	$(document).ready(function() {
 		// 김준수
 		var userName = $("#userName").val();
 		console.log("chatName  userName: " + userName);
 		if(userName == null || userName.trim() == ""){
-			alert("사용자 이름을 입력해주세요.");
 			$("#userName").focus();
 		}else{
 			wsOpen(); //웹서비스를오픈함 위에 있는 메서드 동작
-			alert("4. wsOpen하고 난 이후 chatName() 펑션의 else문");
 			$("#meName").append('<input type="hidden" value="'+userName+'">'); 
 			$("#yourName").hide();
 			$("#yourMsg").show();
-			$("#yourNameDel").show();
-			alert("5 chatName 의 else의 wsOpen 이후append 언제? ")
 		}
-	}
+	});
 	
-/*     // 삭제시 처리 
-	function chatNameDelete(){
-		var userName = $("#userName").val();
-		var sessionId = $("#sessionId").val();
-		console.log("chatNameDelete  userName: " + userName);
-		console.log("chatNameDelete  sessionId: " + sessionId);
-		if(userName == null || userName.trim() == ""){
-			alert("사용자 이름을 입력해주세요.");
-			$("#userName").focus();
-		}else{
-			wsDeleteUser(sessionId);
-			window.close();
-		}
-	}
-    
-	// User Delete  Message 전송 
-	function wsDeleteUser(sessionId) {
-		var option ={
-				type: "userDelete",
-				sessionId : sessionId
-			}
-			// 자바스크립트의 값을 JSON 문자열로 변환
-			ws.send(JSON.stringify(option));
-	} */
-	
+
 	// User 등록  Message 전송  saveStatus --> Create/ Delete
 	function sendUser(saveStatus) {
 		var userOption ={
@@ -210,7 +176,6 @@
 				userName : $("#userName").val(),
 				saveStatus : saveStatus // 추가함, 삭제도 여기다 하려고
 			}
-		alert("8. sendUser Start..")
 		// 자바스크립트의 값을 JSON 문자열로 변환
 		ws.send(JSON.stringify(userOption));
 		if(saveStatus == "Delete") {
@@ -255,20 +220,12 @@
 			<table class="inputTable">
 				<tr>
 					<th>사용자명</th>
-					<th><input type="text" name="userName" id="userName"></th>
+					<th><input type="text" name="userName" id="userName" value="${user_id }"></th>
 					<th><button onclick="chatName()" id="startBtn">이름 등록</button></th>
 				</tr>
 			</table>
 		</div>
-		<div id="yourNameDel">
-			<table class="deleteTable">
-				<tr>
-					<th>사용자명 삭제</th>
-					<!-- <th><input type="text" name="userName" id="userName"></th> -->
-					<th><button onclick="sendUser('Delete')" id="startBtn">이름 삭제</button></th>
-				</tr>
-			</table>
-		</div>
+		
 		<div id="yourMsg">
 			<table class="inputTable">
 				<tr>

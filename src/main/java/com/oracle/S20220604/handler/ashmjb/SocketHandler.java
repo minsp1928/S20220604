@@ -14,6 +14,7 @@ import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
 
+import com.oracle.S20220604.model.Message;
 import com.oracle.S20220604.service.ashmjb.MessageService;
 
 @Component
@@ -37,10 +38,12 @@ public class SocketHandler extends TextWebSocketHandler {
 		// 메시지 발송
 		String msg = message.getPayload();
 		System.out.println("9. SocketHandler handleTextMessage msg => "+ msg);
-
+		
 		JSONObject jsonObj = jsonToObjectParser(msg); // 여기서 제이선으로 다시 파싱해줌
 		// type을 Get 하여 분기
 		String msgType = (String) jsonObj.get("type");
+		
+		
 		System.out.println("10. SocketHandler handleTextMessage msg Type -> "+ msgType);
 		
 		switch(msgType) {
@@ -50,7 +53,18 @@ public class SocketHandler extends TextWebSocketHandler {
 		System.out.printf("JSONUser: %s", jsonUser);
 		//전송 대상을 기준으로 분기
 		String yourName = (String) jsonObj.get("yourName");
+		yourName = "ALL";
 		System.out.println("SocketHandler handleTextMessage yourName -> "+ yourName);
+
+		String msgUserName = (String)jsonObj.get("userName");
+		String msgContent = (String)jsonObj.get("msg");
+		Message msgserv = new Message();
+		msgserv.setContent(msgContent);
+		msgserv.setSend_user_id(msgUserName);
+		msgserv.setRoom_num(1);
+		msgserv.setMsg_num(1);
+		int result = ms.insert(msgserv);
+		
 		//전체
 		if(yourName.equals("ALL")) {
 			for(String key : sessionMap.keySet()) {

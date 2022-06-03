@@ -9,7 +9,9 @@ public class ChattingController {
 	@RequestMapping("/chat")
 	public ModelAndView chat() {
 		System.out.println("ChattingController chat start");
+		String user_id = "namwoo";
 		ModelAndView mv = new ModelAndView();
+		mv.addObject("user_id", user_id);
 		mv.setViewName("/chatAshmjb/chatRoomMain");
 		return mv;
 	}
