@@ -22,4 +22,16 @@ public class ChattingController {
 		mv.setViewName("/chatAshmjb/text");
 		return mv;
 	}
+	
+	@RequestMapping(value="profileCreate")
+	public String profileCreate() {
+		
+		return "/chatAshmjb/profileCreate";
+	}
+	@RequestMapping(value="openChatCreate")
+	public String openChatCreate() {
+		
+		return "/chatAshmjb/openChatCreate";
+	}
+	
 }
