@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -58,15 +59,25 @@
 					</div>
 				</div>
 				
-		<!-- 	</span> -->
+		<!-- 	</span> --> 
 			<div class = "header_middle_img">
-				<img alt="로고이미지" src="/img/logo_sajomarket.png" id="logo_img">
+				<a href="${pageContext.request.contextPath}/main"><img alt="로고이미지" src="/img/logo_sajomarket.png" id="logo_img"></a>
 			</div>
 		</div>
-		<div class="header_login">
-			<button id="login_button">로그인</button>
-			<button id="login_button">회원가입</button>
+		
+		<div class="header_login"><!--로그인-->
+		<c:choose>
+			<c:when test="${user_id ne null }"><!--user_id가 있다면-->
+				<a href="#"><button id="logout_button">로그아웃</button></a><!--아이디 비우기-->
+				<a href="#"><button id="mypage_button">마이페이지</button></a>	<!--마이페이지로 이동-->
+			</c:when>
+			<c:otherwise>
+				<a href="${pageContext.request.contextPath}login"><button id="login_button">로그인</button></a>
+				<button id="join_button">회원가입</button><!--회원가입으로 연결  -->
+			</c:otherwise>
+		</c:choose>
 		</div>
+		
 	</header>
 	
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>

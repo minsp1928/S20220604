@@ -25,4 +25,5 @@ public class Member {
 	private Date join_date;
 	private String nickname;
 	private String nick_photo;
+	
 }
