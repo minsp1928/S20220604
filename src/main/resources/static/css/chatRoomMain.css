@@ -1,6 +1,6 @@
-@charset "EUC-KR";
+@charset "UTF-8";
 
-.main {
+.tool {
 	margin-top: 8px;
 	/* padding: 0 8px; */
 	display: flex;
@@ -28,7 +28,7 @@
 	background-color: #398750;
 }
 
-.main2 { /* ¿ÀÇÂÀÌ¶û qna°¨½Ñ°Å */
+.main2 { /* ì˜¤í”ˆì´ë‘ qnaê°ì‹¼ê±° */
 	display: flex;
 }
 
@@ -58,6 +58,10 @@ li, ol, ul {
 	font-size: 15px;
 	font-weight: 600;
 	color: white;
+}
+
+.btn_toOpenChat :hover{
+	background-color: aqua;
 }
 
 .toOpenChat {
@@ -132,8 +136,27 @@ li, ol, ul {
 	order: 1;
 	position: relative;
 	min-width: 445px;
-	
-	
+}
+
+.chatting .me{
+	color: blue;
+	text-align: right;
+}
+.chatting .others{
+	color: blue;
+	text-align: left;
+}
+input{
+	width: 330px;
+	height: 25px;
+}
+#yourMsg{
+	display: none;
+}
+
+.chatting_name {
+	min-height: 500px;
+	background-color: #c2eace;
 }
 
  .chatting_section{

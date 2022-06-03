@@ -62,7 +62,6 @@ public class SocketHandler extends TextWebSocketHandler {
 		msgserv.setContent(msgContent);
 		msgserv.setSend_user_id(msgUserName);
 		msgserv.setRoom_num(1);
-		msgserv.setMsg_num(1);
 		int result = ms.insert(msgserv);
 		
 		//전체

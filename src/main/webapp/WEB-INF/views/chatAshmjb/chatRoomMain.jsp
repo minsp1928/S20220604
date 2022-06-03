@@ -4,50 +4,11 @@
 <html>
 <head>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet"> <!-- 아이콘 -->
+
+<link href="/css/chatRoomMain.css"  rel="stylesheet" type="text/css"> 
 <meta charset="UTF-8">
-	<title>Chating</title>
-	<style>
-		*{
-			margin:0;
-			padding:0;
-		}
-		.container{
-			width: 500px;
-			margin: 0 auto;
-			padding: 25px
-		}
-		.container h1{
-			text-align: left;
-			padding: 5px 5px 5px 15px;
-			color: #FFBB00;
-			border-left: 3px solid #FFBB00;
-			margin-bottom: 20px;
-		}
-		.chating{
-			background-color: #000;
-			width: 500px;
-			height: 500px;
-			overflow: auto;
-		}
-		.chating .me{
-			color: #F6F6F6;
-			text-align: right;
-		}
-		.chating .others{
-			color: #FFE400;
-			text-align: left;
-		}
-		input{
-			width: 330px;
-			height: 25px;
-		}
-		#yourMsg{
-			display: none;
-		}
-		#yourNameDel{
-			display: none;
-		}
-	</style>
+<title>Chating</title>	
 </head>
 
 <script type="text/javascript">
@@ -107,9 +68,9 @@
 	                // 메시지이므로 오른쪽으로 정렬하는 클래스를 처리하고 메시지를 출력.     
 	                // 비교하여 같지 않다면 타인이 발신한 메시지이므로 왼쪽으로 정렬하는 클래스를 처리하고 메시지를 출력
 					if(jsonMsg.sessionId == $("#sessionId").val()){
-						$("#chating").append("<p class='me'>나 :" + jsonMsg.msg + "</p>");	
+						$("#chatting_content").append("<p class='me'>나 :" + jsonMsg.msg + "</p>");	
 					}else{
-						$("#chating").append("<p class='others'>" + jsonMsg.userName + " :" + jsonMsg.msg + "</p>");
+						$("#chatting_content").append("<p class='others'>" + jsonMsg.userName + " :" + jsonMsg.msg + "</p>");
 					}
 					}else if(memberSave = true){
 			//		}else if(jsonMsg.type = "userSave"){
@@ -154,7 +115,6 @@
 	}
 
 	$(document).ready(function() {
-		// 김준수
 		var userName = $("#userName").val();
 		console.log("chatName  userName: " + userName);
 		if(userName == null || userName.trim() == ""){
@@ -195,46 +155,77 @@
 			sessionId : $("#sessionId").val(), // $().val()하면 변한 밸류값을 바로바로 가져옴
 			userName : $("#userName").val(),
 			yourName : $("#member_sub").val(),
-			msg : $("#chatting").val()
+			msg : $("#message").val()
 		}
 		// 자바스크립트의 값을 JSON 문자열로 변환
 		ws.send(JSON.stringify(option));
-		$('#chatting').val("");
+		$('#message').val("");
 	}
 </script>
 <body>
  <jsp:include page="/WEB-INF/views/base/header.jsp" flush="true">
 	<jsp:param value="" name=""/>
 </jsp:include>
-	<div id="container" class="container">
+	<div id="tool" class="tool">
+		<div class="snb">
+			<div class="chat_list_search">
+				<ul class="main2">
+					<li class="toOpenLink">
+						<button class="btn_toOpenChat">
+							<img class="toOpenChat" src="/img/chatBox.png">
+							<div class="Text">오픈채팅</div>
+						</button>
+					</li>
+					
+					<li class="qali"><!-- 궁금해요 -->
+						<button class="btn_toOpenChat">
+							<div class="qa">Q&A</div>
+							<div class="Text">궁금해요</div>
+						</button>
+					</li>
+					
+				</ul>
+				<div class="chatRoomsearchdiv">
+				      <span class="icon"><i class="fa fa-search"></i></span>
+				      <input type="search" class="chatRoomsearch" id="chatRoomsearch" />
+				</div>
+			</div>
+			
+			<div class="chatList_area">
+				<div class="chatList_wrap">
+					<!-- Ajax 로 삽입
+					 <ul class="chatList">
+						<li class="">					
+					</ul> -->
+				ssss
+				</div>
+			</div>
+		</div>
 		
+		<!-- 이거는 세션아이디, 내이름 나타내기 -->
 		<input type="hidden" id="sessionId" value="">
 		<div id="meName"></div>
+		<div id="yourName">
+			<input type="hidden" name="userName" id="userName" value="${user_id }">
+		</div>
+		<!-- 여기까지 -->
+		
 		<div id="chating" class="chating">
 		<!-- 아작스에서 포이치로 돌려서 채팅대화내역리스트 뽑아서 여기에 어펜드 시키는것 -->
-		</div>
-		<div id="member" class="member">
+			<div class="chatting">
+				<div class="chatting_name">
+					방제목 : 
+					<hr><br>
+					<div class="chatting_content" id="chatting_content"> 
+					</div>
+				</div>
+				<div>
+					<input type="text" class="message" id="message" placeholder="메시지를 입력하세요" >
+					<button onclick="send()" id="sendBtn">전송</button>
+				</div>
+			</div>
 		</div>
 		
-		<div id="yourName">
-			<table class="inputTable">
-				<tr>
-					<th>사용자명</th>
-					<th><input type="text" name="userName" id="userName" value="${user_id }"></th>
-					<th><button onclick="chatName()" id="startBtn">이름 등록</button></th>
-				</tr>
-			</table>
-		</div>
-		
-		<div id="yourMsg">
-			<table class="inputTable">
-				<tr>
-					<th>메시지</th>
-					<th><input id="chatting" placeholder="보내실 메시지를 입력하세요."></th>
-					<th><button onclick="send()" id="sendBtn">보내기</button></th>
-				</tr>
-			</table>
-		</div>
 	</div>
 	<jsp:include page="/WEB-INF/views/base/footer.jsp" flush="true">
 	<jsp:param value="" name=""/>
