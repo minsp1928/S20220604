@@ -1,0 +1,152 @@
+@charset "EUC-KR";
+
+.main {
+	margin-top: 8px;
+	/* padding: 0 8px; */
+	display: flex;
+	-webkit-box-flex: 1;
+	flex: 1 1 auto;
+	width: 100%;
+	box-sizing: border-box;
+	justify-content: center;
+	min-height: 600px;
+}
+ 
+.snb {
+	width:30%;
+	flex-direction: column;
+	flex: 0 1 290px;
+	order: 0;
+	min-width: 264px;
+	background-color: white;
+}
+
+.chat_list_search {
+	position: relative;
+	padding: 27px 0 11px;
+	border: 1px solid #398750;
+	background-color: #398750;
+}
+
+.main2 { /* ¿ÀÇÂÀÌ¶û qna°¨½Ñ°Å */
+	display: flex;
+}
+
+li, ol, ul {
+	list-style: none;
+}
+
+.main2 li {
+	display: flex;
+	-webkit-box-flex: 1;
+	flex: 1 0;
+	text-align: center;
+}
+
+.qali {
+	border-left: 1px solid #336d44;
+}
+
+.main2 button {
+	border: none;
+	background: none;
+}
+
+.btn_toOpenChat {
+	display: block;
+	width: 100%;
+	font-size: 15px;
+	font-weight: 600;
+	color: white;
+}
+
+.toOpenChat {
+	width: 35px;
+	margin-left: 1em;
+}
+
+.qa {
+	font-size: 19px;
+	line-height: 21px;
+}
+
+.Text {
+	display: block;
+	margin-top: 8px;
+	font-weight: 600;
+	line-height: 17px;
+}
+
+.openChatting {
+	margin-bottom: 15px;
+}
+
+.openChatting a {
+	text-decoration: none;
+	color: white;
+	border: solid;
+	border-width: 1px;
+	margin-left: 1em;
+	margin-top: 15px;
+	padding: 0.5em;
+	background-color: #d8d374;
+	border-radius: 30px;
+}
+
+.chatRoomsearchdiv {
+	width: 100%;
+	vertical-align: middle;
+	white-space: nowrap;
+	position: relative;
+	margin: 26px 14px 0;
+	display: flex;
+}
+
+.chatRoomsearchdiv input.chatRoomsearch {
+	height: 2em;
+	background: #d6ecd07d;
+	border: none;
+	font-size: 10pt;
+	float: left;
+	margin-left: 10px;
+	padding-left: 45px;
+	padding-top: 3px;
+	border-radius: 5px;
+}
+
+.chatRoomsearchdiv .icon {
+	position: absolute;
+	/* top: 40%; */
+	margin-left: 21px;
+	margin-top: 1px;
+	z-index: 1;
+	color: #1f3c2f;
+}
+
+.chatting{
+	width: 70%;
+	margin-right: 0;
+	-webkit-box-flex: 1;
+	flex: 1 1 750;
+	-webkit-box-ordinal-group: 2;
+	order: 1;
+	position: relative;
+	min-width: 445px;
+	
+	
+}
+
+ .chatting_section{
+ 	display: flex;
+ 	flex-direction: column;
+ 	-webkit-box-orient: vertical;
+ 	-webkit-box-direction: normal;
+ 	position: relative;
+ 	box-sizing: border-box;
+ 	border: 1px solid #d8d374;
+ 	min-height: 500px;
+ }
+ input.message{
+ 	width: 100%;
+ 	height: 2em;
+ }
