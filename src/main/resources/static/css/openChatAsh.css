@@ -11,8 +11,22 @@
 .newOpenChat .chatImg{	/* 프로필 이미지 출력 */
 	width: 50%;
 	height: 50vh;
+	object-fit: contain;
 }
 
+.newOpenChat .picChange2{		/* 프로필 이미지 변경 버튼 */
+	background-color: #a6d377;
+	border: none;
+	cursor: pointer;
+	width: 24%;
+	height: 5vh;
+	border-radius: 20px;
+	display: inline-block;
+	line-height: 5vh;
+}
+.newOpenChat #picChange{		/* 진짜 파일 input 버튼 숨겨둠*/
+	display: none;
+}
 
 .newOpenChat .createChatRoomName{	/* 닉네임 입력 텍스트 */
 	width: 85%;

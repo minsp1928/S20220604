@@ -1,8 +1,12 @@
 package com.oracle.S20220604.controller.ashmjb;
 
+import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.UUID;
 
+import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
@@ -47,15 +51,18 @@ public class ChattingController {
 	}
 	
 	@RequestMapping(value="profileCreate")
-	public String profileCreate() {
+	public ModelAndView profileCreate() {
 		
-		return "/chatAshmjb/profileCreate";
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("/chatAshmjb/profileCreate");
+		return mv;
 	}
 	
 	@RequestMapping(value="openChatCreate")
 	public ModelAndView openChatCreate() {
 		System.out.println("ChattingController chat start");
 		ModelAndView mv = new ModelAndView();
+		mv.addObject("defaultChatImg", "/img/defaultChatImg.png");
 		mv.setViewName("/chatAshmjb/openChatCreate");
 		return mv;
 		
@@ -66,11 +73,14 @@ public class ChattingController {
 		System.out.println("ChattingController createOpenChat Start... ");
 		ModelAndView mv = new ModelAndView();
 		String uploadPath = request.getSession().getServletContext().getRealPath("/upload/");
-		
+//		logger.info(file.getOriginalFilename());
+		System.out.println(file.getOriginalFilename());
+		System.out.println(file.getBytes());
 		System.out.println("createOpenChat upload POST Start");
 		
-//		String savedName = uploadFile(file.getOriginalFilename(), file.getBytes(), uploadPath);
-		
+		String savedName = uploadFile(file.getOriginalFilename(), file.getBytes(), uploadPath);
+		System.out.println("savedName : "+savedName);
+		chatting.setPicChange(file.getOriginalFilename());
 		cs.insert(chatting);
 		
 //		mv.addObject("savedName", savedName);
@@ -98,6 +108,66 @@ public class ChattingController {
 		
 		return savedName;
 	}
+	
+	private String resizeImg(String originalFileName) {
+		String remakeFileName = "";
+		
+		String imgOriginalPath= "C:\\Users\\Anhyemi\\Desktop\\defaultChatImg.png";           // 원본 이미지 파일명
+        String imgTargetPath= "C:\\Users\\Anhyemi\\Desktop\\testimg\\defaultChatImg3.png";    // 새 이미지 파일명
+        String imgFormat = "png";
+        int newWidth = 300;
+        int newHeight = 300;
+
+        Image image;
+        int imageWidth;
+        int imageHeight;
+
+        try{
+            // 원본 이미지 가져오기
+            image = ImageIO.read(new File(imgOriginalPath));
+
+            // 원본 이미지 사이즈 가져오기
+            imageWidth = image.getWidth(null);
+            imageHeight = image.getHeight(null);
+
+            System.out.println("imageWidth : " + imageWidth);
+            System.out.println("imageHeight : " + imageHeight);
+
+
+            // 이미지 리사이즈
+            // Image.SCALE_DEFAULT : 기본 이미지 스케일링 알고리즘 사용
+            // Image.SCALE_FAST    : 이미지 부드러움보다 속도 우선
+            // Image.SCALE_REPLICATE : ReplicateScaleFilter 클래스로 구체화 된 이미지 크기 조절 알고리즘
+            // Image.SCALE_SMOOTH  : 속도보다 이미지 부드러움을 우선
+            // Image.SCALE_AREA_AVERAGING  : 평균 알고리즘 사용
+            Image resizeImage = image.getScaledInstance(newWidth, newHeight, Image.SCALE_SMOOTH);
+            System.out.println("reimageWidth : " + resizeImage.getWidth(null));
+            System.out.println("reimageHeight : " + resizeImage.getHeight(null));
+            // 새 이미지  저장하기
+            BufferedImage newImage = new BufferedImage(newWidth, newHeight, BufferedImage.TYPE_INT_RGB);
+            Graphics g = newImage.getGraphics();
+            g.drawImage(resizeImage, 0, 0, null);
+            g.dispose();
+            ImageIO.write(newImage, imgFormat, new File(imgTargetPath));
+
+        }catch (Exception e){
+
+            e.printStackTrace();
+
+        }
+		
+		return remakeFileName;
+	}
+	
+	@RequestMapping(value="test02")
+	public ModelAndView test02()  {
+		ModelAndView mv = new ModelAndView();
+		
+		mv.setViewName("/chatAshmjb/test02");
+		return mv;
+	}
+	
+	
 	
 	
 }

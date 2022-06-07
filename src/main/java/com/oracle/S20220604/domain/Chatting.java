@@ -5,6 +5,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
+import javax.persistence.Transient;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -27,4 +28,5 @@ public class Chatting {
 	private String  room_name;
 	private int 	room_type;
 	private String 	room_pawd;
+	private String	picChange;
 }
