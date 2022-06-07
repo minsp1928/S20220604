@@ -167,6 +167,7 @@
 	<jsp:param value="" name=""/>
 </jsp:include>
 	<div id="tool" class="tool">
+	<button onclick="location.href='openChatCreate'">오픈채팅만들기</button>
 		<div class="snb">
 			<div class="chat_list_search">
 				<ul class="main2">

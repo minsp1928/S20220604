@@ -6,6 +6,20 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link href="css/openChatAsh.css" rel="stylesheet" type="text/css">
+<style type="text/css">
+/* 안먹어서 여기다 해써.... 나중에 옮기쟝 ㅎㅎ */
+.newOpenChat .picChange2{		/* 프로필 이미지 변경 버튼 */
+	background-color: #a6d377;
+	border: none;
+	cursor: pointer;
+	width: 24%; /* 이거 넓이 가 안먹어.. */
+	height: 5vh;
+	border-radius: 20px;
+}
+.newOpenChat #picChange{		/* 진짜 파일 input 버튼 숨겨둠*/
+	display: none;
+}
+</style>
 <script type="text/javascript">
 	function toggleTextbox(checkbox) {
 		// 1. 텍스트 박스 element 찾기
@@ -26,14 +40,23 @@
 </script>
 </head>
 <body>
+<form action="createOpenChat" method="post" enctype="multipart/form-data" >
 	<div class="newOpenChat">
 		<h1>오픈 채팅방 만들기</h1>
 		<img alt="채팅방 이미지" src="/img/coupon_banner.jpg" class="chatImg" name=""><p>
-		<button class="picChange" name="" onclick="location.href='#'">사진 변경</button><p>
-		<input type="text" class="createChatRoomName" name="" placeholder="오픈채팅방 이름을 입력하세요." onfocus="this.placeholder=''" onblur="this.placeholder='오픈채팅방 이름을 입력하세요.'"><p>
+		<label class="picChange2" for="picChange">사진변경</label>
+		<input ' id="picChange" class="picChange" type="file" />
+		<!-- <button class="picChange2" name="" onclick="location.href='#'">사진 변경</button> --><p>
+		<!-- ?? 나름 고민했는데 이게 왜 필요한걸깤ㅋㅋㅋㅋㅋㅋ 디비에 사진은 저장 안되게 되있는데??  -->
+		
+		<input type="text" class="createChatRoomName" name="room_name" placeholder="오픈채팅방 이름을 입력하세요." onfocus="this.placeholder=''" onblur="this.placeholder='오픈채팅방 이름을 입력하세요.'"><p>
 		비밀번호 <input type="checkbox" id="pwdCheckbox" name="" onclick="toggleTextbox(this)">
-		<input type="password" class="chatRoomPwd" id="chatRoomPwd" name="" placeholder="비밀번호를 입력하세요." onfocus="this.placeholder=''" onblur="this.placeholder='비밀번호를 입력하세요.'"><p>
-		<button class="createNicknameBtn" name="" onclick="location.href='#'">생성하기</button>
+		<input type="password" class="chatRoomPwd" id="chatRoomPwd" name="room_pawd" placeholder="비밀번호를 입력하세요." onfocus="this.placeholder=''" onblur="this.placeholder='비밀번호를 입력하세요.'"><p>
+	<!-- 	<button class="createNicknameBtn" name="" onclick="location.href='#'" type="submit">생성하기</button>-->
+		<button class="createNicknameBtn" name="" type="submit">생성하기</button>
+	
+		<input type="hidden" name="room_type" value="2">
 	</div>
+</form>
 </body>
 </html>

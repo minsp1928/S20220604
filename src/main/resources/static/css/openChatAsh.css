@@ -13,14 +13,6 @@
 	height: 50vh;
 }
 
-.newOpenChat .picChange{		/* 프로필 이미지 변경 버튼 */
-	background-color: #a6d377;
-	border: none;
-	cursor: pointer;
-	width: 24%;
-	height: 5vh;
-	border-radius: 20px;
-}
 
 .newOpenChat .createChatRoomName{	/* 닉네임 입력 텍스트 */
 	width: 85%;
