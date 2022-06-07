@@ -41,7 +41,7 @@
 			<label class="text_label">일치하는 정보가 존재하지 않습니다.</label>
 		</c:if>
 	
-	<!--일치 할 때 -->
+	<!--일치 하는 경우-->
 	<c:if test="${check == 0 }">
 		<label class="text_label">찾으시는 아이디는' ${user_id}' 입니다.</label>
 		<div>
