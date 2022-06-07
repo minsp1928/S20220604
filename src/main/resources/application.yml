@@ -18,6 +18,9 @@ spring:
 #ORM jpa:
   jpa:
     hibernate:
+    
+    
+    
       ddl-auto: none #create
     properties:
       hibernate:

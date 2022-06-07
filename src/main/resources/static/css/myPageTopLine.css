@@ -1,0 +1,67 @@
+@charset "UTF-8";
+body{
+	margin: 0 ;
+}
+myPageTopLine {
+	/* background-image: url('/img/myPageTopLineImage.png');
+	background-repeat: no-repeat;
+	background-size: cover;
+	*/
+	display: flex;
+	margin: 0 auto;
+	
+	background-size: 40px, 120px, 40px 40px, 120px 120px;
+    background-image: linear-gradient(90deg, #ffffff 2px, transparent 2px), linear-gradient(90deg, #ffffff 2px, transparent 2px), linear-gradient(#ffffff 2px, transparent 2px),linear-gradient(#ffffff 2px, transparent 2px),  linear-gradient(#ffffff 2px, transparent 2px),linear-gradient(#ffffff 2px, transparent 2px);
+    height: 60px;
+    width: 100%;
+    background-color: #CEFBC9;
+}
+
+myPageTopLine .myPageTopLine_userMode {
+	/* background-color: rgba(0,0,255,0.2); */
+	width: 15%;
+	height: 100%;
+/* 	display: flex; */
+	
+}
+.myPageTopLine_userMode #userMode_button {
+    border: 2px solid black;
+    box-shadow: 6px 7px 4px #376b1091;
+    border-radius: 20px 20px;
+    margin-left: 7%;
+    margin-top: 5%;
+    padding-left: 5px;
+    padding-bottom: 1.5px;
+    padding-top: 2.5px;
+    padding-right: 5px;
+    background-color: white;
+    font-size: 14px;
+    font-family: 'Noto Sans KR';
+    font-weight: bold;
+}
+
+myPageTopLine .myPageTopLine_chat {
+	/* background-color: rgba(0,0,255,0.2); */
+	width: 15%;
+	margin-left: 85%;
+	height: 100%;
+/* 	display: flex; */
+	
+}
+.myPageTopLine_chat #chat_button {
+    border: 2px solid black;
+    box-shadow: 6px 7px 4px #376b1091;
+    border-radius: 20px 20px;
+    margin-left: 7%;
+    margin-top: 5%;
+    padding-left: 5px;
+    padding-bottom: 1.5px;
+    padding-top: 2.5px;
+    padding-right: 5px;
+    background-color: white;
+    font-size: 14px;
+    font-family: 'Noto Sans KR';
+    font-weight: bold;
+}
+
+
