@@ -1,0 +1,26 @@
+@charset "UTF-8";
+
+.myProductList {
+	text-align: center;
+	
+}
+.myProductListTable {
+	text-align: center;
+ 	line-height: 1.5;
+	width: 80%;
+	border: 1px solid #1c3316;
+	border-collapse: collapse;
+	color: #1c3316;
+	padding: 0px;
+	font-size: 18px;
+	margin-left: auto;
+	margin-right: auto;
+	    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+th {
+	text-align: center;
+	padding: 3px;
+}
+

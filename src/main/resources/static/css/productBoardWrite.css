@@ -1,0 +1,27 @@
+@charset "UTF-8";
+
+.productBoardWriteTable {
+	text-align: center;
+ 	line-height: 1.5;
+	width: 80%;
+	border: 1px solid #1c3316;
+	border-collapse: collapse;
+	color: #1c3316;
+	padding: 0px;
+	font-size: 18px;
+	margin-left: auto;
+	margin-right: auto;
+	    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+table{
+	display: flex;
+	justify-content: center;
+	border: none;
+}
+
+h2{
+	text-align: center;
+}
