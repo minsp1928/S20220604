@@ -11,6 +11,13 @@
 		and user_pw = #{user_pw}
 	
 	</select>
-
+	<!--아이디 찾기  -->
+	<select id="pms_findId" parameterType="Member" resultType="Member">
+		select *
+		from member
+		where user_name = #{user_name}
+		and email = #{email}
+	
+	</select>
 
 </mapper>

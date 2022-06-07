@@ -61,19 +61,41 @@
 				
 		<!-- 	</span> --> 
 			<div class = "header_middle_img">
-				<a href="${pageContext.request.contextPath}/main"><img alt="로고이미지" src="/img/logo_sajomarket.png" id="logo_img"></a>
+				<a href="${pageContext.request.contextPath}/main?=${user_id}"><img alt="로고이미지" src="/img/logo_sajomarket.png" id="logo_img"></a>
 			</div>
 		</div>
 		
 		<div class="header_login"><!--로그인-->
 		<c:choose>
 			<c:when test="${user_id ne null }"><!--user_id가 있다면-->
-				<a href="#"><button id="logout_button">로그아웃</button></a><!--아이디 비우기-->
-				<a href="#"><button id="mypage_button">마이페이지</button></a>	<!--마이페이지로 이동-->
+				<div id="shopping_bascket">
+				<a href="#">장바구니 이미지 넣으세영</a><!--장바구니로 이동-->
+				</div>
+				<div class="header_category">
+					<img alt="카테고리드롭버튼" src="/img/menu_bar.png" id="header_category_button">
+					<div class="dropdown_category_content">
+					<div id="header_category_button">내정보</div>
+					<ul>
+						<li><a href="adminMain" class="item"><div>마이페이지</div></a></li>
+						<li><a href="faq?user_id=" class="item"><div>1:1문의</div></a></li>
+						<li><a href="notice" class="item"><div>공지사항</div></a></li>
+						<li><a href="coupon" class="item"><div>쿠폰</div></a></li>
+						<p><p><p><p>
+						<li>
+							<form action="logout_button" name="logout_button">
+								<button id="logout_button">로그아웃</button><!--아이디 비우기-->
+
+							</form>
+						</li>
+						<p><p><p><p>
+					</ul>
+				</div>	<!--마이페이지로 이동-->
+				</div>
 			</c:when>
 			<c:otherwise>
+			
 				<a href="${pageContext.request.contextPath}login"><button id="login_button">로그인</button></a>
-				<button id="join_button">회원가입</button><!--회원가입으로 연결  -->
+				<a href="${pageContext.request.contextPath}joinAgree"><button id="join_button">회원가입</button></a><!--회원가입으로 연결  -->
 			</c:otherwise>
 		</c:choose>
 		</div>

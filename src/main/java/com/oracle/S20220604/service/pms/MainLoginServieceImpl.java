@@ -17,4 +17,10 @@ public class MainLoginServieceImpl implements MainLoginService {
 		return md.selectLogin(member);
 	}
 
+	@Override
+	public Member findIdCheck(Member member) {
+		System.out.println("MainLoginServieceImpl findIdCheck Start");
+		return md.findId(member);
+	}
+
 }

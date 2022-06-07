@@ -6,4 +6,6 @@ public interface MainLoginDao {
 
 	Member selectLogin(Member member);
 
+	Member findId(Member member);
+
 }

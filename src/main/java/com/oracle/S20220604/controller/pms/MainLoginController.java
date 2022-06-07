@@ -37,12 +37,22 @@ public class MainLoginController {
 			
 			return "base/footer";
 		}
-		@RequestMapping(value = "login")
+		@RequestMapping(value = "login")	//로그인페이지로 이동
 		public String login() {
 			
 			return "mainLoginPms/login";
 		}
-//--------------------------login----------------------------\\
+		@RequestMapping(value = "findID")	//아이디찾기페이지로 이동
+		public String findID() { 
+			
+			return "mainLoginPms/findID";
+		}
+		@RequestMapping(value = "findPW")	//비밀번호찾기페이지로 이동
+		public String findPW() { 
+			
+			return "mainLoginPms/findPW";
+		}
+//--------------------------login start----------------------------\\
 		@RequestMapping(value = "loginbtn")
 		public String login(Member member, String user_id, Model model, HttpServletRequest request) {//로그인
 			System.out.println("MainLoginController login Start...");
@@ -62,4 +72,60 @@ public class MainLoginController {
 		
 		}
 
-}
+//-------------------------logout start------------------------\\
+		@RequestMapping(value = "logout_button")
+		public String logout(HttpServletRequest request) { //로그아웃/*HttpSession session)*/
+			System.out.println("MainLoginController logout Start...");
+//			session.setAttribute("sessionID", null);
+//			session.invalidate();
+			request.getSession().invalidate();//세션비우기
+			return "mainLoginPms/main"; 
+		}
+		
+		
+
+
+//-------------------------find id start------------------------\\
+	
+		
+		@RequestMapping(value = "findIdBtn")
+		public String findIdCheck(Member member, Model model) {
+			System.out.println("MainLoginController findIdBtn start...");
+		    Member findIdCheck = ms.findIdCheck(member);
+			if (member == null) {
+				model.addAttribute("result", 1); //일치하는 정보가 없을때
+			}else {
+				model.addAttribute("result", 2);
+				model.addAttribute("user_id", member.getUser_id());
+			}
+			return "mainLoginPms/findID";
+					
+		}
+		
+		
+		
+//-------------------------find id end------------------------\\
+		
+		
+//-------------------------join start------------------------\\
+		@RequestMapping(value = "joinAgree")
+		public String joinAgree() {
+			System.out.println("MainLoginController joinAgree start");
+			return "mainLoginPms/joinAgree";
+		}
+		@RequestMapping(value = "joinForm")
+		public String joinForm() {
+			System.out.println("MainLoginController joinForm start");
+			return "mainLoginPms/joinForm";
+		}
+		
+//-------------------------join end------------------------\\
+		
+		
+		
+		
+		
+//-------------------------naver login------------------------\\
+		
+
+}//end

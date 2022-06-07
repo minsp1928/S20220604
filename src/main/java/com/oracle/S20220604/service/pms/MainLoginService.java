@@ -6,4 +6,6 @@ public interface MainLoginService {
 
 	Member login(Member member);
 
+	Member findIdCheck(Member member);
+
 }
