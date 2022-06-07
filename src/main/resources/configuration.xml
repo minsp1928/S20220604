@@ -4,8 +4,12 @@
 
 <configuration>
 	<typeAliases>
-		<!-- <typeAlias alias="Emp" 	type="com.oracle.oBootMybatis01.model.Emp"/>
-		<typeAlias alias="Dept" type="com.oracle.oBootMybatis01.model.Dept"/> -->
-		</typeAliases>
-
+		<typeAlias alias="Banner" type="com.oracle.S20220604.model.Banner"/>
+		<typeAlias alias="Board" type="com.oracle.S20220604.model.Board"/>
+		<typeAlias alias="Coupon" type="com.oracle.S20220604.model.Coupon"/>
+		<typeAlias alias="Faq" type="com.oracle.S20220604.model.Faq"/>
+		<typeAlias alias="Member" type="com.oracle.S20220604.model.Member"/>
+		<typeAlias alias="IncomeVO" type="com.oracle.S20220604.model.IncomeVO"/>
+		<typeAlias alias="MemberChk" type="com.oracle.S20220604.model.MemberChk"/>
+	</typeAliases>
 </configuration>

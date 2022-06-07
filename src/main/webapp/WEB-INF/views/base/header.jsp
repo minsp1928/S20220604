@@ -39,11 +39,11 @@
 			<div class="dropdown_category_content">
 				<div id="category_title">상품목록</div>
 				<ul>
-					<li><a href="#" class="item"><div>과일</div></a></li>
 					<li><a href="#" class="item"><div>채소</div></a></li>
-					<li><a href="#" class="item"><div>곡류</div></a></li>
+					<li><a href="#" class="item"><div>과일</div></a></li>
+					<li><a href="coupon" class="item"><div>곡류</div></a></li>
 					<hr>
-					<li><a href="#" class="item"><div>베스트</div></a></li>
+					<li><a href="#" class="item"><div>베스트 상품</div></a></li>
 					<li><a href="#" class="item"><div>신상품</div></a></li>
 					<p>
 				</ul>
