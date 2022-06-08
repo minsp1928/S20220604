@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.oracle.S20220604.MessageMapper">
+	<insert id="akInsertMessage" parameterType="Message">
+		insert into 
+		message (room_num, msg_num, msg_type, send_user_id, content, msg_time )
+		values (#{room_num}, seq_message_num.nextval, 1, #{send_user_id, jdbcType=VARCHAR}, #{content, jdbcType=VARCHAR}, sysdate )
+	</insert>
+</mapper>

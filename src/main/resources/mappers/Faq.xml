@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.oracle.S20220604.model">
+
+	<select id="mjFaqTotal" resultType="int">
+		select count(*) from faq 
+	</select>
+	
+	<select id="mjFaqList" resultType="Faq">
+		select * from faq order by faq_num desc
+	</select>
+	
+	<select id="mjFaqDetail" parameterType="int" resultType="Faq" >
+		select * from faq where faq_num = #{faq_num}
+	</select>
+	
+	<update id="mjFaqAnswer" parameterType="Faq">
+		update faq set admin_id = 'admin', 
+					   admin_content = #{admin_content}, 
+					   admin_date = sysdate,
+					   faq_check = 1 
+		where faq_num = #{faq_num}
+	</update>
+</mapper>

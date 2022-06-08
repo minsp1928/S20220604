@@ -198,7 +198,51 @@ header .header_login{
     font-family: 'Noto Sans KR';
     font-weight: bold;
 }
-
+.header_login #logout_button {
+    border: 2px solid black;
+    box-shadow: 6px 7px 4px #376b1091;
+    border-radius: 20px 20px;
+    margin-left: 7%;
+    margin-top: 5%;
+    padding-left: 5px;
+    padding-bottom: 1.5px;
+    padding-top: 2.5px;
+    padding-right: 5px;
+    background-color: white;
+    font-size: 14px;
+    font-family: 'Noto Sans KR';
+    font-weight: bold;
+}
+.header_login #mypage_button {
+    border: 2px solid black;
+    box-shadow: 6px 7px 4px #376b1091;
+    border-radius: 20px 20px;
+    margin-left: 7%;
+    margin-top: 5%;
+    padding-left: 5px;
+    padding-bottom: 1.5px;
+    padding-top: 2.5px;
+    padding-right: 5px;
+    background-color: white;
+    font-size: 14px;
+    font-family: 'Noto Sans KR';
+    font-weight: bold;
+}
+.header_login #join_button {
+    border: 2px solid black;
+    box-shadow: 6px 7px 4px #376b1091;
+    border-radius: 20px 20px;
+    margin-left: 7%;
+    margin-top: 5%;
+    padding-left: 5px;
+    padding-bottom: 1.5px;
+    padding-top: 2.5px;
+    padding-right: 5px;
+    background-color: white;
+    font-size: 14px;
+    font-family: 'Noto Sans KR';
+    font-weight: bold;
+}
 
 
 input {
@@ -239,7 +283,7 @@ input {
 }
 
 .item:hover {
-	color: #9baec8;
+	color: #5d6d68;
 	padding: 2px;
 }
 .text {
