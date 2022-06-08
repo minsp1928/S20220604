@@ -114,6 +114,10 @@
 		});
 	}
 
+	window.onload = function () {
+		document.getElementById("modal").style.display="block";
+	}
+	
 	$(document).ready(function() {
 		var userName = $("#userName").val();
 		console.log("chatName  userName: " + userName);
@@ -226,10 +230,28 @@
 				</div>
 			</div>
 		</div>
-		
+		<div id="modal">
+		    <div class="modal_content">
+		        <h2>모달 창</h2>
+		        <p>모달 창 입니다.</p>
+		        <div class="modal_btn" style="display: inline;">
+			        <button type="button" id="modal_close_btn">모달 창 닫기</button>
+			        <button type="button" id="modal_close_btn">모달 창 닫기</button>
+		        </div>
+		        
+		    </div>
+		    <div class="modal_layer"></div>
+		</div>
 	</div>
 	<jsp:include page="/WEB-INF/views/base/footer.jsp" flush="true">
 	<jsp:param value="" name=""/>
 </jsp:include>
+
+
+<script type="text/javascript">
+	document.getElementById("modal_close_btn").onclick = function() {
+	    document.getElementById("modal").style.display="none";
+	}
+</script>
 </body>
 </html>

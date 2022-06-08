@@ -19,7 +19,7 @@ spring:
     host: smtp.gmail.com
     port: 587
     username: sajomarket@gmail.com
-    password: tiger2022
+    password: ymwvtvtszzvhqtul
     properties:
       mail:
         smtp:
