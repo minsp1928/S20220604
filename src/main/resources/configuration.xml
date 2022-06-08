@@ -4,8 +4,14 @@
 
 <configuration>
 	<typeAliases>
+<<<<<<< HEAD
+		<!-- <typeAlias alias="Emp" 	type="com.oracle.oBootMybatis01.model.Emp"/>
+		<typeAlias alias="Dept" type="com.oracle.oBootMybatis01.model.Dept"/> -->
+		<typeAlias alias="Message" type="com.oracle.S20220604.model.Message"/>
+=======
 		<typeAlias alias="Member" 	type="com.oracle.S20220604.model.Member"/>
 		<!--<typeAlias alias="Dept" type="com.oracle.oBootMybatis01.model.Dept"/> -->
+>>>>>>> main
 	</typeAliases>
 
 </configuration>
