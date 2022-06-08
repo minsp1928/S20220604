@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.oracle.S20220604.ProductMapper">
+
+	<select id="tkProductMylist" parameterType="String" resultType="Product">
+		SELECT *
+		FROM product
+		WHERE user_id=#{user_id}
+	</select>
+	
+	<select id="geProinfoListAll" resultType="Product_Info">
+		SELECT *
+		FROM product_info
+		WHERE pro_type2 = 999
+	</select>
+	
+	<select id="geProinfoList2All" parameterType="int" resultType="Product_Info">
+	<![CDATA[
+		SELECT pro_type2, pro_content
+	 	FROM product_info
+	 	WHERE PRO_TYPE1 = #{pro_type1}
+        AND   PRO_TYPE2 <> 999
+        ]]>
+	</select>
+	<!-- <select id="geProductmyProTot" resultType="int">
+		SELECT Count(*) FROM product
+	</select>
+	
+	<select id="geMyProductListAll" parameterType="Product" resultType="Product">
+		SELECT *
+		FROM Product
+		WHERE user_id = #{user_id}
+	</select> -->
+
+
+
+
+
+
+</mapper>
