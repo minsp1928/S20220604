@@ -4,6 +4,7 @@
 
 <configuration>
 	<typeAliases>
+	  <typeAlias alias="Payment" type=com.oracle.S20220604.model.Payment"/>
 		<typeAlias alias="Product" type="com.oracle.S20220604.model.Product"/> <!-- 타입 안에 있는 것을 Product라고 부르겠다는 의미 -->
 		<typeAlias alias="Product_Info" type="com.oracle.S20220604.model.Product_Info"/> <!-- 타입 안에 있는 것을 Product_Info"라고 부르겠다는 의미 -->
 		<typeAlias alias="Message" type="com.oracle.S20220604.model.Message"/>
