@@ -52,23 +52,14 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-websocket</artifactId>
 		</dependency>
-<<<<<<< HEAD
-				<!-- json simple  -->
-=======
+
 		<!-- json simple  -->
->>>>>>> main
 		<dependency>
 		  <groupId>com.googlecode.json-simple</groupId>
 		  <artifactId>json-simple</artifactId>
 		  <version>1.1.1</version>
-<<<<<<< HEAD
 		</dependency>
 	
-=======
-		</dependency>		
-		
->>>>>>> main
-		
 		<dependency>
 			<groupId>org.mybatis.spring.boot</groupId>
 			<artifactId>mybatis-spring-boot-starter</artifactId>
