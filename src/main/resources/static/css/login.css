@@ -1,0 +1,21 @@
+@charset "UTF-8";
+
+body {
+text-align: center;
+}
+.login_box {
+	border: 2px solid black;
+	border-radius: 10px;
+	text-align: center;
+	box-shadow: 10px 10px 10px #d4ddcd6b;
+	width: 400px;
+	height: 450px;
+	margin: 150px;
+}
+#login_btn {
+	background-color: a6d377;
+	border-radius: 10px;
+	padding-left: 15px;
+	padding-right: 15px;
+	
+}
