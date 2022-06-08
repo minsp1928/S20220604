@@ -7,8 +7,8 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class Member {
-
+public class MemberChk {
+	//member chk join
 	private String 	user_id;
 	private String 	user_pw;
 	private String 	user_name;
@@ -26,10 +26,6 @@ public class Member {
 	private String 	nickname;
 	private String 	nick_photo;
 	
-	//조회용
-	private String 	search;
-	private String 	keyword;
-	private String 	startDate;
-	private String	endDate;
+	private int 	chk;
 	
 }

@@ -1,14 +1,25 @@
-package com.oracle.S20220604.model;
+package com.oracle.S20220604.domain;
 
 import java.util.Date;
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 import lombok.Getter;
 import lombok.Setter;
 
+ 
 @Getter
 @Setter
+@Table(name = "member")
 public class Member {
-
+	
+	@Id
 	private String 	user_id;
 	private String 	user_pw;
 	private String 	user_name;
@@ -26,10 +37,7 @@ public class Member {
 	private String 	nickname;
 	private String 	nick_photo;
 	
-	//조회용
-	private String 	search;
-	private String 	keyword;
-	private String 	startDate;
-	private String	endDate;
-	
+	@OneToMany
+	@JoinColumn(name = "user_id")
+	private ChkLevel chkLevel;
 }

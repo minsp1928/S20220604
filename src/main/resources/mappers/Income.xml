@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.oracle.S20220604.domain">
+
+	<select id="mjIncome" resultType="IncomeVO">
+		select pay_date as dd, sum(pay_tot) as income from payment group by pay_date order by pay_date
+	</select>
+	
+	<select id="mjMonthIncome" parameterType="IncomeVO" resultType="IncomeVO">
+		<![CDATA[
+			select b.rn as incomedate, nvl(a.income, 0) as tot                    
+              from (select to_char(pay_date, 'dd') as dd, sum(pay_tot) as income 
+                      from payment
+                     where to_char(pay_date, 'yyyy') = #{year}
+                       and to_char(pay_date, 'mm') = #{month}
+                     group by to_char(pay_date, 'dd')) a, 
+                   (select rownum rn from dual connect by level <= #{lastday}) b
+             where a.dd(+) = b.rn
+             order by b.rn
+		]]>
+	</select>
+	
+	<select id="mjYearIncome" parameterType="IncomeVO" resultType="IncomeVO">
+	<![CDATA[
+		select b.rn as incomedate, nvl(a.income, 0) as tot
+	      from  (select to_char(pay_date,  'mm') as mm, sum(pay_tot) as income 
+                   from payment
+                  where to_char(pay_date, 'yyyy') = #{year}
+                  group by to_char(pay_date,  'mm')) a, 
+                (select rownum rn from dual connect by level <= 12) b
+        where a.mm(+) = b.rn
+        order by b.rn
+	]]>
+	</select>
+</mapper>

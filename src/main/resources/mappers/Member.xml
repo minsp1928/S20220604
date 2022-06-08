@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.oracle.S20220604.model">
+
+	<select id="mjMemberCnt" resultType="int">
+		select count(*) from member  where m_level not in (0)
+	</select>
+	
+	<select id="mjaMemberList" resultType="Member">
+		select * from member where m_level not in (0) order by join_date desc
+	</select>
+	
+	<select id="mjMemberKeywordCnt" parameterType="Member" resultType="int">
+		select count(*)
+		  from member 
+		 where  join_date between #{startDate, jdbcType=VARCHAR} and #{endDate, jdbcType=VARCHAR}
+			<choose>
+				<when test="search == 'user_id'">
+					and  user_id like '%' || #{keyword} || '%' 
+				</when>
+				<when test="search == 'user_name'">
+					and  user_name like '%' || #{keyword} || '%' 
+				</when>
+				<otherwise>
+					and user_id like '%'
+				</otherwise>
+			</choose>
+			<choose>
+				<when test="m_level == 1">
+					and m_level not in (0)
+				</when>
+				<when test="m_level == 2">
+					and m_level = 2
+				</when>
+			</choose>
+	</select>
+	
+	<select id="mjMemberKeyword" parameterType="Member" resultType="Member">
+		select * 
+		  from member 
+		 where join_date between #{startDate, jdbcType=VARCHAR} and #{endDate, jdbcType=VARCHAR}
+			<choose>
+				<when test="search == 'user_id'">
+					and  user_id like '%' || #{keyword} || '%' 
+				</when>
+				<when test="search == 'user_name'">
+					and  user_name like '%' || #{keyword} || '%' 
+				</when>
+				<otherwise>
+					and user_id like '%'
+				</otherwise>
+			</choose>
+			<choose>
+				<when test="m_level == 1">
+					and m_level not in (0)
+				</when>
+				<when test="m_level == 2">
+					and m_level = 2
+				</when>
+			</choose>
+		order by join_date desc
+	</select>
+	
+	<select id="mjSellerList" resultType="MemberChk">
+		select m.*, c.chk 
+		  from  member m, chk_level c
+         where m.user_id = c.user_id
+           and c.chk in (0, 2)
+	</select>
+	
+	<select id="mjNewMember" resultType="Member">
+		<![CDATA[
+			select * from member where join_date between sysdate-6 and sysdate
+		]]>
+	</select>
+</mapper>

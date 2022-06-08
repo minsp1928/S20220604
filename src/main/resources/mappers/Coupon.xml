@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.oracle.S20220604.model">
+	<select id="mjCoupons" resultType="Coupon">
+		select * from coupon where user_id = 'admin'
+	</select>
+	
+	<insert id="mjCreateCoupon" parameterType="Coupon">
+		insert into coupon values('admin', seq_cp_num.nextval, #{cp_name}, #{cp_category}, #{cp_price}, #{st_date}, #{end_date}, 0)
+	</insert>
+	
+	<select id="mjCouponChk" resultType="int" parameterType="Coupon">
+		select count(*) from coupon where user_id = #{user_id} and cp_num = #{cp_num}
+	</select>
+	
+	<select id="mjCouponDown1" resultType="Coupon" parameterType="int">
+		select * from coupon where user_id = 'admin' and cp_num =#{cp_num}
+	</select>
+	
+	<insert id="mjCoouponInsert" parameterType="Coupon">
+		insert into coupon values(#{user_id}, #{cp_num}, #{cp_name}, #{cp_category}, #{cp_price}, #{st_date}, #{end_date}, 0)
+	</insert>
+</mapper>
