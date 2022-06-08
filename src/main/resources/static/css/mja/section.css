@@ -1,0 +1,9 @@
+@charset "UTF-8";
+aside {
+	width: 20%;
+	float: left;
+}
+section {
+	width: 80%;
+	float: right;
+}

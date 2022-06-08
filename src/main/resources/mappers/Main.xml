@@ -2,6 +2,22 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.oracle.S20220604.model">
+<mapper namespace="com.oracle.S20220604.MainLoginMapper">
+	<!--로그인-->
+	<select id="pms_selectLogin" parameterType="Member" resultType="Member">
+		select *
+		from member
+		where user_id = #{user_id}
+		and user_pw = #{user_pw}
+	
+	</select>
+	<!--아이디 찾기  -->
+	<select id="pms_findId" parameterType="Member" resultType="Member">
+		select *
+		from member
+		where user_name = #{user_name}
+		and email = #{email}
+	
+	</select>
 
 </mapper>
