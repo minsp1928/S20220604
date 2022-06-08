@@ -24,7 +24,7 @@ public class PaymentController {
 	public String list(Payment payment, Model model) {
 		logger.info("Payment Start list...");
 		
-		
+		return "";
 	}
 	
 	

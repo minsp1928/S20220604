@@ -1,10 +1,15 @@
 package com.oracle.S20220604.dao.jsh;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.oracle.S20220604.model.Member;
+import com.oracle.S20220604.model.Payment;
+
 @Service
-public class PaymentImpl {
+public class PaymentImpl implements PaymentDao{
 
 	@Autowired
 	private Member mb;
@@ -12,8 +17,10 @@ public class PaymentImpl {
 	private Payment py;
 	
 	@Override
-	public list<Payment> listInfo(Member meb) {
+	public List<Payment> listInfo(Member meb) {
+		List<Payment> sample = null;
 		
+		return sample;
 	}
 	
 }
