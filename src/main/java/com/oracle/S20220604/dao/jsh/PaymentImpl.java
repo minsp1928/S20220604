@@ -11,9 +11,7 @@ import com.oracle.S20220604.model.Payment;
 @Service
 public class PaymentImpl implements PaymentDao{
 
-	@Autowired
 	private Member mb;
-	@Autowired 
 	private Payment py;
 	
 	@Override
