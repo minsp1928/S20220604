@@ -4,6 +4,7 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.util.List;
 import java.util.UUID;
 
 import javax.imageio.ImageIO;
@@ -21,6 +22,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.oracle.S20220604.domain.Chatting;
 import com.oracle.S20220604.service.ashmjb.ChattingService;
+import com.oracle.S20220604.service.ashmjb.Paging;
 
 
 @RestController
@@ -80,7 +82,7 @@ public class ChattingController {
 		
 		String savedName = uploadFile(file.getOriginalFilename(), file.getBytes(), uploadPath);
 		System.out.println("savedName : "+savedName);
-		chatting.setPicChange(file.getOriginalFilename());
+		chatting.setPic_change(savedName);
 		cs.insert(chatting);
 		
 //		mv.addObject("savedName", savedName);
@@ -167,6 +169,24 @@ public class ChattingController {
 		return mv;
 	}
 	
+	@RequestMapping(value = "openChatList")
+	public ModelAndView list(Chatting chatting , String currentPage) {
+		logger.info("list Start ... ");
+		ModelAndView mv = new ModelAndView();
+		int total = cs.total(); // Emp Count 
+		// empdao에 토탈을 불러오니까 그 토탈이 몇개더라
+		Paging pg = new Paging(total, currentPage);
+		chatting.setStart(pg.getStart()); // 시작시 1
+		chatting.setEnd(pg.getEnd());// 시작시 10
+		List<Chatting> openChatList = cs.openChatList(chatting);
+		System.out.println("ChattingController openChatList openChatList.size()-> "+ openChatList.size());
+		mv.addObject("openChatList", openChatList);
+		mv.addObject("pg",pg);
+		mv.addObject("total", total);
+		mv.setViewName("/chatAshmjb/openChatList");
+		
+		return mv;
+	}
 	
 	
 	

@@ -1,5 +1,7 @@
 package com.oracle.S20220604.service.ashmjb;
 
+import java.util.List;
+
 import javax.transaction.Transactional;
 
 import org.slf4j.Logger;
@@ -27,6 +29,26 @@ public class ChattingServiceImpl implements ChattingService {
 		chattingDao.save(chatting);
 		
 		return chatting.getRoom_num();
+	}
+
+	@Override
+	public int total() {
+		System.out.println("ChattingServiceImpl start total...");
+		int totCnt = chattingDao.total();
+		
+		logger.info("total" + totCnt);
+		return totCnt;
+	
+	}
+
+	@Override
+	public List<Chatting> openChatList(Chatting chatting) {
+		List<Chatting> openChatList = null;
+		System.out.println("ChattingServiceImpl openChatList start...");
+		openChatList = chattingDao.openChatList(chatting);
+//		System.out.println("ChattingServiceImpl openChatList.size() ->"+ openChatList.size());
+		
+		return openChatList;
 	}
 
 }

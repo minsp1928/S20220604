@@ -8,6 +8,7 @@
 		<typeAlias alias="Product" 			type="com.oracle.S20220604.model.Product"/> <!-- 타입 안에 있는 것을 Product라고 부르겠다는 의미 -->
 		<typeAlias alias="Product_Info" 	type="com.oracle.S20220604.model.Product_Info"/> <!-- 타입 안에 있는 것을 Product_Info"라고 부르겠다는 의미 -->
 		<typeAlias alias="Message" 			type="com.oracle.S20220604.model.Message"/>
+
 		<typeAlias alias="Member" 			type="com.oracle.S20220604.model.Member"/>
 		<typeAlias alias="Banner" 			type="com.oracle.S20220604.model.Banner"/>
 		<typeAlias alias="Board" 			type="com.oracle.S20220604.model.Board"/>
@@ -15,5 +16,7 @@
 		<typeAlias alias="Faq" 				type="com.oracle.S20220604.model.Faq"/>
 		<typeAlias alias="IncomeVO" 		type="com.oracle.S20220604.model.IncomeVO"/>
 		<typeAlias alias="MemberChk" 		type="com.oracle.S20220604.model.MemberChk"/>
+		
+		<typeAlias alias="Chatting" 		type="com.oracle.S20220604.domain.Chatting"/>
 	</typeAliases>
 </configuration>
