@@ -33,7 +33,7 @@
 	<!--아이디는 갖고오는데 값을 안보여줌-->
 	
 	<!--일치하지 않는경우  -->
-	<c:if test="${result == 1 }">
+	<c:if test="${result == 1 }">ㅁㅁ
 		<script>
 				opener.document.findform.user_name.value = "";
 				opener.document.findform.email.value = "";
