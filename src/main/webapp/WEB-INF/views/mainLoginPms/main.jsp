@@ -13,6 +13,7 @@
 
 	<jsp:param value="" name=""/>
 </jsp:include>
+
 	<div id = coupon_evt>
 		<div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel"> <!--각각 쿠폰,공지사항으로 가는 이미지링크 -->
 		  <div class="carousel-indicators">

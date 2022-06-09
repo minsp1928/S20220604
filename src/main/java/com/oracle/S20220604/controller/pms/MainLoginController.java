@@ -5,6 +5,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,6 +20,10 @@ public class MainLoginController {
 	
 	 @Autowired
 	 private MainLoginService ms;
+	 
+	 @Autowired
+	 private JavaMailSender mailSender;
+	 
 	 private static final Logger logger = LoggerFactory.getLogger(MainLoginController.class);
 	 
 	 //--------------------------main----------------------------\\		
@@ -82,11 +87,7 @@ public class MainLoginController {
 			return "mainLoginPms/main"; 
 		}
 		
-		
-
-
 //-------------------------find id start------------------------\\
-	
 		
 		@RequestMapping(value = "findIdBtn")
 		public String findIdCheck(Member member, Model model) {
@@ -101,10 +102,11 @@ public class MainLoginController {
 			return "mainLoginPms/findID";
 					
 		}
+	
+//-------------------------find pw start------------------------\\
 		
+		@RequestMapping("findPwBtn")
 		
-		
-//-------------------------find id end------------------------\\
 		
 		
 //-------------------------join start------------------------\\
