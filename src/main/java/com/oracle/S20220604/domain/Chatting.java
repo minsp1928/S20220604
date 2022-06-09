@@ -40,4 +40,5 @@ public class Chatting {
 	private int start;
 	@Transient
 	private int end;
+
 }

@@ -5,6 +5,7 @@ import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import javax.imageio.ImageIO;
@@ -21,6 +22,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.oracle.S20220604.domain.Chatting;
+import com.oracle.S20220604.model.Message;
 import com.oracle.S20220604.service.ashmjb.ChattingService;
 import com.oracle.S20220604.service.ashmjb.Paging;
 
@@ -41,6 +43,9 @@ public class ChattingController {
 		String user_id = "namwoo";
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("user_id", user_id);
+		List<Chatting> showList =  cs.showList(user_id);
+		
+		mv.addObject("showList", showList);
 		mv.setViewName("/chatAshmjb/chatRoomMain");
 		return mv;
 	}
@@ -188,6 +193,13 @@ public class ChattingController {
 		return mv;
 	}
 	
+	@RequestMapping("chatnaeyong")
+	public List<Message> chatnaeyong(int room_num) {
+		List<Message> msgnaeyong = cs.msgnaeyong(room_num);
+		
+		
+		return msgnaeyong;
+	}
 	
 	
 }

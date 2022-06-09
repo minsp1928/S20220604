@@ -3,16 +3,33 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.oracle.S20220604.ChattingMapper">
 	<select id="akChattingTotal" resultType="int">
-		select count(*) from chatting
-		
+		select count(*) from
+		chatting
+
 	</select>
 	<select id="akChattingList" parameterType="Chatting" resultType="Chatting">
 		select *
 		from (
-				select rownum rn, a.*
-				from (select * from chatting order by room_num) a
-				)
-		where rn between #{start} and #{end} 
+		select rownum rn, a.*
+		from (select * from chatting order by room_num) a
+		)
+		where rn between #{start} and #{end}
 	</select>
 
+	<select id="akChattingShowList" parameterType="String" resultType="Chatting">
+		select	c.room_num, c.room_name, c.pic_change , c.room_type
+		from 	chatting c, participant p
+		where 	c.room_num = p.room_num
+		And 	p.user_id in(select user_id
+		                 	 from member
+		                	 where user_id = #{user_id})
+		order by c.room_num desc 
+	</select>
+	<select id="akMsgNaeYong" parameterType="int" resultType="Message">
+		select  	 distinct m.content, m.send_user_id , m.msg_num
+		from       	 message m , participant p 
+		where   	 m.room_num =#{room_num}
+		order by	 m.msg_num 
+		
+	</select>
 </mapper>

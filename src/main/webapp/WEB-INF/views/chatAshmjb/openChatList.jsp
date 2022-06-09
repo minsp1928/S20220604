@@ -13,7 +13,7 @@
 		<div>	사진: <img alt="" src="${pageContext.request.contextPath}/upload/${list.pic_change }"> 제목 : ${list.room_name} </div>
 			<hr>
 		</c:forEach>
-	
+	<c:if test=""></c:if>
 	</div>
 </body>
 </html>

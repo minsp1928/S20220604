@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -117,16 +118,7 @@
 	// null이 아니면 실행안되게끔.
 	
 	$(document).ready(function() {
-		if(${뭔가가} == null){
-			window.onload = function () {
-				document.getElementById("modal").style.display="inline";
-			}
-		}
-		else if(${뭔가가} != null){
-			window.onload = function () {
-				document.getElementById("modal").style.display="none";
-			}
-		}
+
 		var userName = $("#userName").val();
 		console.log("chatName  userName: " + userName);
 		if(userName == null || userName.trim() == ""){
@@ -173,6 +165,41 @@
 		ws.send(JSON.stringify(option));
 		$('#message').val("");
 	}
+	
+	$(document).on('click', "#chatList_wrap", function () {
+		alert("클릭");
+		var str = "";
+		var room_num = $(this).attr('value');
+		
+		alert("room_num->"+room_num);
+		$.ajax(
+    			{
+    				url:"${pageContext.request.contextPath}/chatnaeyong",
+    				//      변수 명		변수값  만약 추가로 더들어가면 , 변수명: 변수값 , 변수명3: 변수값3 이런식으로 이어간다.
+    				data : {room_num : Vroom_num},
+    				
+    				// 받을때 -- 컨트롤러나 다 거쳐온다음에 받을때 데이터 타입이 'text'로 받겟다
+    				dataType : 'html', //produces = "application/text;charset=UTF-8" 텍스트일떄 이거 꼭 기술해주기 컨트롤러에
+    				success:function(MsgList){
+    					alert("MsgList --> " + MsgList )
+    					var jsonMsg = JSON.stringify(MsgList);
+    					
+    					$(MsgList).each(
+    						function(){
+    							if($("#userName").val() == jsonMsg.send_user_id){
+    								alert("test");
+    							}
+    						}		
+    					)
+    					
+    					$('#deptName').val(data1); // #deptName :  input tag의 id
+    					$('#msg').html(data1); 	  // #msg : span tag의 id
+    				}
+    			}		 
+    	 );
+	})
+	
+	
 </script>
 <body>
  <jsp:include page="/WEB-INF/views/base/header.jsp" flush="true">
@@ -205,13 +232,15 @@
 			</div>
 			
 			<div class="chatList_area">
-				<div class="chatList_wrap">
-					<!-- Ajax 로 삽입
-					 <ul class="chatList">
-						<li class="">					
-					</ul> -->
-				ssss
-				</div>
+				<c:forEach var="list" items="${showList}">
+					<div class="chatList_wrap" id="chatList_wrap">
+						<input type="hidden"  name="room_num" value="${list.room_num }">
+						<input type="hidden" id="room_type" name="room_type" value="${list.room_type }"> ${list.room_type }
+						<img class="listPic" alt="" src="${pageContext.request.contextPath}/upload/${list.pic_change }"> 
+						<span class="listRoomName"> ${list.room_name}</span>
+						<hr>
+					</div>
+				</c:forEach>
 			</div>
 		</div>
 		

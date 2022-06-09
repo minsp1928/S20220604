@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.oracle.S20220604.domain.Chatting;
+import com.oracle.S20220604.model.Message;
 @Repository
 public class ChattingDaoImpl implements ChattingDao {
 	@Autowired
@@ -56,6 +57,36 @@ public class ChattingDaoImpl implements ChattingDao {
 		}
 		
 		return openChatList;
+	}
+
+	@Override
+	public List<Chatting> showList(String user_id) {
+		List<Chatting> showList = null;
+		System.out.println("ChattingDaoImpl showList Start ... ");
+		try {
+			System.out.println("user_id : "+ user_id);
+			showList = session.selectList("akChattingShowList", user_id);
+			System.out.println("ChattingDaoImpl showList.size()->"+showList.size());
+			
+		} catch (Exception e) {
+			System.out.println("ChattingDaoImpl showList Exception..->"+ e.getMessage());
+		}
+		return showList;
+	}
+
+	@Override
+	public List<Message> msgnaeyong(int room_num) {
+		List<Message> msgnaeyong = null;
+		System.out.println("ChattingDaoImpl msgnaeyong start");
+		try {
+			System.out.println("room_num : "+ room_num);
+			msgnaeyong = session.selectList("akMsgNaeYong", room_num);
+			
+			System.out.println("ChattingDaoImpl msgnaeyong.size()->"+msgnaeyong.size());
+		} catch (Exception e) {
+			System.out.println("ChattingDaoImpl msgnaeyong Exception..->"+ e.getMessage());
+		}
+		return msgnaeyong;
 	}
 
 }
