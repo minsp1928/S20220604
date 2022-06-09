@@ -1,4 +1,4 @@
--<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -113,12 +113,20 @@
 			}
 		});
 	}
-
-	window.onload = function () {
-		document.getElementById("modal").style.display="block";
-	}
+	// 조건문으로 controller에서 select문 해서 null이면 실행하는 펑션
+	// null이 아니면 실행안되게끔.
 	
 	$(document).ready(function() {
+		if(${뭔가가} == null){
+			window.onload = function () {
+				document.getElementById("modal").style.display="inline";
+			}
+		}
+		else if(${뭔가가} != null){
+			window.onload = function () {
+				document.getElementById("modal").style.display="none";
+			}
+		}
 		var userName = $("#userName").val();
 		console.log("chatName  userName: " + userName);
 		if(userName == null || userName.trim() == ""){
@@ -234,7 +242,7 @@
 		    <div class="modal_content">
 		        <h2>모달 창</h2>
 		        <p>모달 창 입니다.</p>
-		        <div class="modal_btn" style="display: inline;">
+		        <div class="modal_btn">
 			        <button type="button" id="modal_close_btn">모달 창 닫기</button>
 			        <button type="button" id="modal_close_btn">모달 창 닫기</button>
 		        </div>
