@@ -19,5 +19,19 @@
 		and email = #{email}
 	
 	</select>
+	<!--비밀번호찾기  -->
+	<select id="pms_findPw" parameterType="Member" resultType="Member">
+		select *
+		from member
+		where user_id = #{user_id}
+		and user_name = #{user_name}
+		and email = #{email}
+	
+	</select>
+	<!--임시비밀번호로 비밀번호바꾸기-->
+	<update id="pms_updateTempPw" parameterType="Member" >
+		update Member set user_pw = #{user_pw}
+		where 			  user_id = #{user_id}
+	</update>
 
 </mapper>

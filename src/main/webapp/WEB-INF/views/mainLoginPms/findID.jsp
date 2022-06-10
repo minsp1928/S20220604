@@ -36,7 +36,7 @@
 	
 	
 </script>
-<style type="text/css">
+<style type="text/css">/*나중에 findID.css에 옮겨서 수정할것*/
 #background_modal{
 	position: absolute;
 	width: 100%; height: 100%;
@@ -62,29 +62,29 @@
 </jsp:include>
 
 	<div id="background_modal" class="background_modal">
-		<div class="modal_contents">
+		<div class="modal_contents" style="background-color: white;">
 		<h4><b>유저의 아이디는</b><span class="close">&times;</span></h4>
 			<br>
 			<h2 id="id_value"></h2>
 			<br>
-			<button type="button" id="login_button" class="login_button">로그인</button>	
+			<button type="button" id="login_button" class="login_button"  onclick = "location.href = '${pageContext.request.contextPath}/login' ">로그인</button>	
 <!-- 			<button type="button" id="login_button" class="login_button">비밀번호 찾기</button>	 -->
 		</div>
 	</div>
 	
 	<div class="findID">
-		<form action="findIdBtn" name="findIdBtn">
+		<!-- <form action="findIdBtn" name="findIdBtn"> -->
 				<a href="${pageContext.request.contextPath}/findID">아이디찾기 </a> / <a href="${pageContext.request.contextPath}/findPW">비밀번호찾기 </a> 
 				<p>이름</p>
 				<input type="text" name="inputName" id="inputName" class="custom-control-input"
-					 placeholder="이름을 입력해주세요">
+					 placeholder="이름을 입력해주세요" onfocus="this.placeholder=''" onblur="this.placeholder='Search'">
 				<p>이메일</p>
 				<input type="text" name="inputEmail" id="inputEmail" class="custom-control-input"
-					 placeholder="이메일을 입력해주세요">
+					 placeholder="이메일을 입력해주세요" onfocus="this.placeholder=''" onblur="this.placeholder='Search'">
 				<!-- <input type="submit" class="idSearch" value="확인"><p> -->
 				<button id="findID_btn" type="button" onclick="searchID()">확인</button><p>
-		</form>
-		<a href="${pageContext.request.contextPath}login"><button id="login_button">로그인</button></a>
+		<!-- </form> -->
+		<button id="login_button" onclick = "location.href = '${pageContext.request.contextPath}/login' ">로그인</button>
 	</div>
 	
 	<script type="text/javascript">
@@ -97,7 +97,7 @@
 		alert("user_name: " + user_name + "email: " + email);
 			$.ajax({
 			type:"POST",
-			url:"<%=context%>/findUserId",
+			url:"<%=context%>/findIdBtn",
 			data: {user_name: user_name, email: email},
 			dataType:'json',
 			success:function(member3){
@@ -107,7 +107,7 @@
 				}else {
 					$('#id_value').text("찾으시는 아이디는 "+member3.user_id+"입니다");
 					alert("찾으시는 아이디는 "+member3.user_id);/*유저아이디를 갖고있는데 멤버로 담아와서 어떻게 유저아이디만 보여주는지 모르겠다*/
-					idV = data;/*비번 찾기용으로 일단 변수에 담기는 했는데 안쓸지도..?*/
+					idV = member3;/*비번 찾기용으로 일단 변수에 담기는 했는데 안쓸지도..?*/
 				}
 			}
 		});
