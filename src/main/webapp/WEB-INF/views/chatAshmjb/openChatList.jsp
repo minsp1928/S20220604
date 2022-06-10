@@ -13,6 +13,7 @@
 		<div>	사진: <img alt="" src="${pageContext.request.contextPath}/upload/${list.pic_change }"> 제목 : ${list.room_name} </div>
 			<hr>
 		</c:forEach>
+			<button onclick="location.href='openChatCreate'">오픈채팅만들기</button>
 	<c:if test=""></c:if>
 	</div>
 </body>

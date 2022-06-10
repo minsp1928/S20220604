@@ -26,7 +26,7 @@
 		order by c.room_num desc 
 	</select>
 	<select id="akMsgNaeYong" parameterType="int" resultType="Message">
-		select  	 distinct m.content, m.send_user_id , m.msg_num
+		select  	 distinct m.*
 		from       	 message m , participant p 
 		where   	 m.room_num =#{room_num}
 		order by	 m.msg_num 

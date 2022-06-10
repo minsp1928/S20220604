@@ -2,6 +2,9 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
+<%
+	String context = request.getContextPath();
+%>
 <html>
 <head>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -166,38 +169,7 @@
 		$('#message').val("");
 	}
 	
-	$(document).on('click', "#chatList_wrap", function () {
-		alert("클릭");
-		var str = "";
-		var room_num = $(this).attr('value');
-		
-		alert("room_num->"+room_num);
-		$.ajax(
-    			{
-    				url:"${pageContext.request.contextPath}/chatnaeyong",
-    				//      변수 명		변수값  만약 추가로 더들어가면 , 변수명: 변수값 , 변수명3: 변수값3 이런식으로 이어간다.
-    				data : {room_num : Vroom_num},
-    				
-    				// 받을때 -- 컨트롤러나 다 거쳐온다음에 받을때 데이터 타입이 'text'로 받겟다
-    				dataType : 'html', //produces = "application/text;charset=UTF-8" 텍스트일떄 이거 꼭 기술해주기 컨트롤러에
-    				success:function(MsgList){
-    					alert("MsgList --> " + MsgList )
-    					var jsonMsg = JSON.stringify(MsgList);
-    					
-    					$(MsgList).each(
-    						function(){
-    							if($("#userName").val() == jsonMsg.send_user_id){
-    								alert("test");
-    							}
-    						}		
-    					)
-    					
-    					$('#deptName').val(data1); // #deptName :  input tag의 id
-    					$('#msg').html(data1); 	  // #msg : span tag의 id
-    				}
-    			}		 
-    	 );
-	})
+	
 	
 	
 </script>
@@ -206,7 +178,7 @@
 	<jsp:param value="" name=""/>
 </jsp:include>
 	<div id="tool" class="tool">
-	<button onclick="location.href='openChatCreate'">오픈채팅만들기</button>
+	<button onclick="location.href='openChatList'">오픈채팅만들기</button>
 		<div class="snb">
 			<div class="chat_list_search">
 				<ul class="main2">
@@ -232,10 +204,10 @@
 			</div>
 			
 			<div class="chatList_area">
-				<c:forEach var="list" items="${showList}">
-					<div class="chatList_wrap" id="chatList_wrap">
-						<input type="hidden"  name="room_num" value="${list.room_num }">
-						<input type="hidden" id="room_type" name="room_type" value="${list.room_type }"> ${list.room_type }
+				<c:forEach var="list" items="${showList}" varStatus="status">
+					<div class="chatList_wrap" id="chatList_wrap" onclick="chatListClick(${status.index})">
+						<input type="hidden" id="room_num${status.index}" name="room_num" value="${list.room_num }">
+						<input type="hidden" id="room_type${status.index}" name="room_type" value="${list.room_type }"> ${list.room_type }
 						<img class="listPic" alt="" src="${pageContext.request.contextPath}/upload/${list.pic_change }"> 
 						<span class="listRoomName"> ${list.room_name}</span>
 						<hr>
@@ -255,11 +227,10 @@
 		<div id="chating" class="chating">
 		<!-- 아작스에서 포이치로 돌려서 채팅대화내역리스트 뽑아서 여기에 어펜드 시키는것 -->
 			<div class="chatting">
-				<div class="chatting_name">
-					방제목 : 
+				<div class="chatting_main">
+					<div id="chatting_name">방제목 :  </div> 
 					<hr><br>
-					<div class="chatting_content" id="chatting_content"> 
-					</div>
+					<div id="chatting_content" class="chatting_content">  	</div>
 				</div>
 				<div>
 					<input type="text" class="message" id="message" placeholder="메시지를 입력하세요" >
@@ -285,7 +256,71 @@
 </jsp:include>
 
 
-<script type="text/javascript">
+<script type="text/javascript">	
+	var contextPath='${pageContext.request.contextPath}';
+	function chatListClick(index) {
+		alert("클릭");
+		var user_name = $('#userName').val();
+		alert(user_name);
+		var str="";
+		var Vroom_num = $("#room_num"+index).val();
+		alert("Vroom_num->"+Vroom_num);
+		$('#chatting_content').empty();
+		$.ajax(
+				{
+					url:"${pageContext.request.contextPath}/chatnaeyong",
+					//      변수 명		변수값  만약 추가로 더들어가면 , 변수명: 변수값 , 변수명3: 변수값3 이런식으로 이어간다.
+					data : {room_num : Vroom_num},
+					// 받을때 -- 컨트롤러나 다 거쳐온다음에 받을때 데이터 타입이 'text'로 받겟다
+					dataType : 'Json', //produces = "application/text;charset=UTF-8" 텍스트일떄 이거 꼭 기술해주기 컨트롤러에
+					success:function(MsgList){
+						var msg = JSON.stringify(MsgList);
+						console.log(msg);
+						
+						$(MsgList).each(
+								function(){
+									var send_user_id = this.send_user_id;
+									var me_user = "";
+									var other_user = "";
+									var content = this.content;
+									var msg_time = this.msg_time;
+									var msg_file = this.msg_file;
+									var msg_pic = this.msg_pic;
+									
+									if($("#userName").val() == send_user_id){
+										other_user = send_user_id;
+										$('#chatting_name').html(other_user);
+										alert(" == "+send_user_id);
+										if(msg_pic != null){
+											str += "<div class='d_img'><img src = '${pageContext.request.contextPath}/upload/"+msg_pic+"' class='mePic'></div>";
+											//src="${pageContext.request.contextPath}/upload/${list.pic_change }"
+										}else{
+											str += "<div class ='boxme'><div class ='me'>"+content+"</div></div>";
+								
+										}
+									}
+									
+									else if($('#userName').val() != send_user_id){
+										me_user = send_user_id;
+										alert(" != "+send_user_id);
+										if(msg_pic != null){
+											str += "<div class='d_img'><img src = '${pageContext.request.contextPath}/upload/"+msg_pic+"' class='otherPic' ></div>";
+											
+										}else{
+											str += "<div class='boxother'><div class ='others'>"+content+"</div></div>";
+										}
+										
+									}
+								}		
+						);
+						$('#chatting_content').append(str);
+					}
+				
+				}		 
+		 );
+	}
+	
+
 	document.getElementById("modal_close_btn").onclick = function() {
 	    document.getElementById("modal").style.display="none";
 	}

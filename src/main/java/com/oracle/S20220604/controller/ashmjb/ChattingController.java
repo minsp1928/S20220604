@@ -44,7 +44,7 @@ public class ChattingController {
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("user_id", user_id);
 		List<Chatting> showList =  cs.showList(user_id);
-		
+		System.out.println("chattingcontroller chat showList.size()-> "+ showList.size());
 		mv.addObject("showList", showList);
 		mv.setViewName("/chatAshmjb/chatRoomMain");
 		return mv;
@@ -193,11 +193,14 @@ public class ChattingController {
 		return mv;
 	}
 	
-	@RequestMapping("chatnaeyong")
+	@RequestMapping(value = "/chatnaeyong")
 	public List<Message> chatnaeyong(int room_num) {
+		logger.info("chatnaeyong msgnaeyong room_num-> "+room_num);
 		List<Message> msgnaeyong = cs.msgnaeyong(room_num);
-		
-		
+		System.out.println("msgnaeyong.get(0).getsend_user_id"+msgnaeyong.get(0).getSend_user_id());
+		System.out.println("msgnaeyong.get(0).getRoom_num()->"+msgnaeyong.get(0).getRoom_num());
+//		System.out.println("msgnaeyong.get(1).getsend_user_id"+msgnaeyong.get(1).getSend_user_id());
+		System.out.println("msgnaeyong.size()->"+msgnaeyong.size());
 		return msgnaeyong;
 	}
 	

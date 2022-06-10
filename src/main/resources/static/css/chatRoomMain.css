@@ -128,7 +128,7 @@ li, ol, ul {
 }
 
 .chatting{
-	width: 70%;
+	width: 100%;
 	margin-right: 0;
 	-webkit-box-flex: 1;
 	flex: 1 1 750;
@@ -136,6 +136,7 @@ li, ol, ul {
 	order: 1;
 	position: relative;
 	min-width: 445px;
+	height: 100%;
 }
 
 .chatting .me{
@@ -154,9 +155,12 @@ input{
 	display: none;
 }
 
-.chatting_name {
+.chatting_main {
 	min-height: 500px;
 	background-color: #c2eace;
+	height: 90%;
+	padding-left: 10px;
+	padding-right: 10px;
 }
 
  .chatting_section{
@@ -225,4 +229,25 @@ input{
 	text-overflow: ellipsis;
 	overflow: hidden;
 	white-space: nowrap;
+}
+.mePic{
+	float: right;
+	height: 20vh;
+	
+}
+.otherPic{
+	float: left;;
+	height: 20vh;
+}
+.d_img{
+	height: 20vh;
+	margin-bottom: 1rem;
+}
+
+.chatting_content{
+	overflow: auto;
+	overflow-x: hidden; 
+}
+.chating{
+	width: 60%;
 }

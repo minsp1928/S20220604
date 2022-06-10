@@ -63,8 +63,13 @@ public class ChattingServiceImpl implements ChattingService {
 
 	@Override
 	public List<Message> msgnaeyong(int room_num) {
+		System.out.println("ChattingServiceImpl room_num start :"+room_num);
+		
 		List<Message> msgnaeyong = chattingDao.msgnaeyong(room_num);
-			
+		
+		System.out.println("ChattingServiceImpl room_num after :"+room_num);
+		System.out.println("ChattingServiceImpl msgnaeyong size() :"+msgnaeyong.size());
+		
 		return msgnaeyong;
 	}
 

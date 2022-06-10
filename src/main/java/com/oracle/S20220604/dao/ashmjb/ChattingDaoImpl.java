@@ -79,10 +79,11 @@ public class ChattingDaoImpl implements ChattingDao {
 		List<Message> msgnaeyong = null;
 		System.out.println("ChattingDaoImpl msgnaeyong start");
 		try {
-			System.out.println("room_num : "+ room_num);
+			System.out.println("ChattingDaoImpl star room_num : "+ room_num);
 			msgnaeyong = session.selectList("akMsgNaeYong", room_num);
 			
-			System.out.println("ChattingDaoImpl msgnaeyong.size()->"+msgnaeyong.size());
+			System.out.println("ChattingDaoImpl after msgnaeyong.size()->"+msgnaeyong.size());
+			
 		} catch (Exception e) {
 			System.out.println("ChattingDaoImpl msgnaeyong Exception..->"+ e.getMessage());
 		}
