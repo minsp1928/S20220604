@@ -60,13 +60,20 @@ public class ChattingDaoImpl implements ChattingDao {
 	}
 
 	@Override
-	public List<Chatting> showList(String user_id) {
+	public List<Chatting> showList(Chatting chatting) {
 		List<Chatting> showList = null;
 		System.out.println("ChattingDaoImpl showList Start ... ");
 		try {
-			System.out.println("user_id : "+ user_id);
-			showList = session.selectList("akChattingShowList", user_id);
-			System.out.println("ChattingDaoImpl showList.size()->"+showList.size());
+			System.out.println("user_id : "+ chatting.getUser_id());
+			if(chatting.getRoom_type2() != 0	) {
+				showList = session.selectList("akChattingShowList12", chatting);
+				
+				System.out.println("ChattingDaoImpl showList.size()->"+showList.size());
+			}
+			else {
+				showList = session.selectList("akChattingShowList3", chatting);
+				System.out.println("ChattingDaoImpl showList.size()->"+showList.size());
+			}
 			
 		} catch (Exception e) {
 			System.out.println("ChattingDaoImpl showList Exception..->"+ e.getMessage());

@@ -10,6 +10,7 @@ import java.util.UUID;
 
 import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -37,18 +38,65 @@ public class ChattingController {
 		this.cs = cs;
 	}
 	
-	@RequestMapping("/chat")
-	public ModelAndView chat() {
+	@RequestMapping("/chat") // room_type : 1 or 2
+	public ModelAndView chat(HttpServletRequest request, HttpSession session) {
 		System.out.println("ChattingController chat start");
+		
+		if(request.getSession().getAttribute("user_id") == null) {
+			System.out.println("==null");
+			session.setAttribute("user_id", "sdsa12");
+		}
+		
+		else if(request.getSession().getAttribute("user_id") != null){
+			System.out.println("!=null");
+		}
+		System.out.println("-----------------------"+session.getAttribute("user_id"));
 		String user_id = "namwoo";
+		String user_id_test = request.getSession().getAttribute("user_id").toString();
 		ModelAndView mv = new ModelAndView();
-		mv.addObject("user_id", user_id);
-		List<Chatting> showList =  cs.showList(user_id);
+		mv.addObject("user_id", user_id_test);
+		Chatting chatting = new Chatting();
+		chatting.setRoom_type(1);
+		chatting.setRoom_type2(2);
+		chatting.setUser_id(user_id_test);
+		System.out.println("user_id_test"+ user_id_test);
+		List<Chatting> showList =  cs.showList(chatting);
+//		List<Chatting> showList = cs.showList(user_id_test);
 		System.out.println("chattingcontroller chat showList.size()-> "+ showList.size());
 		mv.addObject("showList", showList);
 		mv.setViewName("/chatAshmjb/chatRoomMain");
 		return mv;
 	}
+	
+	@RequestMapping("/chat1") // room_type : 3
+	public ModelAndView chat1(HttpServletRequest request, HttpSession session) {
+		System.out.println("ChattingController chat start");
+		
+		if(request.getSession().getAttribute("user_id") == null) {
+			System.out.println("user_id getSession ==null");
+			session.setAttribute("user_id", "namwoo");
+		}
+		
+		else if(request.getSession().getAttribute("user_id") != null){
+			System.out.println("user_id getSession !=null");
+		}
+		String user_id = "namwoo";
+		String user_id_test = request.getSession().getAttribute("user_id").toString();
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("user_id", user_id);
+		Chatting chatting = new Chatting();
+		chatting.setRoom_type(3);
+		chatting.setRoom_type2(0);
+		System.out.println("user_id_test"+ user_id_test);
+		List<Chatting> showList =  cs.showList(chatting);
+		if(showList != null) {
+			System.out.println("chattingcontroller chat showList.size()-> "+ showList.size());
+		}
+		mv.addObject("showList", showList);
+		mv.setViewName("/chatAshmjb/chatRoomMain");
+		return mv;
+	}
+	
 	@RequestMapping("/test")
 	public ModelAndView test() {
 		System.out.println("ChattingController chat start");

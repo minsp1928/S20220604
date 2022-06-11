@@ -5,6 +5,6 @@
 	<insert id="akInsertMessage" parameterType="Message">
 		insert into 
 		message (room_num, msg_num, msg_type, send_user_id, content, msg_time )
-		values (#{room_num}, seq_message_num.nextval, 1, #{send_user_id, jdbcType=VARCHAR}, #{content, jdbcType=VARCHAR}, sysdate )
+		values (#{room_num}, seq_message_num.nextval, #{msg_type}, #{send_user_id, jdbcType=VARCHAR}, #{content, jdbcType=VARCHAR}, sysdate )
 	</insert>
 </mapper>

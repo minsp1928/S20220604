@@ -72,9 +72,9 @@
 	                // 메시지이므로 오른쪽으로 정렬하는 클래스를 처리하고 메시지를 출력.     
 	                // 비교하여 같지 않다면 타인이 발신한 메시지이므로 왼쪽으로 정렬하는 클래스를 처리하고 메시지를 출력
 					if(jsonMsg.sessionId == $("#sessionId").val()){
-						$("#chatting_content").append("<p class='me'>나 :" + jsonMsg.msg + "</p>");	
+						$("#chatting_content").append("<div class ='boxme'><p class ='me'>"+ jsonMsg.msg + "</p></div>");	
 					}else{
-						$("#chatting_content").append("<p class='others'>" + jsonMsg.userName + " :" + jsonMsg.msg + "</p>");
+						$("#chatting_content").append("<div class ='boxother'>" + jsonMsg.userName +"<br><p class='others'>" + jsonMsg.msg + "</p>");
 					}
 					}else if(memberSave = true){
 			//		}else if(jsonMsg.type = "userSave"){
@@ -162,35 +162,35 @@
 			sessionId : $("#sessionId").val(), // $().val()하면 변한 밸류값을 바로바로 가져옴
 			userName : $("#userName").val(),
 			yourName : $("#member_sub").val(),
-			msg : $("#message").val()
+			msg : $("#message").val(),
+			room_type : $("#room_type").val(),
+			room_num : $('#room_num').val()
 		}
 		// 자바스크립트의 값을 JSON 문자열로 변환
 		ws.send(JSON.stringify(option));
 		$('#message').val("");
 	}
 	
-	
-	
-	
 </script>
 <body>
  <jsp:include page="/WEB-INF/views/base/header.jsp" flush="true">
 	<jsp:param value="" name=""/>
 </jsp:include>
-	<div id="tool" class="tool">
 	<button onclick="location.href='openChatList'">오픈채팅만들기</button>
+	<div id="tool" class="tool">
+
 		<div class="snb">
 			<div class="chat_list_search">
 				<ul class="main2">
 					<li class="toOpenLink">
-						<button class="btn_toOpenChat">
+						<button class="btn_toOpenChat" onclick="location.href='chat'">
 							<img class="toOpenChat" src="/img/chatBox.png">
 							<div class="Text">오픈채팅</div>
 						</button>
 					</li>
 					
-					<li class="qali"><!-- 궁금해요 -->
-						<button class="btn_toOpenChat">
+					<li class="qali" ><!-- 궁금해요 -->
+						<button class="btn_toOpenChat" onclick="location.href='chat1?room_type=3'">
 							<div class="qa">Q&A</div>
 							<div class="Text">궁금해요</div>
 						</button>
@@ -203,6 +203,8 @@
 				</div>
 			</div>
 			
+			<input type="hidden" id="room_type" value="">
+			<input type="hidden" id="room_num" value="">
 			<div class="chatList_area">
 				<c:forEach var="list" items="${showList}" varStatus="status">
 					<div class="chatList_wrap" id="chatList_wrap" onclick="chatListClick(${status.index})">
@@ -217,6 +219,7 @@
 		</div>
 		
 		<!-- 이거는 세션아이디, 내이름 나타내기 -->
+		<input type="hidden" id="testId" name="testId" value="테스트아이디">
 		<input type="hidden" id="sessionId" value="">
 		<div id="meName"></div>
 		<div id="yourName">
@@ -228,7 +231,7 @@
 		<!-- 아작스에서 포이치로 돌려서 채팅대화내역리스트 뽑아서 여기에 어펜드 시키는것 -->
 			<div class="chatting">
 				<div class="chatting_main">
-					<div id="chatting_name">방제목 :  </div> 
+					<div id="chatting_name">  </div> 
 					<hr><br>
 					<div id="chatting_content" class="chatting_content">  	</div>
 				</div>
@@ -265,6 +268,10 @@
 		var str="";
 		var Vroom_num = $("#room_num"+index).val();
 		alert("Vroom_num->"+Vroom_num);
+		var room_type_this = $("#room_type"+index).val();
+		$("#room_type").val(room_type_this);
+		var room_num_this = $("#room_num"+index).val();
+		$("#room_num").val(room_num_this);
 		$('#chatting_content').empty();
 		$.ajax(
 				{
@@ -276,7 +283,6 @@
 					success:function(MsgList){
 						var msg = JSON.stringify(MsgList);
 						console.log(msg);
-						
 						$(MsgList).each(
 								function(){
 									var send_user_id = this.send_user_id;
@@ -286,28 +292,27 @@
 									var msg_time = this.msg_time;
 									var msg_file = this.msg_file;
 									var msg_pic = this.msg_pic;
-									
 									if($("#userName").val() == send_user_id){
-										other_user = send_user_id;
-										$('#chatting_name').html(other_user);
+										me_user = send_user_id;
 										alert(" == "+send_user_id);
 										if(msg_pic != null){
 											str += "<div class='d_img'><img src = '${pageContext.request.contextPath}/upload/"+msg_pic+"' class='mePic'></div>";
 											//src="${pageContext.request.contextPath}/upload/${list.pic_change }"
 										}else{
-											str += "<div class ='boxme'><div class ='me'>"+content+"</div></div>";
+											str += "<div class ='boxme'><p class ='me'>"+content+"</p></div>";
 								
 										}
 									}
 									
 									else if($('#userName').val() != send_user_id){
-										me_user = send_user_id;
+										other_user = send_user_id;
+										$('#chatting_name').html(other_user);
 										alert(" != "+send_user_id);
 										if(msg_pic != null){
 											str += "<div class='d_img'><img src = '${pageContext.request.contextPath}/upload/"+msg_pic+"' class='otherPic' ></div>";
 											
 										}else{
-											str += "<div class='boxother'><div class ='others'>"+content+"</div></div>";
+											str += "<div class='boxother'>"+send_user_id+"<br><p class ='others'>"+content+"</p></div>";
 										}
 										
 									}

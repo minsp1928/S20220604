@@ -12,7 +12,7 @@ public interface ChattingDao {
 
 	List<Chatting>  openChatList(Chatting chatting);
 
-	List<Chatting>  showList(String user_id);
+	List<Chatting>  showList(Chatting chatting);
 
 	List<Message>	 msgnaeyong(int room_num);
 }

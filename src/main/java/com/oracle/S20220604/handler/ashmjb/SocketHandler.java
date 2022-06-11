@@ -58,10 +58,17 @@ public class SocketHandler extends TextWebSocketHandler {
 
 		String msgUserName = (String)jsonObj.get("userName");
 		String msgContent = (String)jsonObj.get("msg");
+		String mrn	= (String) jsonObj.get("room_num");
+		int msgRoomNum = Integer.parseInt(mrn) ;
+		String mty	= (String) jsonObj.get("room_type");
+		int msgRoomType = Integer.parseInt(mty);
+		
+		
 		Message msgserv = new Message();
 		msgserv.setContent(msgContent);
 		msgserv.setSend_user_id(msgUserName);
-		msgserv.setRoom_num(1);
+		msgserv.setRoom_num(msgRoomNum);
+		msgserv.setMsg_type(msgRoomType);
 		int result = ms.insert(msgserv);
 		
 		//전체

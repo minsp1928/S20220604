@@ -16,15 +16,29 @@
 		where rn between #{start} and #{end}
 	</select>
 
-	<select id="akChattingShowList" parameterType="String" resultType="Chatting">
-		select	c.room_num, c.room_name, c.pic_change , c.room_type
+	<select id="akChattingShowList12" parameterType="Chatting" resultType="Chatting">
+		select	distinct c.room_num, c.room_name, c.pic_change , c.room_type
 		from 	chatting c, participant p
 		where 	c.room_num = p.room_num
 		And 	p.user_id in(select user_id
 		                 	 from member
 		                	 where user_id = #{user_id})
+		And     c.room_type = #{room_type} or c.room_type = #{room_type2}               	 
 		order by c.room_num desc 
 	</select>
+	
+	
+	<select id="akChattingShowList3" parameterType="Chatting" resultType="Chatting">
+		select	distinct c.room_num, c.room_name, c.pic_change , c.room_type
+		from 	chatting c, participant p
+		where 	c.room_num = p.room_num
+		And 	p.user_id in(select user_id
+		                 	 from member
+		                	 where user_id = #{user_id})
+		And     c.room_type = #{room_type}               	 
+		order by c.room_num desc 
+	</select>
+	
 	<select id="akMsgNaeYong" parameterType="int" resultType="Message">
 		select  	 distinct m.*
 		from       	 message m , participant p 

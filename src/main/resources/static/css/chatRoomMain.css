@@ -140,12 +140,17 @@ li, ol, ul {
 }
 
 .chatting .me{
-	color: blue;
-	text-align: right;
+	color: #f4f1e9	;
+	text-align: left;
+    font-size: 1.3em;
+    background-color: #b7ce05;
+    word-break: break-word;
 }
 .chatting .others{
-	color: blue;
+	color: #0f5132;
 	text-align: left;
+	font-size: 1.3em;
+	background-color: #fcfcee;
 }
 input{
 	width: 330px;
@@ -157,7 +162,7 @@ input{
 
 .chatting_main {
 	min-height: 500px;
-	background-color: #c2eace;
+	background-color: #e3ebe5;
 	height: 90%;
 	padding-left: 10px;
 	padding-right: 10px;
@@ -250,4 +255,15 @@ input{
 }
 .chating{
 	width: 60%;
+}
+p{
+    display: inline-block;
+    padding: 10px 15px;
+    border-radius: 20px;
+    max-width: 350px;
+    line-height: 130%;
+}
+.boxme{
+    display: flex;
+    justify-content: flex-end;
 }

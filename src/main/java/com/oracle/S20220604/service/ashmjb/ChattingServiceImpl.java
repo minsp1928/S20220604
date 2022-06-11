@@ -53,10 +53,10 @@ public class ChattingServiceImpl implements ChattingService {
 	}
 
 	@Override
-	public List<Chatting> showList(String user_id) {
+	public List<Chatting> showList(Chatting chatting) {
 		
-		logger.info("showList start..., user_id ->" +user_id);
-		List<Chatting> showList = chattingDao.showList(user_id);
+		logger.info("showList start..., user_id ->" +chatting.getUser_id());
+		List<Chatting> showList = chattingDao.showList(chatting);
 		System.out.println(" return showList");
 		return showList;
 	}

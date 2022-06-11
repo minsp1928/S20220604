@@ -40,5 +40,8 @@ public class Chatting {
 	private int start;
 	@Transient
 	private int end;
-
+	@Transient
+	private String user_id;
+	@Transient
+	private int room_type2; //판매자채팅 타입
 }
