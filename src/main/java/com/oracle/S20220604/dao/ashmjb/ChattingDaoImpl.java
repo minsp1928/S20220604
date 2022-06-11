@@ -68,11 +68,11 @@ public class ChattingDaoImpl implements ChattingDao {
 			if(chatting.getRoom_type2() != 0	) {
 				showList = session.selectList("akChattingShowList12", chatting);
 				
-				System.out.println("ChattingDaoImpl showList.size()->"+showList.size());
+				System.out.println("ChattingDaoImpl akChattingShowList12 showList.size()->"+showList.size());
 			}
 			else {
 				showList = session.selectList("akChattingShowList3", chatting);
-				System.out.println("ChattingDaoImpl showList.size()->"+showList.size());
+				System.out.println("ChattingDaoImpl akChattingShowList3 showList.size()->"+showList.size());
 			}
 			
 		} catch (Exception e) {

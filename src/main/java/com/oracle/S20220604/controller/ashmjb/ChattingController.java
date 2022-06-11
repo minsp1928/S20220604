@@ -51,7 +51,7 @@ public class ChattingController {
 			System.out.println("!=null");
 		}
 		System.out.println("-----------------------"+session.getAttribute("user_id"));
-		String user_id = "namwoo";
+		//String user_id = "namwoo";
 		String user_id_test = request.getSession().getAttribute("user_id").toString();
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("user_id", user_id_test);

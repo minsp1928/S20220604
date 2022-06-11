@@ -205,6 +205,7 @@
 			
 			<input type="hidden" id="room_type" value="">
 			<input type="hidden" id="room_num" value="">
+			
 			<div class="chatList_area">
 				<c:forEach var="list" items="${showList}" varStatus="status">
 					<div class="chatList_wrap" id="chatList_wrap" onclick="chatListClick(${status.index})">
