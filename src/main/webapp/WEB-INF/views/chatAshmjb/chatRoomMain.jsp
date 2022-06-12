@@ -132,6 +132,9 @@
 			$("#yourName").hide();
 			$("#yourMsg").show();
 		}
+		// 조건문 하나 걸어서 모달 오픈되는 특정조건 관련된 sql문 하나 추가해야함.
+		document.getElementById("modal").style.display="flex";
+		
 	});
 	
 
