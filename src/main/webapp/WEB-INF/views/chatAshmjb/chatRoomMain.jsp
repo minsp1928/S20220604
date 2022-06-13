@@ -76,8 +76,8 @@
 					}else{
 						$("#chatting_content").append("<div class ='boxother'>" + jsonMsg.userName +"<br><p class='others'>" + jsonMsg.msg + "</p>");
 					}
-					}else if(memberSave = true){
-			//		}else if(jsonMsg.type = "userSave"){
+				}else if(memberSave = true){
+		//		}else if(jsonMsg.type = "userSave"){
 					$('#member_sub').remove();
 					// 멤버가 더 있어서 여기userSave가 동작하면 여기 그 콤보박스 생긴걸 지우고 새로이 다시 셀렉트 박스 생성해줌
 					
@@ -85,22 +85,6 @@
 					// div로 감싸주면 재정의시 삭제(Refresh)후 다시 생성 
 					//var str = " <div id='member_sub' class='member_sub'> ";
 					var str = " ";
-					/* str  += " <select name='member' id='member_sub' class='member_sub'> ";
-					str  += " <option value='ALL'>전체 </option> "; 
-					$(jsonMsg).each(
-						function(){
-							var str2 = "";
-				            // User를 선택하여 message전송 가능토록 member에 등록 
-							if(jsonMsg.sessionId == $("#sessionId").val()){
-								alert("내꺼임"+ $("#sessionId").val())
-							} else {  // 타인 session일 경우 추가 등록 
-								str2 += " <option value='"+this.sessionId + "'> "+this.userName  + "</option> "; 
-								str  += str2 ;
-							}
-						}
-					);
-					str += " </select>"
-					str += " </div><p>" */
 					$('#member').append(str);	
 					memberSave = false;
 				
@@ -108,6 +92,12 @@
 				}else{
 						console.warn("unknown type!");
 				}
+			}
+			// 예시코드는 여기서 들어간다.
+			else{
+				//파일 업로드한 경우 업로드한 파일을 채팅방에 뿌려준다.
+				var url = URL.createObjectURL(new Blob([msg]));
+				$("#chating").append("<div class='img'><img class='msgImg' src="+url+"></div><div class='clearBoth'></div>");
 			}
 		}
 
@@ -121,7 +111,6 @@
 	// null이 아니면 실행안되게끔.
 	
 	$(document).ready(function() {
-
 		var userName = $("#userName").val();
 		console.log("chatName  userName: " + userName);
 		if(userName == null || userName.trim() == ""){
@@ -136,15 +125,16 @@
 		document.getElementById("modal").style.display="flex";
 		
 	});
-	
 
 	// User 등록  Message 전송  saveStatus --> Create/ Delete
+	// Create  -> Context도 만듦어 보냄 
 	function sendUser(saveStatus) {
 		var userOption ={
-				type: "userSave", // wㅜ제 sjob
-				sessionId : $("#sessionId").val(),
-				userName : $("#userName").val(),
-				saveStatus : saveStatus // 추가함, 삭제도 여기다 하려고
+				type        : "userSave", // wsjob
+				sessionId   : $("#sessionId").val(),
+				userName    : $("#userName").val(),
+				userContext :'${pageContext.request.contextPath}/upload/chatting',
+				saveStatus  : saveStatus // 추가함, 삭제도 여기다 하려고
 			}
 		// 자바스크립트의 값을 JSON 문자열로 변환
 		ws.send(JSON.stringify(userOption));
@@ -160,12 +150,17 @@
 	
 	// 전체 Message 전송 
 	function send() {
+		var uploadImg = $("#uploadImg").src;
+		if(uploadImg == null)
+			uploadImg = "null";
+		
 		var option ={
 			type: "message",
 			sessionId : $("#sessionId").val(), // $().val()하면 변한 밸류값을 바로바로 가져옴
 			userName : $("#userName").val(),
 			yourName : $("#member_sub").val(),
 			msg : $("#message").val(),
+			imgSrc : uploadImg,
 			room_type : $("#room_type").val(),
 			room_num : $('#room_num').val()
 		}
@@ -174,6 +169,48 @@
 		$('#message').val("");
 	}
 	
+	function fileSend(){
+		var file = document.querySelector("#fileUpload").files[0];
+		alert(file.name);
+		var fileReader = new FileReader();
+		fileReader.onload = function() {
+			var param = {
+				type: "fileUpload",
+				file: file,
+				sessionId : $("#sessionId").val(),
+				msg : $("#chatting").val(),
+				yourName : $("#member_sub").val(),
+				userName : $("#userName").val(),
+				room_type : $("#room_type").val(),
+				room_num : $('#room_num').val()
+			}
+			ws.send(JSON.stringify(param)); //파일 보내기전 메시지를 보내서 파일을 보냄을 명시한다.
+
+		    arrayBuffer = this.result;
+			ws.send(arrayBuffer); //파일 소켓 전송
+		}
+		fileReader.readAsArrayBuffer(file);
+	}
+	function imgAjax() {
+		var formData = new FormData();
+		var contextPath='${pageContext.request.contextPath}';
+		/* var imgAJaxSrc = $("#uploadImg").src; */
+		/* alert("imgAjaxSrc"+imgAjaxSrc); */
+		formData.append('imgFile', $("#fileUpload")[0].files[0]);
+		alert("formData->"+JSON.stringify(formData));
+		//formData.append('request', contextPath);
+		$.ajax({
+			url:"${pageContext.request.contextPath}/imgAjax",
+			type:"POST",
+			data : formData,
+			dataType : 'text',
+			contentType: false,
+			processData: false,
+			success:function(img_src){
+				$("#uploadImg").attr("src", img_src);
+			}
+		})
+	}
 </script>
 <body>
  <jsp:include page="/WEB-INF/views/base/header.jsp" flush="true">
@@ -239,7 +276,16 @@
 					<hr><br>
 					<div id="chatting_content" class="chatting_content">  	</div>
 				</div>
-				<div>
+				<div >
+					<div>파일업로드</div>
+						<div>
+							<img alt="" src="" id="uploadImg" >
+							<input type="file" id="fileUpload" accept=".jpg,.jpeg,.gif,.png" onchange="imgAjax()">
+							<button onclick="fileSend()" id="sendFileBtn">파일올리기</button>
+						</div>
+						
+				</div>
+				
 					<input type="text" class="message" id="message" placeholder="메시지를 입력하세요" >
 					<button onclick="send()" id="sendBtn">전송</button>
 				</div>
@@ -266,12 +312,9 @@
 <script type="text/javascript">	
 	var contextPath='${pageContext.request.contextPath}';
 	function chatListClick(index) {
-		alert("클릭");
 		var user_name = $('#userName').val();
-		alert(user_name);
 		var str="";
 		var Vroom_num = $("#room_num"+index).val();
-		alert("Vroom_num->"+Vroom_num);
 		var room_type_this = $("#room_type"+index).val();
 		$("#room_type").val(room_type_this);
 		var room_num_this = $("#room_num"+index).val();
@@ -298,7 +341,6 @@
 									var msg_pic = this.msg_pic;
 									if($("#userName").val() == send_user_id){
 										me_user = send_user_id;
-										alert(" == "+send_user_id);
 										if(msg_pic != null){
 											str += "<div class='d_img'><img src = '${pageContext.request.contextPath}/upload/"+msg_pic+"' class='mePic'></div>";
 											//src="${pageContext.request.contextPath}/upload/${list.pic_change }"
@@ -311,7 +353,6 @@
 									else if($('#userName').val() != send_user_id){
 										other_user = send_user_id;
 										$('#chatting_name').html(other_user);
-										alert(" != "+send_user_id);
 										if(msg_pic != null){
 											str += "<div class='d_img'><img src = '${pageContext.request.contextPath}/upload/"+msg_pic+"' class='otherPic' ></div>";
 											
