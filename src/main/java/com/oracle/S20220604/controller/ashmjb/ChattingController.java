@@ -42,23 +42,23 @@ public class ChattingController {
 	@RequestMapping("/chat") // room_type : 1 or 2
 	public ModelAndView chat(HttpServletRequest request, HttpSession session) {
 		System.out.println("ChattingController chat start");
-		String session_id = (String) request.getSession().getAttribute("session_id");
+		String session_id = (String) request.getSession().getAttribute("sessionId");
 		System.out.println("session_id : "+session_id);
 		if(session_id == null) {
 			System.out.println("==null");
 			session.setAttribute("session_id", "namwoo");
 		}
 		
-		else if(request.getSession().getAttribute("session_id") != null){
+		else if(request.getSession().getAttribute("sessionId") != null){
 			System.out.println("!=null");
 		}
 		System.out.println("-------------session.getAttriuser_id----------"+session.getAttribute("user_id"));
 		ModelAndView mv = new ModelAndView();
-		mv.addObject("user_id", session.getAttribute("session_id").toString());
+		mv.addObject("user_id", session.getAttribute("sessionId").toString());
 		Chatting chatting = new Chatting();
 		chatting.setRoom_type(1);
 		chatting.setRoom_type2(2);
-		chatting.setUser_id(session.getAttribute("session_id").toString());
+		chatting.setUser_id(session.getAttribute("sessionId").toString());
 		List<Chatting> showList =  cs.showList(chatting);
 //		List<Chatting> showList = cs.showList(user_id_test);
 		System.out.println("chattingcontroller chat showList.size()-> "+ showList.size());
@@ -71,20 +71,20 @@ public class ChattingController {
 	public ModelAndView chat1(HttpServletRequest request, HttpSession session) {
 		System.out.println("ChattingController chat start");
 		
-		if(request.getSession().getAttribute("session_id") == null) {
+		if(request.getSession().getAttribute("sessionId") == null) {
 			System.out.println("user_id getSession ==null");
 			session.setAttribute("session_id", "namwoo");
 		}
 		
-		else if(request.getSession().getAttribute("session_id") != null){
+		else if(request.getSession().getAttribute("sessionId") != null){
 			System.out.println("user_id getSession !=null");
 		}
 		ModelAndView mv = new ModelAndView();
-		mv.addObject("user_id", session.getAttribute("session_id").toString());
+		mv.addObject("user_id", session.getAttribute("sessionId").toString());
 		Chatting chatting = new Chatting();
 		chatting.setRoom_type(3);
 		chatting.setRoom_type2(0);
-		System.out.println("user_id"+ session.getAttribute("session_id").toString());
+		System.out.println("user_id"+ session.getAttribute("sessionId").toString());
 		List<Chatting> showList =  cs.showList(chatting);
 		if(showList != null) {
 			System.out.println("chattingcontroller chat showList.size()-> "+ showList.size());

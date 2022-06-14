@@ -268,8 +268,8 @@
 		</div>
 		
 		<!-- 이거는 세션아이디, 내이름 나타내기 -->
-		<input type="text" id="testId" name="testId" value="테스트아이디">
-		sessionId : <input type="text" id="sessionId" value="">
+		<input type="hidden" id="testId" name="testId" value="테스트아이디">
+		<!-- sessionId :  --><input type="hidden" id="sessionId" value="">
 		<div id="meName"></div>
 		<div id="yourName">
 			<input type="text" name="userName" id="userName" value="${user_id }">
