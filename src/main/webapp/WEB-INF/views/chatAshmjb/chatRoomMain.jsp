@@ -71,10 +71,25 @@
 	                // 최초 이름을 입력하고 연결되었을때, 발급받은 sessionId값을 비교하여 같다면 자기 자신이 발신한
 	                // 메시지이므로 오른쪽으로 정렬하는 클래스를 처리하고 메시지를 출력.     
 	                // 비교하여 같지 않다면 타인이 발신한 메시지이므로 왼쪽으로 정렬하는 클래스를 처리하고 메시지를 출력
-					if(jsonMsg.sessionId == $("#sessionId").val()){
-						$("#chatting_content").append("<div class ='boxme'><p class ='me'>"+ jsonMsg.msg + "</p></div>");	
+	                if(jsonMsg.sessionId == $("#sessionId").val()){
+	                	if(jsonMsg.msg == "" && jsonMsg.imgSrc != ""){
+							alert("if me"+jsonMsg.imgSrc);
+							$("#chatting_content").append("<div class ='d_img'><img class='mePic' src='${pageContext.request.contextPath}/upload/"+jsonMsg.imgSrc+"'></div>");	
+							$("#chatting_content").scrollTop($("#chatting_content")[0].scrollHeight);
+	                	}else{
+							alert("el me"+jsonMsg.imgSrc);
+							$("#chatting_content").append("<div class ='boxme'><p class ='me'>"+ jsonMsg.msg + "</p></div>");	
+							$("#chatting_content").scrollTop($("#chatting_content")[0].scrollHeight);
+						} 
 					}else{
-						$("#chatting_content").append("<div class ='boxother'>" + jsonMsg.userName +"<br><p class='others'>" + jsonMsg.msg + "</p>");
+						if(jsonMsg.msg == "" && jsonMsg.imgSrc != ""){
+							$("#chatting_content").append("<div class ='d_img'><img class='otherPic' src='${pageContext.request.contextPath}/upload/"+jsonMsg.imgSrc+"'></div>");	
+							$("#chatting_content").scrollTop($("#chatting_content")[0].scrollHeight);
+						}else{
+							$("#chatting_content").append("<div class ='boxother'>" + jsonMsg.userName +"<br><p class='others'>" + jsonMsg.msg + "</p>");
+							$("#chatting_content").scrollTop($("#chatting_content")[0].scrollHeight);
+						}
+						
 					}
 				}else if(memberSave = true){
 		//		}else if(jsonMsg.type = "userSave"){
@@ -94,11 +109,7 @@
 				}
 			}
 			// 예시코드는 여기서 들어간다.
-			else{
-				//파일 업로드한 경우 업로드한 파일을 채팅방에 뿌려준다.
-				var url = URL.createObjectURL(new Blob([msg]));
-				$("#chating").append("<div class='img'><img class='msgImg' src="+url+"></div><div class='clearBoth'></div>");
-			}
+			
 		}
 
 		document.addEventListener("keypress", function(e){
@@ -122,7 +133,7 @@
 			$("#yourMsg").show();
 		}
 		// 조건문 하나 걸어서 모달 오픈되는 특정조건 관련된 sql문 하나 추가해야함.
-		document.getElementById("modal").style.display="flex";
+//		document.getElementById("modal").style.display="flex";
 		
 	});
 
@@ -150,64 +161,61 @@
 	
 	// 전체 Message 전송 
 	function send() {
-		var uploadImg = $("#uploadImg").src;
+		var uploadImg = document.getElementById('uploadImg').src;
+		var uploadImgName = $("#imgNameHidden").val();
 		if(uploadImg == null)
 			uploadImg = "null";
-		
+		alert(uploadImg);
+		alert(uploadImgName);
 		var option ={
 			type: "message",
 			sessionId : $("#sessionId").val(), // $().val()하면 변한 밸류값을 바로바로 가져옴
 			userName : $("#userName").val(),
 			yourName : $("#member_sub").val(),
 			msg : $("#message").val(),
-			imgSrc : uploadImg,
+			imgSrc : uploadImgName,
 			room_type : $("#room_type").val(),
 			room_num : $('#room_num').val()
 		}
 		// 자바스크립트의 값을 JSON 문자열로 변환
 		ws.send(JSON.stringify(option));
 		$('#message').val("");
-	}
-	
-	function fileSend(){
-		var file = document.querySelector("#fileUpload").files[0];
-		alert(file.name);
-		var fileReader = new FileReader();
-		fileReader.onload = function() {
-			var param = {
-				type: "fileUpload",
-				file: file,
-				sessionId : $("#sessionId").val(),
-				msg : $("#chatting").val(),
-				yourName : $("#member_sub").val(),
-				userName : $("#userName").val(),
-				room_type : $("#room_type").val(),
-				room_num : $('#room_num').val()
-			}
-			ws.send(JSON.stringify(param)); //파일 보내기전 메시지를 보내서 파일을 보냄을 명시한다.
+		document.getElementById("uploadImg").src = "";
+		document.getElementById("fileUpload").value="";
 
-		    arrayBuffer = this.result;
-			ws.send(arrayBuffer); //파일 소켓 전송
-		}
-		fileReader.readAsArrayBuffer(file);
+			
 	}
+	//var inputFile = $("input[name='fileUpload']"); -- 인식못함
+//	<form action="" id="fileForm" method="post" enctype="multipart/form-data">
+//	<img alt="" src="" id="uploadImg" >
+	//<input name="fileUpload" type="file" id="fileUpload" accept=".jpg,.jpeg,.gif,.png" onchange="imgAjax()">
+
 	function imgAjax() {
-		var formData = new FormData();
+	//	var formData = new FormData();
+		var formData = new FormData($('#fileForm')[0]);
 		var contextPath='${pageContext.request.contextPath}';
-		/* var imgAJaxSrc = $("#uploadImg").src; */
-		/* alert("imgAjaxSrc"+imgAjaxSrc); */
-		formData.append('imgFile', $("#fileUpload")[0].files[0]);
-		alert("formData->"+JSON.stringify(formData));
-		//formData.append('request', contextPath);
+		var inputFile = document.querySelector("#fileUpload").files[0];
+		
 		$.ajax({
-			url:"${pageContext.request.contextPath}/imgAjax",
-			type:"POST",
-			data : formData,
-			dataType : 'text',
 			contentType: false,
 			processData: false,
+			url:"${pageContext.request.contextPath}/imgAjax",
+			type:"POST",
+			enctype: 'multipart/form-data',
+			data : formData,
+			dataType : 'json',
 			success:function(img_src){
-				$("#uploadImg").attr("src", img_src);
+				alert("success")
+				alert("s1."+ img_src);
+				var test = JSON.stringify(img_src);
+				alert("s2.: "+ test.name);
+				$(img_src).each(
+					function () {
+						console.log(this.fileName);
+						$("#uploadImg").attr("src",this.realFileName);
+						$("#imgNameHidden").attr("value", this.fileName);
+					}	
+				)
 			}
 		})
 	}
@@ -260,11 +268,11 @@
 		</div>
 		
 		<!-- 이거는 세션아이디, 내이름 나타내기 -->
-		<input type="hidden" id="testId" name="testId" value="테스트아이디">
-		<input type="hidden" id="sessionId" value="">
+		<input type="text" id="testId" name="testId" value="테스트아이디">
+		sessionId : <input type="text" id="sessionId" value="">
 		<div id="meName"></div>
 		<div id="yourName">
-			<input type="hidden" name="userName" id="userName" value="${user_id }">
+			<input type="text" name="userName" id="userName" value="${user_id }">
 		</div>
 		<!-- 여기까지 -->
 		
@@ -277,13 +285,12 @@
 					<div id="chatting_content" class="chatting_content">  	</div>
 				</div>
 				<div >
-					<div>파일업로드</div>
-						<div>
-							<img alt="" src="" id="uploadImg" >
-							<input type="file" id="fileUpload" accept=".jpg,.jpeg,.gif,.png" onchange="imgAjax()">
-							<button onclick="fileSend()" id="sendFileBtn">파일올리기</button>
-						</div>
-						
+				<input type="hidden" id="imgNameHidden" value="">
+				<form  id="fileForm" method="post" enctype="multipart/form-data">
+						<img alt="" src="" id="uploadImg" name="uploadImg">
+						<input name="fileUpload" type="file" id="fileUpload" accept=".jpg,.jpeg,.gif,.png" onchange="imgAjax()">
+						<button id="sendFileBtn">파일올리기</button> <!-- onchange="imgAjax()" -->
+				</form>		
 				</div>
 				
 					<input type="text" class="message" id="message" placeholder="메시지를 입력하세요" >

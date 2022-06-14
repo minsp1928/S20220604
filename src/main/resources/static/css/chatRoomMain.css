@@ -162,6 +162,7 @@ input{
 
 .chatting_main {
 	min-height: 500px;
+	max-height: 1000px;
 	background-color: #e3ebe5;
 	height: 90%;
 	padding-left: 10px;
@@ -252,6 +253,7 @@ input{
 .chatting_content{
 	overflow: auto;
 	overflow-x: hidden; 
+	height: 90%;
 }
 .chating{
 	width: 60%;
@@ -266,4 +268,8 @@ p{
 .boxme{
     display: flex;
     justify-content: flex-end;
+}
+
+#uploadImg{
+	width: 30%;
 }

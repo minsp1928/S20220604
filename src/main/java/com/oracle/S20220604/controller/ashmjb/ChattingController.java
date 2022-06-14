@@ -1,15 +1,11 @@
 package com.oracle.S20220604.controller.ashmjb;
 
-import java.awt.Graphics;
-import java.awt.Image;
-import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
-import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -29,6 +25,9 @@ import com.oracle.S20220604.model.Message;
 import com.oracle.S20220604.service.ashmjb.ChattingService;
 import com.oracle.S20220604.service.ashmjb.Paging;
 
+import lombok.Getter;
+import lombok.Setter;
+
 
 @RestController
 public class ChattingController {
@@ -43,25 +42,23 @@ public class ChattingController {
 	@RequestMapping("/chat") // room_type : 1 or 2
 	public ModelAndView chat(HttpServletRequest request, HttpSession session) {
 		System.out.println("ChattingController chat start");
-		
-		if(request.getSession().getAttribute("user_id") == null) {
+		String session_id = (String) request.getSession().getAttribute("session_id");
+		System.out.println("session_id : "+session_id);
+		if(session_id == null) {
 			System.out.println("==null");
-			session.setAttribute("user_id", "sdsa12");
+			session.setAttribute("session_id", "namwoo");
 		}
 		
-		else if(request.getSession().getAttribute("user_id") != null){
+		else if(request.getSession().getAttribute("session_id") != null){
 			System.out.println("!=null");
 		}
-		System.out.println("-----------------------"+session.getAttribute("user_id"));
-		//String user_id = "namwoo";
-		String user_id_test = request.getSession().getAttribute("user_id").toString();
+		System.out.println("-------------session.getAttriuser_id----------"+session.getAttribute("user_id"));
 		ModelAndView mv = new ModelAndView();
-		mv.addObject("user_id", user_id_test);
+		mv.addObject("user_id", session.getAttribute("session_id").toString());
 		Chatting chatting = new Chatting();
 		chatting.setRoom_type(1);
 		chatting.setRoom_type2(2);
-		chatting.setUser_id(user_id_test);
-		System.out.println("user_id_test"+ user_id_test);
+		chatting.setUser_id(session.getAttribute("session_id").toString());
 		List<Chatting> showList =  cs.showList(chatting);
 //		List<Chatting> showList = cs.showList(user_id_test);
 		System.out.println("chattingcontroller chat showList.size()-> "+ showList.size());
@@ -74,22 +71,20 @@ public class ChattingController {
 	public ModelAndView chat1(HttpServletRequest request, HttpSession session) {
 		System.out.println("ChattingController chat start");
 		
-		if(request.getSession().getAttribute("user_id") == null) {
+		if(request.getSession().getAttribute("session_id") == null) {
 			System.out.println("user_id getSession ==null");
-			session.setAttribute("user_id", "namwoo");
+			session.setAttribute("session_id", "namwoo");
 		}
 		
-		else if(request.getSession().getAttribute("user_id") != null){
+		else if(request.getSession().getAttribute("session_id") != null){
 			System.out.println("user_id getSession !=null");
 		}
-		String user_id = "namwoo";
-		String user_id_test = request.getSession().getAttribute("user_id").toString();
 		ModelAndView mv = new ModelAndView();
-		mv.addObject("user_id", user_id);
+		mv.addObject("user_id", session.getAttribute("session_id").toString());
 		Chatting chatting = new Chatting();
 		chatting.setRoom_type(3);
 		chatting.setRoom_type2(0);
-		System.out.println("user_id_test"+ user_id_test);
+		System.out.println("user_id"+ session.getAttribute("session_id").toString());
 		List<Chatting> showList =  cs.showList(chatting);
 		if(showList != null) {
 			System.out.println("chattingcontroller chat showList.size()-> "+ showList.size());
@@ -200,26 +195,37 @@ public class ChattingController {
 		List<Message> msgnaeyong = cs.msgnaeyong(room_num);
 		System.out.println("msgnaeyong.get(0).getsend_user_id"+msgnaeyong.get(0).getSend_user_id());
 		System.out.println("msgnaeyong.get(0).getRoom_num()->"+msgnaeyong.get(0).getRoom_num());
-//		System.out.println("msgnaeyong.get(1).getsend_user_id"+msgnaeyong.get(1).getSend_user_id());
 		System.out.println("msgnaeyong.size()->"+msgnaeyong.size());
 		return msgnaeyong;
 	}
 	
-	@RequestMapping(value="imgAjax", method = RequestMethod.POST)
-	public String imgAjax(MultipartFile[] uploadimg, HttpServletRequest request) throws Exception {
-		System.out.println(uploadimg);
+	@Getter
+	@Setter
+	public class UploadFile {
+		private MultipartFile fileUpload;
+		private String uploadImg;
+	}
+	
+	@RequestMapping(value="imgAjax", method = RequestMethod.POST) 
+	public Map<String,Object> uploadFiles(UploadFile uploadFile, HttpServletRequest request) throws Exception{
+		System.out.println("tn "+uploadFile.getFileUpload().getOriginalFilename());
+		System.out.println("tb "+uploadFile.getFileUpload().getBytes());
+		String uploadFolder = request.getSession().getServletContext().getRealPath("/upload/");
 		String uploadFileName = "";
 		String uploadFilesavedName = "";
-		String uploadFolder = request.getSession().getServletContext().getRealPath("/upload/");
-		System.out.println("imgAJaxuploadFolder->"+uploadFolder);
-		/*for(MultipartFile multipartFile : uploadimg) {
-			uploadFileName = multipartFile.getOriginalFilename();
-			uploadFilesavedName = uploadFile(uploadFileName, multipartFile.getBytes(), uploadFolder);
-		}*/
-		MultipartFile multipartFile = uploadimg[0];
-		uploadFileName = multipartFile.getOriginalFilename();
-		uploadFilesavedName = uploadFile(uploadFileName, multipartFile.getBytes(), uploadFolder);
+		Map<String,Object> resultMap=new HashMap<String,Object>();
+		uploadFileName = uploadFile.getFileUpload().getOriginalFilename();
+		uploadFilesavedName = uploadFile(uploadFileName, uploadFile.getFileUpload().getBytes(), uploadFolder);
 		System.out.println("imgAjaxFileName-> "+uploadFilesavedName);
-		return uploadFilesavedName;
-	}
+		String realFileName = "/upload/"+ uploadFilesavedName;
+		System.out.println(realFileName + "-------");
+		resultMap.put("addr", uploadFolder);
+		resultMap.put("fileName", uploadFilesavedName);
+		resultMap.put("realFileName", realFileName);
+        return resultMap;
+		        
+    }
+		
+	
+	
 }

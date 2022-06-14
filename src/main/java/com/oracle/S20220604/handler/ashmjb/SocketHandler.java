@@ -1,10 +1,5 @@
 package com.oracle.S20220604.handler.ashmjb;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.nio.ByteBuffer;
-import java.nio.channels.FileChannel;
 import java.util.HashMap;
 import java.util.Iterator;
 
@@ -14,7 +9,6 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.web.socket.BinaryMessage;
 import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
@@ -69,13 +63,15 @@ public class SocketHandler extends TextWebSocketHandler {
 		int msgRoomNum = Integer.parseInt(mrn) ;
 		String mty	= (String) jsonObj.get("room_type");
 		int msgRoomType = Integer.parseInt(mty);
-		
-		
+		String msgPic = (String) jsonObj.get("imgSrc");
+		System.out.println(msgPic+"<-------------------------msgPic");
+		System.out.println(msgContent+"<----------------------------msgContent");
 		Message msgserv = new Message();
 		msgserv.setContent(msgContent);
 		msgserv.setSend_user_id(msgUserName);
 		msgserv.setRoom_num(msgRoomNum);
 		msgserv.setMsg_type(msgRoomType);
+		msgserv.setMsg_pic(msgPic);
 		int result = ms.insert(msgserv);
 		
 		//전체
@@ -184,59 +180,6 @@ public class SocketHandler extends TextWebSocketHandler {
 		System.out.println("switch closed");
 		
 	}
-	
-	
-	@Override
-	public void handleBinaryMessage(WebSocketSession session, BinaryMessage message) {
-		int fileUploadIdx = 0;
-		//바이너리 메시지 발송
-		ByteBuffer byteBuffer = message.getPayload();
-		String fileName = "temp.jpg";
-		File dir = new File(FILE_UPLOAD_PATH);
-		if(!dir.exists()) {
-			dir.mkdirs();
-			System.out.println("업로드용 폴더 생성 : "+ FILE_UPLOAD_PATH);
-		}
-		
-		File file = new File(FILE_UPLOAD_PATH, fileName);
-		FileOutputStream out = null;
-		FileChannel outChannel = null;
-		try {
-			byteBuffer.flip(); //byteBuffer를 읽기 위해 세팅
-			out = new FileOutputStream(file, true); //생성을 위해 OutputStream을 연다.
-			outChannel = out.getChannel(); //채널을 열고
-			byteBuffer.compact(); //파일을 복사한다.
-			outChannel.write(byteBuffer); //파일을 쓴다.
-		}catch(Exception e) {
-			e.printStackTrace();
-		}finally {
-			try {
-				if(out != null) {
-					out.close();
-				}
-				if(outChannel != null) {
-					outChannel.close();
-				}
-			}catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
-		
-		byteBuffer.position(0); //파일을 저장하면서 position값이 변경되었으므로 0으로 초기화한다.
-		//파일쓰기가 끝나면 이미지를 발송한다.
-		for(String key : sessionMap.keySet()) {
-			WebSocketSession wss = sessionMap.get(key);
-			try {
-				System.out.println("message key -> "+ key);
-				System.out.println("message wss -> "+ wss);
-				wss.sendMessage(new BinaryMessage(byteBuffer)); //초기화된 버퍼를 발송한다.
-			} catch (Exception e) {
-				// TODO: handle exception
-			}
-			
-		}
-	}
-	
 	
 	/*  이건 컴파일러가 일반적으로 경고하는 내용 중	"이건 하지마"하고 제외시킬 때 쓰임
 	//	따라서 어떤 경고를 제외시킬지 옵션
