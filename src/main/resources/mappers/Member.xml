@@ -64,15 +64,49 @@
 	</select>
 	
 	<select id="mjSellerList" resultType="MemberChk">
-		select m.*, c.chk 
+		select  m.*, c.chk 
 		  from  member m, chk_level c
-         where m.user_id = c.user_id
-           and c.chk in (0, 2)
+         where  m.user_id = c.user_id
+           and  c.chk = 0
 	</select>
 	
 	<select id="mjNewMember" resultType="Member">
 		<![CDATA[
 			select * from member where join_date between sysdate-6 and sysdate
 		]]>
+	</select>
+	
+	<select id="mjMemberDetail" parameterType="String" resultType="MemberDetail">
+		select member.*, nvl(pay.cotot,0) as orders, nvl(pay.sumtot,0) as orderamount
+		  from member, (select nvl(sum(pay_tot),0) sumtot, nvl(count(pay_tot),0) cotot, user_id
+                          from payment
+                         group by user_id) pay
+         where member.user_id = pay.user_id(+)
+           and member.user_id = #{user_id}
+	</select>
+	
+	<update id="mjsellerApprove1" parameterType="String">
+		update member set m_level = 2 where user_id = #{user_id}
+
+	</update>
+	
+	<update id="mjsellerApprove2" parameterType="String">
+		update chk_level set chk = 1 where user_id = #{user_id}
+	</update>
+	
+	<update id="mjsellerReject" parameterType="String">
+		update chk_level set chk = 2 where user_id = #{user_id}
+	</update>
+	
+	<update id="mjMemberStatus" parameterType="Member">
+		update member set m_level = #{m_level} where user_id = #{user_id}
+	</update>
+	
+	<update id="mjPassReset" parameterType="String">
+		update member set user_pw = '1' where user_id = #{user_id}
+	</update>
+	
+	<select id="mjMemberChk" parameterType="java.lang.String" resultType="int">
+		select count(*) from member where user_id = #{user_id}
 	</select>
 </mapper>

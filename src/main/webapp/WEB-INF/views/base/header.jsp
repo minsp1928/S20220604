@@ -77,9 +77,9 @@
 					<div id="header_category_button">내정보</div>
 					<ul>
 						<li><a href="adminMain" class="item"><div>마이페이지</div></a></li>
-						<li><a href="faq?user_id=" class="item"><div>1:1문의</div></a></li>
+						<li><a href="faq?user_id=${sessionId }" class="item"><div>1:1문의</div></a></li>
 						<li><a href="notice" class="item"><div>공지사항</div></a></li>
-						<li><a href="coupon" class="item"><div>쿠폰</div></a></li>
+						<li><a href="coupon?user_id=${sessionId }" class="item"><div>쿠폰</div></a></li>
 						<p><p><p><p>
 						<li>
 							<form action="logout_button" name="logout_button">
@@ -102,6 +102,5 @@
 		
 	</header>
 	
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 </body>
 </html>

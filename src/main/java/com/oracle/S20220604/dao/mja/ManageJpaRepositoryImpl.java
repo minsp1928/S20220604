@@ -1,5 +1,6 @@
 package com.oracle.S20220604.dao.mja;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -7,6 +8,7 @@ import javax.persistence.EntityManager;
 import org.springframework.stereotype.Repository;
 
 import com.oracle.S20220604.domain.CouponJpa;
+import com.oracle.S20220604.domain.FaqJpa;
 import com.oracle.S20220604.domain.HwCurrentVO;
 
 @Repository
@@ -21,6 +23,8 @@ public class ManageJpaRepositoryImpl implements ManageJpaRepository {
 	@Override
 	public List<CouponJpa> couponList() {
 		String user_id = "admin";
+		LocalDate now = LocalDate.now();
+		String date = now.toString();
 		@SuppressWarnings("unchecked")
 		List<CouponJpa> couponList = em.createQuery("SELECT m FROM CouponJpa m WHERE m.user_id = :user_id")
 										.setParameter("user_id", user_id)
@@ -61,5 +65,17 @@ public class ManageJpaRepositoryImpl implements ManageJpaRepository {
 		System.out.println("insert 성공");
 		
 		return insert;
+	}
+
+	@Override
+	public FaqJpa save(FaqJpa faqJpa) {
+		LocalDate now = LocalDate.now();
+		String date = now.toString();
+		faqJpa.setUser_date(date);
+		faqJpa.setFaq_check(0);
+		faqJpa.setLogin_check(0);
+		em.persist(faqJpa);
+		System.out.println("insert 성공");
+		return faqJpa;
 	}
 }

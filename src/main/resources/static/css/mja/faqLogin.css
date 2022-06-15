@@ -1,0 +1,11 @@
+@charset "UTF-8";
+
+.container {
+	font-family: 'Noto Sans KR';
+	padding-top: 50px;
+	padding-bottom: 50px;
+}
+ 
+#subBtn {
+	float: right;
+} 

@@ -1,0 +1,14 @@
+@charset "UTF-8";
+
+.container {
+	font-family: 'Noto Sans KR';
+	padding: 20px;
+}
+ 
+#one{
+	padding: 50px;
+}
+#one a{
+	text-decoration: none;
+	color: gray;
+} 

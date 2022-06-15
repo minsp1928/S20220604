@@ -3,10 +3,10 @@ package com.oracle.S20220604.model;
 import lombok.Data;
 
 @Data
-public class IncomeVO {
+public class MonthIncome {
 	
-	private int incomedate;
-	private int tot;
+	private int incomedatem;
+	private int totm;
 	
 	//조회용
 	private int year;

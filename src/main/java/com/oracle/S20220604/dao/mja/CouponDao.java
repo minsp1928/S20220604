@@ -14,4 +14,8 @@ public interface CouponDao {
 
 	Coupon couponDown(Coupon coupon);
 
+	List<Coupon> getCouponLIst(Coupon coupon);
+
+	int couponCount();
+
 }

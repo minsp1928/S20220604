@@ -7,27 +7,47 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link href="css/mja/coupon.css" rel="stylesheet" type="text/css">
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
 <jsp:include page="/WEB-INF/views/base/header.jsp" flush="true"/>
-<section>
-<h1>쿠폰</h1>
-<input type="hidden" id="user_id" name="user_id" value="namwoo"> 
- <div class="row">
- 	<c:forEach var="cp" items="${cpList }" varStatus="status">
- 		<div class="col-lg-4">
- 			<div class="couponCard">
-	 		<img alt="" src="/img/coupon_default.png">
-	 		<input type="hidden" id="cp_num${status.index }" name="cp_num" value="${cp.cp_num }">
- 			<input type="text" id="cp_name${status.index }" name="cp_name" value="${cp.cp_name }">
- 			<button  type="button" onclick="couponDown(${status.index})" value=""><img alt="" src="/img/download.png"></button>
- 			</div>
-	 	</div>	
- 	</c:forEach>	
- </div>
-</section>
+<div class="container" id="one">
+	<div class="row gx-6">
+	<h1>진행중인 쿠폰</h1>
+		<input type="hidden" id="user_id" name="user_id" value="${user_id}"> 
+			<c:forEach var="cp" items="${cpList }" varStatus="status">
+				<div class="col-lg-4">			 			 
+ 					<img src="/img/coupon_default.png" class="card-img-top" alt="쿠폰이미지">
+ 					<div class="card-body">
+   					<h5 class="card-title">${cp.cp_name }</h5>
+   					<p class="card-text"> 
+   						<fmt:parseDate value=" ${cp.st_date }" var="date" pattern="yyyy-MM-dd HH:mm:ss"/>
+   						<fmt:formatDate value="${date }" pattern="yyyy-MM-dd"/>
+   						~
+   						<fmt:parseDate value=" ${cp.end_date }" var="date" pattern="yyyy-MM-dd HH:mm:ss"/>
+   						<fmt:formatDate value="${date }" pattern="yyyy-MM-dd"/>
+   					<p>
+ 					<input type="hidden" id="cp_num${status.index }" name="cp_num" value="${cp.cp_num }">
+   					<button type="button" class="btn btn-primary btn-sm" onclick="couponDown(${status.index})">쿠폰다운</button>
+				</div><p>
+ 			</div>	
+		</c:forEach>
+		
+		<div id="two">
+				<c:if test="${paging.startPage > paging.pageBlock}">
+					<a href="coupon?currentPage=${paging.startPage-paging.pageBlock }">[이전]</a>
+				</c:if>
+				<c:forEach var="i" begin="${paging.startPage }" end="${paging.endPage }">
+					<a href="coupon?currentPage=${i }">[${i }]</a>
+				</c:forEach>
+				<c:if test="${paging.endPage <paging.totalPage }">
+					<a href="coupon?currentPage=${paging.startPatg+paging.pageBlock }">[다음]</a>
+				</c:if>
+		</div>
+	</div>	
+</div> 
 <script type="text/javascript">
 	function couponDown(Vindex) {
 		console.log(Vindex);

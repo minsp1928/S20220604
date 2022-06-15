@@ -1,0 +1,26 @@
+@charset "UTF-8";
+
+.container {
+	font-family: 'Noto Sans KR';
+	padding: 20px;
+}
+ 
+#sellTbl {
+	text-align: center;
+}
+ 
+#newtbl {
+	text-align: center;
+}
+
+#one {
+	margin-bottom: 20px;
+}
+
+#two {
+	margin-bottom: 20px;
+}
+
+#three {
+	margin-bottom: 20px;
+}

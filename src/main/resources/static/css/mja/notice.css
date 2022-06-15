@@ -1,0 +1,22 @@
+@charset "UTF-8";
+
+.container {
+	font-family: 'Noto Sans KR';
+	padding: 20px;
+}
+ 
+#one {
+	margin-top: 20px;
+}
+#two {
+	margin-top: 10px;
+	align-items: center;
+}
+#tbl th{
+	text-align: center;
+}
+#tbl a{
+	color: #1c3316;
+    text-decoration: none;
+    
+}

@@ -26,10 +26,10 @@ public class FaqDaoImpl implements FaqDao {
 	}
 
 	@Override
-	public List<Faq> faqList() {
+	public List<Faq> faqList(Faq faq) {
 		List<Faq> faqs = null;
 		try {
-			faqs = session.selectList("mjFaqList");
+			faqs = session.selectList("mjFaqList",faq);
 		} catch (Exception e) {
 			System.out.println("faqList err : " + e.getMessage());
 		}
@@ -57,6 +57,44 @@ public class FaqDaoImpl implements FaqDao {
 			result = session.update("mjFaqAnswer", faq);
 		} catch (Exception e) {
 			System.out.println("faqAnswer err : " + e.getMessage()); 
+		}
+		return result;
+	}
+
+	@Override
+	public List<Faq> faqKeyword(Faq faq) {
+		System.out.println("faqKeyword Dao 시작");
+		if(faq.getKeyword().isEmpty()) faq.setKeyword("%");
+		List<Faq> faqs = null;
+		try {
+			faqs = session.selectList("mjFaqKeyword", faq);
+		} catch (Exception e) {
+			System.out.println("FaqKeyword err : " + e.getMessage()); 
+		}
+		return faqs;
+	}
+
+	@Override
+	public List<Faq> questions(String user_id) {
+		System.out.println("questions Dao 시작");
+		List<Faq> faqs = null;
+		try {
+			faqs = session.selectList("mjQuestionList",user_id);
+		} catch (Exception e) {
+			System.out.println("questions err : " + e.getMessage()); 
+		}
+				
+		return faqs;
+	}
+
+	@Override
+	public int faqchk(Faq faq) {
+		System.out.println("fqachk dao 시작");
+		int result = 0;
+		try {
+			result = session.selectOne("mjFaqchk", faq);
+		} catch (Exception e) {
+			System.out.println("fqachk err : " + e.getMessage()); 
 		}
 		return result;
 	}

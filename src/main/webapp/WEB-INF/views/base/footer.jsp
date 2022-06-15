@@ -45,8 +45,8 @@
                     </div>
                 </div>
                 <div id="footer_admin">
-                    <a href="#">공지사항</a><br> <!--관리자 페이지의 공지사항으로 이동-->
-                    <a href="#">1:1문의</a><br> <!--관리자 페이지의 1:1문의로 이동-->
+                    <a href="notice">공지사항</a><br> <!--관리자 페이지의 공지사항으로 이동-->
+                    <a href="faq?user_id=${sessionId }">1:1문의</a><br> <!--관리자 페이지의 1:1문의로 이동-->
                 </div>
             </div>
             <hr>
@@ -56,6 +56,7 @@
             </div>
         </div>
     </footer>
-
+    
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 </body>
 </html>
