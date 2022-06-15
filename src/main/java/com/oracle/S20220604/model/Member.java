@@ -15,7 +15,8 @@ public class Member {
 	private String 	email;
 	private String 	con_tel;
 	private String 	user_photo;
-	private String 	con_addr;
+	private String 	con_addr1;
+	private String 	con_addr2;
 	private String 	sell_name;
 	private String 	sell_tel;
 	private String 	sell_photo;

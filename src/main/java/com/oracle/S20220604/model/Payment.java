@@ -12,10 +12,11 @@ public class Payment {
 	private String user_id;		 	private int pay_state;
 	private String pay_name; 		private String pay_address;
 	private String pay_tell; 		private int cp_state;
-	private int cp_num;				private String pay_req;
-	private Date pay_date;
+	private int    cp_num;			private String pay_req;
+	private String pay_date;
 	
 	
+
 }
 
 

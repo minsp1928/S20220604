@@ -1,10 +1,11 @@
-package com.oracle.S20220604.service.jsh;
+package com.oracle.S20220604.dao.jsh;
 
 import java.util.List;
 
 import com.oracle.S20220604.model.Review;
 
-public interface ReviewService {
+public interface ReviewDao {
+
 
 	List<Review> SearchReview(int pro_num);
 

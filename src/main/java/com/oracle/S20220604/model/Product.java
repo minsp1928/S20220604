@@ -21,5 +21,8 @@ public class Product {
 	private int amount;
 	private int sell_amount;
 	
+	 //조회
+	private int quantity;
+	
 	
 }

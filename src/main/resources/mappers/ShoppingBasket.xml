@@ -3,6 +3,28 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.oracle.S20220604.ShoppingBasketMapper">
-
+	
+	<select id="jshBaksetProduct" parameterType="int" resultType="Basket">
+		select 	b.basket_num, b.pro_num, b.basket_amount,
+				p.pro_price, p.pro_title, p.pro_photo
+		from 	basket b left join product p on b.pro_num = p.pro_num 
+		where	b.basket_num = #{basket_num} 
+	</select>
+	
+	<select id="jshBasket" parameterType="String" resultType="Main_Basket">
+		select basket_num, user_id from main_basket where user_id = #{user_id}
+	</select>
+	
+	<delete id="jshDeletBasket" parameterType="Basket">
+		delete from basket where basket_num = #{basket_num} and pro_num = #{pro_num}
+	</delete>
+	
+	<select id="jshBasketCount" parameterType="int" resultType="int">
+		select Count(*) from basket where basket_num = #{basket_num}
+	</select>
+	
+	<delete id="jshDeletMainBasket" parameterType="int">
+		delete from main_basket where basket_num = #{basket_num}
+	</delete>
 
 </mapper>

@@ -4,5 +4,22 @@
 
 <mapper namespace="com.oracle.S20220604.ReviewMapper">
 
+	<select id="jshSearchReview" parameterType="int" resultType="Review">
+		select user_id, re_title, re_content, re_pic, re_star 
+		from review 
+		where pro_num = #{pro_num}
+	</select>
+	
+	<select id="jshSearchMbPic" parameterType="String" resultType="Member">
+		select user_photo from member where user_id = #{user_id}
+	</select>
+	
+	<!-- <select id="jshReviewTotal" resultType="int" >
+		SELECT Count(*) FROM review where pro_num = #{pro_num}
+	</select> -->
+	
+	<delete id="jshReviewDelete" parameterType="Review">
+		delete from review where user_id = #{user_id} and pro_num = #{pro_num}
+	</delete>
 
 </mapper>

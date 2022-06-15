@@ -15,5 +15,10 @@
 		<typeAlias alias="Faq" 				type="com.oracle.S20220604.model.Faq"/>
 		<typeAlias alias="IncomeVO" 		type="com.oracle.S20220604.model.IncomeVO"/>
 		<typeAlias alias="MemberChk" 		type="com.oracle.S20220604.model.MemberChk"/>
+		<typeAlias alias="Main_Basket" 		type="com.oracle.S20220604.model.Main_Basket"/>
+		<typeAlias alias="Basket" 			type="com.oracle.S20220604.model.Basket"/>
+		<typeAlias alias="OrderList" 		type="com.oracle.S20220604.model.OrderList"/>
+		<typeAlias alias="Review" 			type="com.oracle.S20220604.model.Review"/>
+		<typeAlias alias="MyPageVO"       	type="com.oracle.S20220604.model.MyPageVO"/>
 	</typeAliases>
 </configuration>

@@ -16,4 +16,7 @@ public class Coupon {
 	private Date	st_date;
 	private Date  	end_date;
 	private int		cp_status;
+	
+	//조회용
+	private String to_date;
 }
