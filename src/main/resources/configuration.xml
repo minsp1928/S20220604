@@ -18,5 +18,7 @@
 		<typeAlias alias="MemberChk" 		type="com.oracle.S20220604.model.MemberChk"/>
 		
 		<typeAlias alias="Chatting" 		type="com.oracle.S20220604.domain.Chatting"/>
+		<typeAlias alias="ReadCheck" 		type="com.oracle.S20220604.model.ReadCheck"/>
+		<typeAlias alias="Participant" 		type="com.oracle.S20220604.model.Participant"/>
 	</typeAliases>
 </configuration>

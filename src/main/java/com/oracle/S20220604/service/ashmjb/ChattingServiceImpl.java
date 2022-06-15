@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import com.oracle.S20220604.dao.ashmjb.ChattingDao;
 import com.oracle.S20220604.domain.Chatting;
 import com.oracle.S20220604.model.Message;
+import com.oracle.S20220604.model.Participant;
 
 @Service
 @Transactional
@@ -28,7 +29,10 @@ public class ChattingServiceImpl implements ChattingService {
 		logger.info("insert Start .. ");
 		logger.info("insert chatting.getRoom_num-> " + chatting.getRoom_num());
 		chattingDao.save(chatting);
-		
+		Participant pt = new Participant();
+		pt.setUser_id(chatting.getUser_id());
+		int saveParticipantResult = chattingDao.saveParticipant(pt);
+		System.out.println("saveParticipantResult -> "+saveParticipantResult);
 		return chatting.getRoom_num();
 	}
 

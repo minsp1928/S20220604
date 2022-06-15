@@ -171,11 +171,11 @@
 			type: "message",
 			sessionId : $("#sessionId").val(), // $().val()하면 변한 밸류값을 바로바로 가져옴
 			userName : $("#userName").val(),
-			yourName : $("#member_sub").val(),
 			msg : $("#message").val(),
 			imgSrc : uploadImgName,
 			room_type : $("#room_type").val(),
-			room_num : $('#room_num').val()
+			room_num : $('#room_num').val(),
+			otherName : $('#chatting_name').text()
 		}
 		// 자바스크립트의 값을 JSON 문자열로 변환
 		ws.send(JSON.stringify(option));
@@ -205,10 +205,7 @@
 			data : formData,
 			dataType : 'json',
 			success:function(img_src){
-				alert("success")
-				alert("s1."+ img_src);
 				var test = JSON.stringify(img_src);
-				alert("s2.: "+ test.name);
 				$(img_src).each(
 					function () {
 						console.log(this.fileName);
@@ -221,7 +218,7 @@
 	}
 </script>
 <body>
- <jsp:include page="/WEB-INF/views/base/header.jsp" flush="true">
+ <jsp:include page="/WEB-INF/views/base/header2.jsp" flush="true">
 	<jsp:param value="" name=""/>
 </jsp:include>
 	<button onclick="location.href='openChatList'">오픈채팅만들기</button>

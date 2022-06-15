@@ -1,0 +1,274 @@
+@charset "UTF-8";
+body{
+	margin: 0 ;
+}
+header {
+	display: flex;
+	margin: 0 auto;
+	/* background-size: 40px, 120px, 40px 40px, 120px 120px;
+    background-image: linear-gradient(90deg, #ffffff 2px, transparent 2px), linear-gradient(90deg, #ffffff 2px, transparent 2px), linear-gradient(#ffffff 2px, transparent 2px),linear-gradient(#ffffff 2px, transparent 2px),  linear-gradient(#ffffff 2px, transparent 2px),linear-gradient(#ffffff 2px, transparent 2px); */
+    height: 75px;
+    width: 100%;
+    justify-content: space-between;
+    /* background-color: #a6d377; */
+}
+STYLE
+.header_category ::before{ /* 아무것도 안할때 설정잡기 */
+    font-family: 'Material Icons';
+    font-size: 1.5em;
+    float: left;
+    clear: left;
+}
+
+
+
+header .header_category {
+	/* background-color: rgba(255,0,0,0.2); */
+	width:10%;
+	height: 100%;
+
+}
+
+.header_category  #header_category_button{
+	margin-left:10%;
+	margin-top: 10%;
+	 cursor: pointer;
+}
+.dropdown_category_content {
+	display: none;
+	position: absolute;
+    background-color: #F2F2F2;
+    color: #000;
+    border-radius: 5px;
+    padding: 10px;
+    box-sizing: border-box;
+/*     overflow: visible; */
+    box-shadow: 6px 7px 4px #376b1091;
+    overflow: hidden; /* 반응형 애니메이션용 */
+    transition: all 0.5s ease; /* 반응형 애니메이션 */
+    
+}
+.header_category ul { /* 메뉴클래스의 ul태그 설정 */
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+.header_category a:hover { /* a태그 설정한 애 위에 마우스 올렷을때 */
+    background-color: #5d6d68;
+    color: #f4f1e9;
+    border-radius: 7px;
+    cursor: pointer;
+    padding-bottom: 30px;
+}
+.header_category ul li:hover {/*  ul li 태그 설정한 애 위에 마우스 올렷을때 */
+    background-color: #000;
+    height: 25px;
+    color: #a6d377;
+    border-radius: 7px;
+    cursor: pointer;
+
+}
+.header_category div { /* 텍스트 위치 지정 */
+    line-height: 1.5;
+    font-size: 1em;
+    font-family: 'Noto Sans KR';
+    padding: 0 0 0 20px; /* 패딩 20p로 축소*/
+} 
+.header_category:hover .dropdown_category_content {display: block;}
+
+.header_category a, .header_category > label { /* 메뉴클래스의 a, label태그 설정 */
+    display: block;
+    height: 25px;
+    padding: 8px;
+    /* cursor: pointer; */
+    color: #000;
+    text-decoration: none;
+}
+header .header_middle{
+	width:43%;
+	height: 100%;
+	display: flex;
+	justify-content: space-between;
+	vertical-align: middle;
+}
+.header_middle #logo_img{
+	margin-top :2%;
+	width:25%;
+	align-items: center;
+
+}
+
+.header_middle_searchbar {
+    height: 30px;
+    margin-right: 10%;
+}
+.header_middle .header_middle_img{
+	display: flex;
+	float: left;
+	width: 50%;
+}
+#imgContent {
+	font-size: 20px;
+	color: #86ed73;
+	text-decoration: none;
+}
+a {
+	color: #86ed73;
+	text-decoration: none;
+}
+a:hover{
+	color: #86ed73;
+	text-decoration: none;
+}
+a:visited{
+	color: #86ed73;
+	text-decoration: none;
+}
+
+#searchbar{
+	border : 2px solid  black;
+	border-radius : 20px 20px;
+	float: right;
+	margin-right: 3%;
+    box-shadow: 6px 7px 4px #376b1091;
+    width: 360px;
+    height: 30px;
+   
+}
+#search_img {
+	width: 5px;
+    height: 5px;
+}
+
+header .header_login{
+	width: 47%;
+	height: 100%;
+	margin-top: 1.5%;
+	display: flex;
+}
+#login_button_a{
+	margin-right: 5%;
+}
+#join_button_a{
+	margin-right: 5%;
+}
+.header_login #login_button {
+    border: 2px solid black;
+    box-shadow: 6px 7px 4px #376b1091;
+    border-radius: 20px 20px;
+    margin-left: 7%;
+    padding-left: 5px;
+    padding-bottom: 1.5px;
+    padding-top: 2.5px;
+    padding-right: 5px;
+    background-color: white;
+    font-size: 14px;
+    font-family: 'Noto Sans KR';
+    font-weight: bold;
+    width: 100%;
+    
+}
+.header_login #logout_button {
+    border: 2px solid black;
+    box-shadow: 6px 7px 4px #376b1091;
+    border-radius: 20px 20px;
+    margin-left: 7%;
+    padding-left: 5px;
+    padding-bottom: 1.5px;
+    padding-top: 2.5px;
+    padding-right: 5px;
+    background-color: white;
+    font-size: 14px;
+    font-family: 'Noto Sans KR';
+    font-weight: bold;
+    width: 100%;
+}
+.header_login #mypage_button {
+    border: 2px solid black;
+    box-shadow: 6px 7px 4px #376b1091;
+    border-radius: 20px 20px;
+    margin-left: 7%;
+    padding-left: 5px;
+    padding-bottom: 1.5px;
+    padding-top: 2.5px;
+    padding-right: 5px;
+    background-color: white;
+    font-size: 14px;
+    font-family: 'Noto Sans KR';
+    font-weight: bold;
+    width: 100%;
+}
+.header_login #join_button {
+    border: 2px solid black;
+    box-shadow: 6px 7px 4px #376b1091;
+    border-radius: 20px 20px;
+    margin-left: 7%;
+    padding-left: 5px;
+    padding-bottom: 1.5px;
+    padding-top: 2.5px;
+    padding-right: 5px;
+    background-color: white;
+    font-size: 14px;
+    font-family: 'Noto Sans KR';
+    font-weight: bold;
+    width: 100%;
+}
+
+
+input {
+  height: 1.8em;
+  width: 220px;
+  padding: 0 10px;
+ 
+  outline: none;
+  border: none;
+  color: #5d6d68;
+  border-bottom: 1px solid #030303;
+  display: block;
+  
+}
+
+::placeholder {
+	color: gray;
+/* 	padding-left:3px;
+	padding-bottom:5px;
+	font-size: 13px; */
+    float: left;
+    letter-spacing: 0.5px;
+
+}
+#recommend {
+	margin-top: 1px;
+	position: absolute;
+	background: white;
+	padding: 0 10px;
+}
+
+.item {
+	height: 1.8em;
+	width: 220px;
+	outline: none;
+	padding-bottom: 2px;
+	padding-top: 2px;
+}
+
+.item:hover {
+	color: #5d6d68;
+	padding: 2px;
+}
+.text {
+	font-weight: bold;
+}
+#category_title {
+	font-family: 'Noto Sans KR';
+	font-size: 16pt;
+	font-weight: bold;
+	color: #5d6d68;
+}
+
+#header_bottom_line{
+	border: 1px solid black;
+	margin-left: 20px;
+	margin-right: 40px;
+}
+

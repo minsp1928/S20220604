@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import com.oracle.S20220604.domain.Chatting;
 import com.oracle.S20220604.model.Message;
+import com.oracle.S20220604.model.Participant;
 @Repository
 public class ChattingDaoImpl implements ChattingDao {
 	@Autowired
@@ -23,10 +24,26 @@ public class ChattingDaoImpl implements ChattingDao {
 
 	@Override
 	public Chatting save(Chatting chatting) {
-
 		em.persist(chatting);
+		System.out.println("Chatting save->");
+		
 		return chatting;
-	
+	}
+
+	@Override
+	public int saveParticipant(Participant pt) {
+		int result = 0;
+		int room_num = session.selectOne("akSelectUser_id");
+		pt.setRoom_num(room_num);
+		System.out.println("chatting.getRoom_num->"+pt.getRoom_num());
+		System.out.println("chatting.getUser_id->"+pt.getUser_id());
+		try {
+			result = session.insert("akInsertParticipant", pt);
+			System.out.println("akInsertParticipant -> "+result);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		return result;
 	}
 
 	@Override
@@ -96,5 +113,6 @@ public class ChattingDaoImpl implements ChattingDao {
 		}
 		return msgnaeyong;
 	}
+
 
 }

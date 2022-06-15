@@ -27,6 +27,11 @@ public class MainLoginController {
 			
 			return "base/header";
 		}
+		@RequestMapping(value = "header2")
+		public String header2() {
+			
+			return "base/header2";
+		}
 		@RequestMapping(value = "main")
 		public String main() {
 			

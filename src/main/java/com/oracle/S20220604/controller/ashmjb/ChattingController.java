@@ -40,25 +40,25 @@ public class ChattingController {
 	}
 	
 	@RequestMapping("/chat") // room_type : 1 or 2
-	public ModelAndView chat(HttpServletRequest request, HttpSession session) {
+	public ModelAndView chat(HttpServletRequest request) {
 		System.out.println("ChattingController chat start");
 		String session_id = (String) request.getSession().getAttribute("sessionId");
 		System.out.println("session_id : "+session_id);
 		if(session_id == null) {
 			System.out.println("==null");
-			session.setAttribute("session_id", "namwoo");
+			request.getSession().setAttribute("session_id", "namwoo");
 		}
 		
 		else if(request.getSession().getAttribute("sessionId") != null){
 			System.out.println("!=null");
 		}
-		System.out.println("-------------session.getAttriuser_id----------"+session.getAttribute("user_id"));
+		System.out.println("-------------session.getAttriuser_id----------"+request.getSession().getAttribute("user_id"));
 		ModelAndView mv = new ModelAndView();
-		mv.addObject("user_id", session.getAttribute("sessionId").toString());
+		mv.addObject("user_id", request.getSession().getAttribute("sessionId").toString());
 		Chatting chatting = new Chatting();
 		chatting.setRoom_type(1);
 		chatting.setRoom_type2(2);
-		chatting.setUser_id(session.getAttribute("sessionId").toString());
+		chatting.setUser_id(request.getSession().getAttribute("sessionId").toString());
 		List<Chatting> showList =  cs.showList(chatting);
 //		List<Chatting> showList = cs.showList(user_id_test);
 		System.out.println("chattingcontroller chat showList.size()-> "+ showList.size());
@@ -129,10 +129,11 @@ public class ChattingController {
 		System.out.println(file.getOriginalFilename());
 		System.out.println(file.getBytes());
 		System.out.println("createOpenChat upload POST Start");
-		
+		String user_id = request.getSession().getAttribute("sessionId").toString();
 		String savedName = uploadFile(file.getOriginalFilename(), file.getBytes(), uploadPath);
 		System.out.println("savedName : "+savedName);
 		chatting.setPic_change(savedName);
+		chatting.setUser_id(user_id);
 		cs.insert(chatting);
 		
 //		mv.addObject("savedName", savedName);

@@ -15,7 +15,9 @@ import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
 
 import com.oracle.S20220604.model.Message;
+import com.oracle.S20220604.model.ReadCheck;
 import com.oracle.S20220604.service.ashmjb.MessageService;
+import com.oracle.S20220604.service.ashmjb.ReadCheckService;
 
 @Component
 public class SocketHandler extends TextWebSocketHandler {
@@ -33,6 +35,9 @@ public class SocketHandler extends TextWebSocketHandler {
 	
 	// 웹소켓 세션 ID과 Member을 담아둘 JSONObject
 	JSONObject jsonUser = null;
+	
+	@Autowired
+	private ReadCheckService rs;
 	
 	// 메소드는 메시지를 수신하면 실행
 	public void handleTextMessage(WebSocketSession session, TextMessage message ) {
@@ -53,8 +58,8 @@ public class SocketHandler extends TextWebSocketHandler {
 		jsonUser = new JSONObject(sessionUserMap);
 		System.out.printf("JSONUser: %s", jsonUser);
 		//전송 대상을 기준으로 분기
-		String yourName = (String) jsonObj.get("yourName");
-		yourName = "ALL";
+		
+		String yourName = "ALL";
 		System.out.println("SocketHandler handleTextMessage yourName -> "+ yourName);
 
 		String msgUserName = (String)jsonObj.get("userName");
@@ -73,7 +78,15 @@ public class SocketHandler extends TextWebSocketHandler {
 		msgserv.setMsg_type(msgRoomType);
 		msgserv.setMsg_pic(msgPic);
 		int result = ms.insert(msgserv);
-		
+		String otherName = (String) jsonObj.get("otherName");
+		ReadCheck rc = new ReadCheck();
+		rc.setRoom_num(msgRoomNum);
+		rc.setRead(0);
+		rc.setUser_id(msgUserName);
+		int readCheckInsert = rs.insertMe(rc);
+		rc.setRead(1);
+		rc.setUser_id(otherName);
+		int readCheckInsert2 = rs.insertOther(rc);
 		//전체
 		if(yourName.equals("ALL")) {
 			for(String key : sessionMap.keySet()) {
