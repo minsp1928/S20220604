@@ -4,7 +4,9 @@
 
 <mapper namespace="com.oracle.S20220604.model">
 	<select id="mjCoupons" resultType="Coupon">
-		select * from coupon where user_id = 'admin'
+		select user_id, cp_num, cp_name, cp_category, cp_price, to_char(st_date, 'yyyy-mm-dd') st_date, to_char(end_date, 'yyyy-mm-dd') end_date, cp_status
+		  from coupon 
+		 where user_id = 'admin'
 	</select>
 	
 	<insert id="mjCreateCoupon" parameterType="Coupon">
@@ -16,10 +18,30 @@
 	</select>
 	
 	<select id="mjCouponDown1" resultType="Coupon" parameterType="int">
-		select * from coupon where user_id = 'admin' and cp_num =#{cp_num}
+		select *
+		  from coupon 
+		 where user_id = 'admin' 
+		   and cp_num = #{cp_num}
 	</select>
 	
 	<insert id="mjCoouponInsert" parameterType="Coupon">
-		insert into coupon values(#{user_id}, #{cp_num}, #{cp_name}, #{cp_category}, #{cp_price}, #{st_date}, #{end_date}, 0)
+		insert into coupon 
+		values(#{user_id}, #{cp_num}, #{cp_name}, #{cp_category}, #{cp_price}, TO_DATE(#{st_date}, 'YYYY-MM-DD HH24:MI:SS'),  TO_DATE(#{end_date}, 'YYYY-MM-DD HH24:MI:SS'), 0)
 	</insert>
-</mapper>
+	
+	<select id="mjCouponCount" resultType="int">
+		select count(*) from coupon where end_date >= sysdate and user_id = 'admin'
+	</select>
+	
+	<select id="mjCouponList" resultType="Coupon" parameterType="Coupon">
+	 	select *
+         from (select rownum rn, a.*
+                from  (select * 
+                        from coupon 
+                       where end_date >= sysdate 
+                         and user_id = 'admin' 
+                       order by end_date desc) a)
+        where  rn between #{start} and #{end} 
+	</select>
+	
+</mapper> 

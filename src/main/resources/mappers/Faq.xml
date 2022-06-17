@@ -8,8 +8,12 @@
 		select count(*) from faq 
 	</select>
 	
-	<select id="mjFaqList" resultType="Faq">
-		select * from faq order by faq_num desc
+	<select id="mjFaqList" parameterType="Faq" resultType="Faq">
+		select * 
+		  from (select rownum rn, a.*
+		          from (select * from faq order by faq_num desc) a
+		       )
+		 where rn between #{start} and #{end} 
 	</select>
 	
 	<select id="mjFaqDetail" parameterType="int" resultType="Faq" >
@@ -23,4 +27,31 @@
 					   faq_check = 1 
 		where faq_num = #{faq_num}
 	</update>
+	
+	<select id="mjFaqKeyword" parameterType="Faq" resultType="Faq">
+		select *
+		  from faq
+		 where 	<choose>
+		 			<when test="search == 'faq_num'">
+		 				faq_num like '%' || #{keyword} || '%'
+		 			</when>
+		 			<when test="search == 'faq_subject'">
+		 				faq_subject like '%' || #{keyword} || '%'
+		 			</when>
+		 	 		<when test="search == 'user_id'">
+		 				user_id like '%' || #{keyword} || '%'
+		 			</when>
+		 	</choose>
+	</select>
+	
+	<select id="mjQuestionList" parameterType="java.lang.String" resultType="Faq">
+		select * from faq where user_id = #{user_id} order by faq_num desc
+	</select>
+	
+	<select id="mjFaqchk" parameterType="Faq" resultType="int">
+		select count(*) 
+		  from faq 
+	 	 where faq_num = #{faq_num} 
+		   and faq_pass = #{faq_pass}
+	</select>
 </mapper>

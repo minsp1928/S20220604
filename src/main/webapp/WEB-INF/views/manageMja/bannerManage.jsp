@@ -1,7 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" 
-"http://www.w3.org/TR/html4/loose.dtd">
 <%@ include file="mja.jsp" %> 
 <%
 	String context = request.getContextPath();
@@ -10,26 +8,128 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script type="text/javascript" src="js/jquery.js"></script>
-<script type="text/javascript" src="js/httpRequest.js"></script>
-<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<link href="css/mja/section.css" rel="stylesheet" type="text/css">
+<link href="css/mja/bannerManage.css" rel="stylesheet" type="text/css">
 </head>
 <body>
+<jsp:include page="/WEB-INF/views/base/header.jsp" flush="true"/>
+<div class="container">
+	<div class="row">
+		<div class="col-lg-2">
+   			<a href="adminMain" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
+     				<svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"/></svg>
+     					<span class="fs-4">Admin</span>
+   			</a>
+   			<hr>
+   			<ul class="nav nav-pills flex-column mb-auto">
+		      <li class="nav-item">
+		        <a href="sellManage?month=0&year=0" class="nav-link link-dark">
+		          <svg class="bi me-2" width="16" height="16"><use xlink:href="#home"/></svg>
+		          	판매관리
+		        </a>
+		      </li>
+		      <li>
+		        <a href="memberManage" class="nav-link link-dark">
+		          <svg class="bi me-2" width="16" height="16"><use xlink:href="#speedometer2"/></svg>
+		          	회원관리
+		        </a>
+		      </li>
+		      <li>
+		        <a href="noticeManage" class="nav-link link-dark">
+		          <svg class="bi me-2" width="16" height="16"><use xlink:href="#table"/></svg>
+		         	공  지
+		        </a>
+		      </li>
+		      <li>
+		        <a href="couponManage" class="nav-link link-dark">
+		          <svg class="bi me-2" width="16" height="16"><use xlink:href="#grid"/></svg>
+		          	쿠  폰
+		        </a>
+		      </li>
+		      <li>
+		        <a href="bannerManage" class="nav-link link-dark">
+		          <svg class="bi me-2" width="16" height="16"><use xlink:href="#people-circle"/></svg>
+		         	배  너
+		        </a>
+		      </li>
+		      <li>
+		        <a href="faqManage" class="nav-link link-dark">
+		          <svg class="bi me-2" width="16" height="16"><use xlink:href="#people-circle"/></svg>
+		         	1:1문의
+		        </a>
+		      </li>
+		      <li>
+		        <a href="#" class="nav-link link-dark">
+		          <svg class="bi me-2" width="16" height="16"><use xlink:href="#people-circle"/></svg>
+		         	채  팅
+		        </a>
+		      </li>
+		    </ul>	 
+		</div>
+		<div class="col-10 col-lg-8 offset-lg-1" id="one">	
+			<div>
+				<h3>배너리스트</h3>
+				<c:set var="num" value="1"></c:set>
+				<table class="table">
+					<tr><th>번호</th><th>카테고리</th><th>배너명</th><th>삭제</th></tr>
+					<c:forEach var="bn" items="${banners }">
+					<tr>
+						<td>${num }</td>
+							<c:if test="${bn.bn_category == 1 }"><td>공지사항</td></c:if>
+							<c:if test="${bn.bn_category == 2 }"><td>쿠폰</td></c:if>
+						<td>${bn.bn_name }</td>
+						<td><button  id="bnDelete" onclick="bannerDelete(${bn.bn_num})">삭제</button></td>
+					</tr>
+					<c:set var="num" value="${num + 1}"></c:set>
+					</c:forEach>
+				</table>
+			</div>
+			
+			<p>
+			
+			<div>
+				<h3>배너등록</h3>
+					<form name="createBn" action="createBanner" method="post" enctype="multipart/form-data">
+						<table class="table">
+							<tr>
+								<th>배너명</th><td colspan="2"><input type="text"	name="bn_name" required="required"></td>
+							</tr>
+							<tr>
+								<th>카테고리</th><td><input type="button"    value="쿠폰" 	onclick="coupon()"></td>
+			 						           <td><input type="button"    value="공지" onclick="getBoardNum()"></td>
+							</tr>
+							<tr>
+								<th>공지글</th><td colspan="2"><div id="board"></div></td>
+							</tr>
+							<tr>
+								<th>배너이미지</th><td colspan="2"><input type="file" name="file"></td>
+							</tr>
+							<tr>
+								<td colspan="3"><input type="submit" value="등록" onclick="bannerChk()">
+									<input type="hidden" id="bn_category" name="bn_category" >
+									<input type="hidden" id="board_num" name="board_num" >
+								</td>
+							</tr>
+						</table>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
 <script type="text/javascript">
 	
 	function coupon() {
 		$('#boardSelect').remove();
 		alert("coupon");
-		$('#couponSelect').val('1');
+		$('#bn_category').val('1');
+		$('#board_num').val('1');
 	}
 	
 	function getBoardNum() {
 		$('#boardSelect').remove();
 		var str  = "";
 		var str2 = "";
-		alert("getBoarNum")
-		console.log("getBoardNum run");
+		$('#bn_category').val('2');
 		$.ajax(
 			{
 				url:"<%=context %>/getBoardNum",
@@ -88,43 +188,6 @@
 		});
 	}
 </script>
-<jsp:include page="/WEB-INF/views/base/header.jsp" flush="true"/>
-<jsp:include page="/WEB-INF/views/manageMja/sidebar.jsp"/>
-<section>
-<div>
-	<h3>배너등록</h3>
-		<form name="createBn" action="createBanner" method="post" enctype="multipart/form-data">
-			<table>
-				<tr><th>배너명</th><td colspan="2"><input type="text"	name="bn_name" required="required"></td></tr>
-				<tr><th>카테고리</th><td><input type="button" name="bn_category"  value="쿠폰" 	onclick="coupon()"></td>
- 						           <td><input type="button" name="bn_category"  value="공지" onclick="getBoardNum()"></td>
-				</tr>
-				<tr><th>공지글</th><td colspan="2"><div id="board"></div></td></tr>
-				<tr><th>배너이미지</th><td colspan="2">
-					<input type="file" name="bn_photo">
-					<input type="hidden" name="path" value="${pageContext.request.contextPath}/resources/image/"> </td></tr>
-				<tr><td colspan="3"><input type="submit" value="등록"></td></tr>
-			</table>
-		</form>
-</div>
-<div>
-	<h3>배너리스트</h3>
-	<c:set var="num" value="${num }"></c:set>
-	<table>
-		<tr><th>번호</th><th>카테고리</th><th>배너명</th><th>삭제</th></tr>
-		<c:forEach var="bn" items="${banners }">
-			<tr><td>${num }</td>
-				<c:if test="${bn.bn_category == 1 }"><td>공지사항</td></c:if>
-				<c:if test="${bn.bn_category == 2 }"><td>쿠폰</td></c:if>
-				<td>${bn.bn_name }</td>
-				<td><button  id="bnDelete" onclick="bannerDelete(${bn.bn_num})">삭제</button>
-				</td></tr>
-			<c:set var="num" value="${num - 1}"></c:set>
-		</c:forEach>
-	</table>
-</div>
-
-</section>
 <jsp:include page="/WEB-INF/views/base/footer.jsp" flush="true"/>
 </body>
 </html>

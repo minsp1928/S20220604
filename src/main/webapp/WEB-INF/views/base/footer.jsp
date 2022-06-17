@@ -45,8 +45,8 @@
                     </div>
                 </div>
                 <div id="footer_admin">
-                    <a href="#">공지사항</a><br> <!--관리자 페이지의 공지사항으로 이동-->
-                    <a href="#">1:1문의</a><br> <!--관리자 페이지의 1:1문의로 이동-->
+                    <a href="notice">공지사항</a><br> <!--관리자 페이지의 공지사항으로 이동-->
+                    <a href="faq?user_id=${sessionId }">1:1문의</a><br> <!--관리자 페이지의 1:1문의로 이동-->
                 </div>
             </div>
             <hr>

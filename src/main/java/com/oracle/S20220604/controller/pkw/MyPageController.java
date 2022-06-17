@@ -9,7 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.oracle.S20220604.model.OrderList;
+import com.oracle.S20220604.model.MyPageVO;
 import com.oracle.S20220604.service.pkw.OrderListService;
 
 
@@ -21,7 +21,7 @@ public class MyPageController {
 	private OrderListService ols;
 	
 	@RequestMapping(value="shopperMyPage")
-	public String shopperMyPage(OrderList orderlist, String currentPage, Model model) {
+	public String shopperMyPage(MyPageVO orderlist, String currentPage, Model model) {
 		logger.info("MyPageController Start shopperMyPage...");
 
 		int total = ols.total();

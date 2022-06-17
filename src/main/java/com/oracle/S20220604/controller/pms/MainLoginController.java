@@ -66,9 +66,20 @@ public class MainLoginController {
 		}
 		@RequestMapping(value = "header2")
 		public String header2() {
+<<<<<<< HEAD
+=======
 			
 			return "base/header2";
 		}
+<<<<<<< HEAD
+=======
+		@RequestMapping(value = "main")
+		public String main() {
+>>>>>>> origin/chat-ashmjb
+			
+			return "base/header2";
+		}
+>>>>>>> 23b083b4aca25bc4caf87bca7ddbedee8c9379c5
 		@RequestMapping(value = "main")  //메인페이지
 		   public String main(Product product, String curreuntPage, Model model) {
 		      System.out.println("MainLoginController product_bestTop4list Start...");

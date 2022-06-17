@@ -11,6 +11,9 @@ import com.oracle.S20220604.domain.CouponJpa;
 import com.oracle.S20220604.model.Banner;
 import com.oracle.S20220604.model.Board;
 import com.oracle.S20220604.model.Coupon;
+import com.oracle.S20220604.model.Faq;
+import com.oracle.S20220604.model.Member;
+import com.oracle.S20220604.model.MemberDetail;
 import com.oracle.S20220604.service.mja.ManagerService;
 
 @RestController
@@ -75,5 +78,64 @@ public class ManageRestController {
 		} else {
 			return  "0";
 		}
+	}
+	
+	@RequestMapping(value = "sellerApprove")
+	public boolean sellerApprove(String user_id) {
+		System.out.println("seller Approve 컨트롤러 실행");
+		System.out.println(user_id);
+		//승인
+		int num =  managerService.sellerApprove(user_id);
+		return true;
+	}
+	
+	
+	@RequestMapping(value = "sellerReject")
+	public boolean sellerReject(String user_id) {
+		System.out.println("sellerReject 컨트롤러 실행");
+		System.out.println(user_id);
+		//반려
+		int num =  managerService.sellerReject(user_id);
+		return true;
+	}
+	
+	@RequestMapping(value = "memberStatus",  produces = "application/text;charset=UTF-8")
+	public String memberStatus(Member member) {
+		System.out.println("memberStatus 실행");
+		System.out.println(member.getM_level());
+		System.out.println(member.getUser_id());
+		String result = "";
+		if(member.getM_level().equals("3")) {
+			member.setM_level("1"); result = "1";
+		} else {
+			member.setM_level("3"); result = "3";
+		}
+		int status = managerService.memberStatus(member);
+		
+		return result;
+	}
+	
+	@RequestMapping(value = "passReset")
+	public boolean passReset(String user_id) {
+		System.out.println("passReset 실행 ");
+		System.out.println("user_id" + user_id);
+		int num = managerService.passReset(user_id);
+		return true;
+	}
+	
+	@RequestMapping(value = "faqchk")
+	public String faqchk(String num, String pass) {
+		System.out.println("faqchk 실행");
+		System.out.println("num : " + num + "pass :" + pass);
+		Faq faq = new Faq();
+		faq.setFaq_num(Integer.parseInt(num));
+		System.out.println(faq.getFaq_num());
+		System.out.println(faq.getFaq_pass());
+		faq.setFaq_pass(Integer.parseInt(pass));
+		int result = managerService.faqchk(faq);
+		System.out.println("result : " + result);
+		if(result > 0) return "ok";
+		else           return "notOk";
+		
 	}
 }

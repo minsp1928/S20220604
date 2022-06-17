@@ -2,11 +2,14 @@ package com.oracle.S20220604.service.mja;
 
 import java.util.List;
 
+import com.oracle.S20220604.domain.CouponJpa;
+import com.oracle.S20220604.domain.FaqJpa;
 import com.oracle.S20220604.model.Banner;
 import com.oracle.S20220604.model.Board;
 import com.oracle.S20220604.model.Coupon;
 import com.oracle.S20220604.model.Faq;
 import com.oracle.S20220604.model.Member;
+import com.oracle.S20220604.model.MemberDetail;
 import com.oracle.S20220604.model.MemberChk;
 
 public interface ManagerService {
@@ -21,6 +24,13 @@ public interface ManagerService {
 	List<Member> memberKeyword(Member member);
 	
 	List<Member> newMember();
+	
+	MemberDetail memberDetail(String user_id);
+
+	int memberStatus(Member member);
+
+	int passReset(String user_id);
+
 
 	//공지
 	int boardTotal();
@@ -33,6 +43,7 @@ public interface ManagerService {
 	
 	int noticeHits(int board_num);
 	
+	int noticeDelete(int board_num);
 	
 	//쿠폰
 	List<Coupon> coupons();
@@ -43,17 +54,21 @@ public interface ManagerService {
 
 	String couponDown(Coupon coupon);
 	
+	List<Coupon> getCouponList(Coupon coupon);
+	
+	int couponCount();
 	
 	
 	//1:1 문의
 	int faqTotal();
 
-	List<Faq> faqList();
+	List<Faq> faqList(Faq faq);
 
 	Faq faqDetail(int faq_num);
 
 	int faqAnswer(Faq faq);
 
+	List<Faq> faqKeyword(Faq faq);
 	
 	
 	//배너 등록시 글 확인
@@ -70,13 +85,24 @@ public interface ManagerService {
 	//판매자
 	List<MemberChk> approveSeller();
 
+	int sellerApprove(String user_id);
+
+	int sellerReject(String user_id);
+
+	
+	//인터셉터
+	int memberChk(String user_id);
+
+	List<Faq> questions(String user_id);
+
+	int faqchk(Faq faq);
+
+	
+
 	
 
 
-	
 
-	
-	
 
 	
 

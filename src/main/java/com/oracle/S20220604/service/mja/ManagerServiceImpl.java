@@ -10,11 +10,14 @@ import com.oracle.S20220604.dao.mja.BoardDao;
 import com.oracle.S20220604.dao.mja.CouponDao;
 import com.oracle.S20220604.dao.mja.FaqDao;
 import com.oracle.S20220604.dao.mja.MemberManageDao;
+import com.oracle.S20220604.domain.CouponJpa;
+import com.oracle.S20220604.domain.FaqJpa;
 import com.oracle.S20220604.model.Banner;
 import com.oracle.S20220604.model.Board;
 import com.oracle.S20220604.model.Coupon;
 import com.oracle.S20220604.model.Faq;
 import com.oracle.S20220604.model.Member;
+import com.oracle.S20220604.model.MemberDetail;
 import com.oracle.S20220604.model.MemberChk;
  
 
@@ -63,9 +66,33 @@ public class ManagerServiceImpl implements ManagerService {
 	
 	@Override
 	public List<Member> newMember() {
+		System.out.println("newMember 서비스");
 		List<Member> member = memberManageDao.newMember();
 		return member;
 	}
+	
+	@Override
+	public MemberDetail memberDetail(String user_id) {
+		System.out.println("memberDetail 서비스");
+		MemberDetail member = memberManageDao.memberDetail(user_id);
+		System.out.println("memberDetail 서비스 끝");
+		return member;
+	}
+
+	@Override
+	public int memberStatus(Member member) {
+		System.out.println("memberStatus 서비스");
+		int status = memberManageDao.memberStatus(member);
+		return status;
+	}
+	
+	@Override
+	public int passReset(String user_id) {
+		System.out.println("passReset 서비스");
+		int status = memberManageDao.passReset(user_id);
+		return status;
+	}
+	
 	//공지
 	@Override
 	public int boardTotal() {
@@ -104,6 +131,13 @@ public class ManagerServiceImpl implements ManagerService {
 		return result;
 	}
 	
+	@Override
+	public int noticeDelete(int board_num) {
+		System.out.println("notice delete 서비스 ");
+		int result = boardDao.noticeDelete(board_num);
+		return result;
+	}
+	
 	
 	//쿠폰
 	@Override
@@ -134,8 +168,20 @@ public class ManagerServiceImpl implements ManagerService {
 		return insert.getUser_id();
 	}
 	
+	@Override
+	public List<Coupon> getCouponList(Coupon coupon) {
+		System.out.println("getCouponList 서비스 시작");
+		List<Coupon> coupons = couponDao.getCouponLIst(coupon);
+		return coupons;
+	}
 	
 	
+	@Override
+	public int couponCount() {
+		System.out.println("couponCount 서비스 시작");
+		int couponCnount = couponDao.couponCount();
+		return couponCnount;
+	}
 	
 	//1:1 문의
 	@Override
@@ -146,9 +192,9 @@ public class ManagerServiceImpl implements ManagerService {
 	}
 
 	@Override
-	public List<Faq> faqList() {
+	public List<Faq> faqList(Faq faq) {
 		System.out.println("faqsList 서비스");
-		List<Faq> faqs = faqDao.faqList();
+		List<Faq> faqs = faqDao.faqList(faq);
 		return faqs;
 	}
 
@@ -167,6 +213,20 @@ public class ManagerServiceImpl implements ManagerService {
 		return result;
 	}
 
+	
+	@Override
+	public List<Faq> faqKeyword(Faq faq) {
+		System.out.println("faqKeyword 서비스 ");
+		List<Faq> faqs = faqDao.faqKeyword(faq);
+		return faqs;
+	}
+	
+	@Override
+	public int faqchk(Faq faq) {
+		System.out.println("faqchk 서비스 ");
+		int faqchk = faqDao.faqchk(faq);
+		return faqchk;
+	}
 	
 	
 	//배너
@@ -203,17 +263,47 @@ public class ManagerServiceImpl implements ManagerService {
 		return seller;
 	}
 
+	@Override
+	public int sellerApprove(String user_id) {
+		int result = memberManageDao.sellerApprove(user_id);
+		return result;
+	}
+
+	@Override
+	public int sellerReject(String user_id) {
+		int result = memberManageDao.sellerReject(user_id);
+		return result;
+	}
+	
+	
+	//인터셉터
+	@Override
+	public int memberChk(String user_id) {
+		int result = memberManageDao.memberChk(user_id);
+		return result;
+	}
+
+	@Override
+	public List<Faq> questions(String user_id) {
+		System.out.println("questions 서비스");
+		List<Faq> faqs = faqDao.questions(user_id);
+		return faqs;
+	}
+
 	
 
 
 
-	
+
+
+
+
+
+
+
+
+
 
 	
 
-	
-
-
-	
- 
 }

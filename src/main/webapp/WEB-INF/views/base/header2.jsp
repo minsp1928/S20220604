@@ -32,7 +32,15 @@
             
 		<div class="header_middle">
 			<div class = "header_middle_img">
+<<<<<<< HEAD
 				<a href="${pageContext.request.contextPath}/main?=${sessionId }" id="log_img_a">
+=======
+<<<<<<< HEAD
+				<a href="${pageContext.request.contextPath}/main?=${sessionId }" id="log_img_a">
+=======
+				<a href="${pageContext.request.contextPath}/main?=${user_id}" id="log_img_a">
+>>>>>>> origin/chat-ashmjb
+>>>>>>> 23b083b4aca25bc4caf87bca7ddbedee8c9379c5
 					<img alt="로고이미지" src="/img/logo_sajomarket.png" id="logo_img">
 					<span id="imgContent">마켓사조</span>
 				</a>
@@ -47,7 +55,15 @@
 			</div>
 				
 		<c:choose>
+<<<<<<< HEAD
 			<c:when test="${sessionId ne null }"><!--sessionId가 있다면-->
+=======
+<<<<<<< HEAD
+			<c:when test="${sessionId ne null }"><!--sessionId가 있다면-->
+=======
+			<c:when test="${user_id ne null }"><!--user_id가 있다면-->
+>>>>>>> origin/chat-ashmjb
+>>>>>>> 23b083b4aca25bc4caf87bca7ddbedee8c9379c5
 				<div id="shopping_bascket">
 				<a href="#">장바구니 이미지 넣으세영</a><!--장바구니로 이동-->
 				</div>

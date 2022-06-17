@@ -43,8 +43,17 @@
 	<br>
 	<br>
 	<button onclick="location.href='chat'">채팅버튼</button>
+<<<<<<< HEAD
     <button onclick="location.href='chatWithCeller'">판매자 문의하기</button>
 
+=======
+<<<<<<< HEAD
+    <button onclick="location.href='chatWithCeller'">판매자 문의하기</button>
+
+=======
+	<button onclick="location.href='chatWithCeller'">판매자 문의하기</button>
+>>>>>>> origin/chat-ashmjb
+>>>>>>> 23b083b4aca25bc4caf87bca7ddbedee8c9379c5
 	<h4>베스트 상품</h4><p>
 	<div class="product_bestTop4list">
 		<div class="row"> 

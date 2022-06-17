@@ -12,6 +12,6 @@
 	</delete>
 	
 	<insert id="mjBannerCreate" parameterType="Banner">
-		insert into banner values(seq_banner_num.nextval, board_num=#{board_num}, bn_name=#{bn_name}, bn_category=#{bn_category}, bn_photo=#{bn_photo})
+		insert into banner values(seq_banner_num.nextval, #{board_num}, #{bn_name}, #{bn_category}, #{bn_photo})
 	</insert>
 </mapper>

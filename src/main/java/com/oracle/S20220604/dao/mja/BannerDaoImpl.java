@@ -42,6 +42,11 @@ public class BannerDaoImpl implements BannerDao {
 	public int createBanner(Banner banner) {
 		System.out.println("banner create dao");
 		int result = 0;
+		System.out.println("banner" + banner.getBn_num());
+		System.out.println("banner" + banner.getBoard_num());
+		System.out.println("banner" + banner.getBn_name());
+		System.out.println("banner" + banner.getBn_category());
+		System.out.println("banner" + banner.getBn_photo());
 		try {
 			result = session.insert("mjBannerCreate", banner);
 		} catch (Exception e) {

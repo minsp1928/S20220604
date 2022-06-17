@@ -11,8 +11,21 @@
 </head>
 <body>
 <jsp:include page="/WEB-INF/views/base/header.jsp" flush="true"/>
-<jsp:include page="/WEB-INF/views/manageMja/sidebar.jsp"/>
-<section>
+<div class="container">
+	<div class="row">
+		<div class="col-lg-3">
+			<a href="adminMain" class="admin">ADMIN</a><p>
+				<ul class="sidebar">
+					<li><a href="sellManage?month=0&year=0">판매관리 </a></li>
+		  			<li><a href="memberManage">회원관리</a></li>
+		  			<li><a href="noticeManage">공  지</a></li>
+		  			<li><a href="couponManage">쿠  폰</a></li>
+		 			<li><a href="bannerManage">배  너 </a></li>
+		  			<li><a href="faqManage">1:1 문의</a></li>
+		  			<li><a href="#">채  팅</a></li>
+				</ul>
+		</div>
+		<div class="col-lg-9">
 <h2>공지사항 등록</h2>
 	<form action="writeNotice">
 		<table>
@@ -26,7 +39,7 @@
 			<tr><td colspan="2"><input type="submit" value="등록"></td></tr>
 		</table>
 	</form>
-</section>
+</div></div></div>
 <jsp:include page="/WEB-INF/views/base/footer.jsp" flush="true"/>
 </body>
 </html>

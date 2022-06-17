@@ -19,5 +19,7 @@ public interface BoardDao {
 
 	int noticeHits(int board_num);
 
+	int noticeDelete(int board_num);
+
 	
 }

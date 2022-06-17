@@ -88,5 +88,17 @@ public class BoardDaoImpl implements BoardDao {
 		}
 		return result;
 	}
+
+
+	@Override
+	public int noticeDelete(int board_num) {
+		int result = 0;
+		try {			
+			result = session.delete("mjNoticeDelete", board_num);
+		} catch (Exception e) {
+			System.out.println("noticeDelete dao : " + e.getMessage());
+		}
+		return result;
+	}
  
 }

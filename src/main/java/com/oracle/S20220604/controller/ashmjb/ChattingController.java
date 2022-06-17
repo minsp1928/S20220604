@@ -45,16 +45,30 @@ public class ChattingController {
 	public ModelAndView chat(HttpServletRequest request, Chatting chatting) {
 		System.out.println("ChattingController chat start");
 		String session_id = (String) request.getSession().getAttribute("sessionId");
+<<<<<<< HEAD
 		System.out.println("ChattingController chat session_id : "+session_id);
 		if(session_id == null) {
 			System.out.println("==null");
 			request.getSession().setAttribute("sessionId", "namwoo");
+=======
+			System.out.println("ChattingController chat session_id : "+session_id);
+		if(session_id == null) {
+			System.out.println("==null");
+			request.getSession().setAttribute("sessionId", "namwoo");
+			session_id = (String) request.getSession().getAttribute("sessionId");
+>>>>>>> origin/chat-ashmjb
 		}
 		
 		else if(request.getSession().getAttribute("sessionId") != null){
 			System.out.println("!=null");
+<<<<<<< HEAD
 		}
 		System.out.println("------------session_id------"+session_id);
+=======
+			System.out.println("------------!=null session_id------"+session_id);
+		}
+		
+>>>>>>> origin/chat-ashmjb
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("user_id", request.getSession().getAttribute("sessionId").toString());
 //		Chatting chatting = new Chatting();
