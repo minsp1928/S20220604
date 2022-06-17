@@ -3,7 +3,9 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.oracle.S20220604.MainLoginMapper">
+
 	<!--로그인-->
+	
 	<select id="pms_selectLogin" parameterType="Member" resultType="Member">
 		select *
 		from member
@@ -11,7 +13,9 @@
 		and user_pw = #{user_pw}
 	
 	</select>
+	
 	<!--아이디 찾기  -->
+	
 	<select id="pms_findId" parameterType="Member" resultType="Member">
 		select *
 		from member
@@ -20,18 +24,103 @@
 	
 	</select>
 	<!--비밀번호찾기  -->
+	
 	<select id="pms_findPw" parameterType="Member" resultType="Member">
 		select *
 		from member
 		where user_id = #{user_id}
 		and user_name = #{user_name}
 		and email = #{email}
-	
 	</select>
+	
 	<!--임시비밀번호로 비밀번호바꾸기-->
+	
 	<update id="pms_updateTempPw" parameterType="Member" >
 		update Member set user_pw = #{user_pw}
 		where 			  user_id = #{user_id}
 	</update>
+	
+	<!--아이디중복 ajax-->
+	
+	<select id="pms_checkId" parameterType="Member" resultType="Member">
+		select *
+		from member
+		where user_id = #{user_id}
+	</select>
+	
+	<!--회원가입-->
+	<insert id="pms_joinInsert" parameterType="Member">
+		insert into member(user_id, user_pw, user_name, email, con_tel, user_photo,
+						   con_addr1, con_addr2, m_level,join_date)
+				    values(#{user_id}, #{user_pw}, #{user_name}, #{email}
+            			 , #{con_tel}, #{user_photo}, #{con_addr1},#{con_addr2},1,sysdate)
+	</insert>
+	<!--네이버 로그인의 경우 회원가입-->
+	<insert id="pms_insertMember_NaverID" parameterType="Member">
+		insert into member(user_id, user_pw, user_name, email, con_tel,
+						   m_level,join_date)
+				    values(#{user_id}, #{user_pw}, #{user_name}, #{email}
+            			 , #{con_tel}, 1,sysdate)
+	</insert>
 
+	<!-- 총 전체 삼품 갯수 -->
+	<select id="msProductTotal"  parameterType="Product" resultType="int">
+    
+		SELECT Count(*) FROM product 
+		where pro_status = 1
+		
+	</select>
+	
+	<!--메인 베스트 상품 top4 리스트-->
+	<select id="msProductBest4list" parameterType="Product" resultType="Product">
+	<![CDATA[
+		SELECT * FROM ( select * from product
+                where pro_status = 1
+                ORDER by  sell_amount Desc )
+                where ROWNUM <=4
+			]]>
+	
+	</select>
+	
+	<!--메인 신상품 top4 리스트-->
+	<select id="msProductNew4list" parameterType="Product" resultType="Product">
+	<![CDATA[
+		SELECT * FROM product 
+		where pro_status = 1
+        and ROWNUM <=4
+        ORDER by  pro_num Desc
+			]]>
+	
+	</select>
+		<!--메인 베스트 상품 전체 리스트-->
+	<select id="msProductBestAllList" parameterType="Product" resultType="Product">
+
+		SELECT * FROM ( select * from product
+                where pro_status = 1
+                ORDER by  sell_amount Desc )
+               
+			
+	
+	</select>
+		<!--메인 신상품 상품 전체 리스트-->
+	<select id="msProductNewAllList" parameterType="Product" resultType="Product">
+
+		SELECT * FROM product 
+		where pro_status = 1
+        ORDER by pro_num Desc
+
+	</select>
+	<!--검색-->
+	<!--Keyword로 검색하기					  parameterType, resultType같은타입으로 잡아준다 -->
+   <select id="msSearchKeyword" parameterType="Product" resultType="Product">
+       SELECT *
+       FROM (
+           SELECT rownum rn , a.*
+           FROM (
+          		 SELECT * from product where pro_status = 1 and pro_title like '%' || #{keyword} || '%' ) a
+		       	 )
+	   WHERE rn BETWEEN #{start} and #{end}
+		<!--검색된 모든 로직을 적용시킨후에 페이징을 해줌  -->
+	</select>
+	
 </mapper>
