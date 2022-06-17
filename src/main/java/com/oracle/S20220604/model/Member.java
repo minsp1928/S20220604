@@ -28,14 +28,18 @@ public class Member {
 	private String 	nickname;    //채팅익명이름
 	private String 	nick_photo;  //채팅익명프로필사진
 	private String  auth_status; //회원가입인증상태(인증:1)
+<<<<<<< HEAD
 	
+=======
+>>>>>>> origin/manager-mja
 	
-	//조회용
+	//검색조회용
 	private String 	search;
 	private String 	keyword;
 	private String 	startDate;
 	private String	endDate;
 	
+<<<<<<< HEAD
 	//프로필사진 변경용 변수
 	private String photoChange;
 	
@@ -43,3 +47,12 @@ public class Member {
 	
 	
 }
+=======
+	//회원관리 상세페이지
+	//주문건수
+	private int orders;
+	//총주문금액
+	private int orderamount;
+	
+}
+>>>>>>> origin/manager-mja

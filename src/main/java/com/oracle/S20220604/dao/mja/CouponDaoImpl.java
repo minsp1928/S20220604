@@ -54,12 +54,50 @@ public class CouponDaoImpl implements CouponDao{
 
 	@Override
 	public Coupon couponDown(Coupon coupon) {
-		System.out.println("couponCheck dao 시작");
+		System.out.println("couponDown dao 시작");
 		int cp_num = coupon.getCp_num();
-		Coupon insert = session.selectOne("mjCouponDown1", cp_num);
-		insert.setUser_id(coupon.getUser_id());
-		int result = session.insert("mjCoouponInsert", insert);
+		Coupon insert = null;
+		try {
+			insert = session.selectOne("mjCouponDown1", cp_num);
+			System.out.println("insert : " + insert );
+			insert.setUser_id(coupon.getUser_id());
+			System.out.println("user_id : " + insert.getUser_id());
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		
+		try {			
+			int result = session.insert("mjCoouponInsert", insert);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
 		return insert;
+	}
+
+	
+
+	@Override
+	public int couponCount() {
+		System.out.println("couponCount dao");
+		int result = 0;
+		try {
+			result = session.selectOne("mjCouponCount");
+		} catch (Exception e) {
+			System.out.println("mjCouponCount Err : " + e.getMessage());
+		}
+		return result;
+	}
+	
+	@Override
+	public List<Coupon> getCouponLIst(Coupon coupon) {
+		System.out.println("couponList Dao");
+		List<Coupon> coupons = null;
+		try {
+			coupons = session.selectList("mjCouponList", coupon);
+		} catch (Exception e) {
+			System.out.println("couponList Err : " + e.getMessage());
+		}
+		return coupons;
 	}
 
 }

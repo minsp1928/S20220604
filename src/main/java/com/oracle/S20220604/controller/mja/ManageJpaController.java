@@ -6,10 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.oracle.S20220604.domain.CouponJpa;
+import com.oracle.S20220604.domain.FaqJpa;
 import com.oracle.S20220604.service.mja.ManageJpaService;
 
 @Controller
@@ -22,11 +24,17 @@ public class ManageJpaController {
 		this.manageJpaService = manageJpaService;
 	}
 	
-	@GetMapping(value = "coupon")
-	public String coupon(Model model) {
-		System.out.println("manageJap coupon 컨트롤러");
-		List<CouponJpa> couponList = manageJpaService.getCouponList();
-		model.addAttribute("cpList", couponList);
-		return "manageMja/coupon";
+	
+	
+	@PostMapping(value = "faqSubmit")
+	public String faqSubmit(FaqJpa faqJpa, Model model) {
+		System.out.println("faqSubmit 컨트롤러");
+		System.out.println(faqJpa.getFaq_subject());
+		System.out.println(faqJpa.getFaq_subject());
+		System.out.println(faqJpa.getFaq_content());
+		System.out.println(faqJpa.getFaq_email());
+		FaqJpa newFaq = manageJpaService.faqSubmit(faqJpa);
+		if( newFaq != null)  return "redirect:questions";
+		else 			     return "forward:faqSubmit";
 	}
 }

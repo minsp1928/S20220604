@@ -1,0 +1,12 @@
+@charset "UTF-8";
+
+.container {
+	font-family: 'Noto Sans KR';
+	padding: 20px;
+}
+#memtbl{
+	text-align: center;
+} 
+#pic {
+	width: 400px;
+}

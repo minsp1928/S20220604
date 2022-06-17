@@ -2,9 +2,7 @@ package com.oracle.S20220604.controller.mja;
 
 import java.io.File;
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.List;
-import java.util.Map;
 import java.util.UUID;
 
 import javax.mail.internet.MimeMessage;
@@ -19,10 +17,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.oracle.S20220604.model.Banner;
@@ -30,7 +26,9 @@ import com.oracle.S20220604.model.Board;
 import com.oracle.S20220604.model.Coupon;
 import com.oracle.S20220604.model.Faq;
 import com.oracle.S20220604.model.Member;
+import com.oracle.S20220604.model.MemberDetail;
 import com.oracle.S20220604.model.MemberChk;
+import com.oracle.S20220604.service.mja.CouponPaging;
 import com.oracle.S20220604.service.mja.ManagerService;
 import com.oracle.S20220604.service.mja.Paging;
  
@@ -45,7 +43,8 @@ public class ManagerController {
 	
 	@Autowired
 	private JavaMailSender mailSender;
-	
+
+//------------------------------------------------------------------------------
 	//관리자 메인페이지
 	@GetMapping(value = "adminMain")
 	public String main( Model model) {
@@ -53,17 +52,30 @@ public class ManagerController {
 		LocalDate now = LocalDate.now();
 		String sysdate = now.toString();
 		String minusdate = now.minusDays(6).toString();
-		List<Member> member = managerService.newMember();
-		int num = member.size();
+		//총회원
+		int memNum = managerService.memberCnt();
+		
+		//판매자요청중
 		List<MemberChk> seller = managerService.approveSeller();
-		model.addAttribute("num", num);
+		int sellerNum = seller.size();
+		
+		//신규회원
+		List<Member> member = managerService.newMember();
+		int newMemNum = member.size();
+		
 		model.addAttribute("sysdate", sysdate);
 		model.addAttribute("minusdate", minusdate);
 		model.addAttribute("member", member);
 		model.addAttribute("seller", seller);
+		model.addAttribute("sellerNum", sellerNum);
+		model.addAttribute("newMemNum", newMemNum);	
+		model.addAttribute("memNum", memNum);	
+		
 		return "manageMja/adminMain";
 	}
 
+	
+//회원관리------------------------------------------------------------------------------
 	
 	//관리자 회원관리
 	@GetMapping(value = "memberManage")
@@ -90,7 +102,19 @@ public class ManagerController {
 		return "manageMja/memberManage";
 	}
 	
+	//회원정보 상세
+	@RequestMapping(value = "memberDetail")
+	public String memberDetail(Member member, Model model) {
+		String user_id = member.getUser_id();
+		System.out.println("memberDetail 컨트롤러");
+		System.out.println("user_id : " + user_id);
+		MemberDetail Dmember = managerService.memberDetail(user_id);
+		model.addAttribute("member", Dmember);
+		return "manageMja/memberDetail";
+	}
 
+
+//공지 ------------------------------------------------------------------------------
 	//소비자가 보는 공지
 	@RequestMapping(value = "notice")
 	public String notice(Board board, String currentPage, Model model) {
@@ -131,6 +155,7 @@ public class ManagerController {
 		//전체 글 
 		int total = managerService.boardTotal();
 		System.out.println("notice total :"  + total);
+		
 		Paging paging = new Paging(total, currentPage);
 		board.setStart(paging.getStart());
 		board.setEnd(paging.getEnd());
@@ -153,23 +178,31 @@ public class ManagerController {
 	public String writeNotice(Board board, Model model) {
 		System.out.println("writeNotice 컨트롤러");
 		int result = managerService.writeNotice(board);
-		if(result > 0) 	return  "redirect:noticeManage";
+		if(result > 0) 	return  "redirect:noticeDeleteForm";
 		else 			return 	"forward:writeNotice";
 	}
 	
 	
-	//공지수정
-	@GetMapping(value = "noticeUpdateForm")
+	//관리자 공지 세부내용 확인
+	@GetMapping(value = "noticeDeleteForm")
 	public String noticeUpdateForm(int board_num, Model model) {
 		System.out.println("noticeDetail 컨트롤러");
 		Board board = managerService.noticeDetail(board_num);
 		model.addAttribute("bd", board);
-		return "manageMja/noticeUpdateForm";
+		return "manageMja/noticeDeleteForm";
+	}
+	
+	//공지삭제
+	@GetMapping(value = "noticeDelete")
+	public String noticeDelete(int board_num, Model model) {
+		System.out.println("noticeDelete 컨트롤러");
+		int result = managerService.noticeDelete(board_num);
+		if(result > 0) 	return  "redirect:noticeManage";
+		else 			return 	"forward:noticeDeleteForm";
 	}
 	
 	
-	
-	
+//쿠폰 ------------------------------------------------------------------------------	
 	//관리자 쿠폰
 	@GetMapping(value = "couponManage")
 	public String couponManage(Model model) {
@@ -180,7 +213,7 @@ public class ManagerController {
 		return"manageMja/couponManage";
 	}
 	//쿠폰 발행
-	@GetMapping(value = "createCoupon")
+	@RequestMapping(value = "createCoupon")
 	public String createCoupon(Coupon coupon, Model model) {
 		System.out.println("createCoupon 컨트롤러");
 		System.out.println("coupon" + coupon);
@@ -191,26 +224,25 @@ public class ManagerController {
 		}	
 	}
 	
-
-	
-	
-	//소비자가 보는 1:1 문의
-	@RequestMapping(value = "faq")
-	public String faq(String user_id, Model model) {
-		System.out.println("faq 컨트롤러");
+	//소비자가 보는 쿠폰 페이지
+	@GetMapping(value = "coupon")
+	public String coupon(String user_id, String currentPage, Coupon coupon, Model model) {
+		System.out.println("coupon 컨트롤러");
 		
-		if(user_id.isEmpty()) {
-			System.out.println("로그인 안했을때");
-			return "manageMja/faqNotLogin";
-		} else {
-			System.out.println("로그인 했을 때");
-			return "manageMja/faqLogin";
-		}
+		int total = managerService.couponCount();
+		CouponPaging paging = new CouponPaging(total, currentPage);
+		coupon.setStart(paging.getStart());
+		coupon.setEnd(paging.getEnd());
+		List<Coupon> couponList = managerService.getCouponList(coupon);
+		model.addAttribute("cpList", couponList);
+		model.addAttribute("user_id", user_id);
+		model.addAttribute("paging", paging);
+		model.addAttribute("total", total);
+		return "manageMja/coupon";
 	}
 	
 	
-	
-	//1:1 문의
+//1:1 문의-----------------------------------------------------------------------------	
 	@GetMapping(value = "faqManage")
 	public String faqManage(Faq faq, String currentPage, Model model) {
 		System.out.println("faqManage 컨트롤러");
@@ -219,10 +251,10 @@ public class ManagerController {
 		Paging paging = new Paging(faqTotal, currentPage);
 		faq.setStart(paging.getStart());
 		faq.setEnd(paging.getEnd());
-		List<Faq> faqs = managerService.faqList();
+		List<Faq> faqs = managerService.faqList(faq);
 		model.addAttribute("faqList", faqs);
 		model.addAttribute("paging", paging);
-		model.addAttribute("num", faqTotal);
+		model.addAttribute("faqTotal", faqTotal);
 		return "manageMja/faqManage";
 	}
 	
@@ -274,7 +306,46 @@ public class ManagerController {
 		return result;
 	}
 	
-	//배너
+	@RequestMapping(value = "faqKeyword")
+	public String faqKeyword(Faq faq, String currentPage, Model model) {
+		System.out.println("faqKeyword 컨트롤러");
+		List<Faq> faqs =  managerService.faqKeyword(faq);
+		int faqTotal = faqs.size();
+		System.out.println("faqTotal = " + faqTotal);
+		Paging paging = new Paging(faqTotal, currentPage);
+		faq.setStart(paging.getStart());
+		faq.setEnd(paging.getEnd());
+		model.addAttribute("faqList", faqs);
+		model.addAttribute("paging", paging);
+		model.addAttribute("num", faqTotal);
+		return "manageMja/faqManage";
+	}
+	
+	
+	
+	//소비자가 보는 문의하기 
+	@RequestMapping("faq")
+	public String faq(String user_id, Model model) {
+		System.out.println("faq 컨트롤러 ");
+		int login_check = 1;
+		if(user_id.equals("") || user_id.isEmpty()) {
+			login_check = 0;
+		}
+		model.addAttribute("user_id", user_id);
+		model.addAttribute("login_check", login_check);
+		return  "manageMja/faq";
+	}
+	
+	
+	@RequestMapping(value = "faqLoginDetail")
+	public String faqLoginDetail(int faq_num, Model model) {
+		System.out.println("faqLoginDetail 컨트롤");
+		Faq faq = managerService.faqDetail(faq_num);
+		model.addAttribute("faq", faq);
+		return "manageMja/faqLoginDetail";
+	}
+	
+// 배너 ----------------------------------------------------------------------------
 	@RequestMapping(value = "bannerManage")
 	public String bannerManage(Model model) {
 		System.out.println("bannerManage 컨트롤러");
@@ -288,13 +359,14 @@ public class ManagerController {
 	
 	@RequestMapping(value = "createBanner", method = RequestMethod.GET)
 	public void createBanner() {
-		System.out.println("createBanner tart");
+		System.out.println("createBanner Get Start");
 		System.out.println();
 	}
 	
-	@RequestMapping(value = "createBanner")
+	@RequestMapping(value = "createBanner", method = RequestMethod.POST)
 	public String createBanner(HttpServletRequest request, MultipartFile file, Banner banner, Model model) 
 			throws Exception {
+		System.out.println("createBanner Post Start");
 		System.out.println("createBanner 컨트롤러");
 		String uploadPath = request.getSession().getServletContext().getRealPath("/img/");
 		logger.info("originalName : " + file.getOriginalFilename());
@@ -305,7 +377,7 @@ public class ManagerController {
 		logger.info("saveName :" + saveName); 
 		banner.setBn_photo(saveName);
 		int result = managerService.createBanner(banner);
-		return "redirect:bannerManage";
+		return "manageMja/bannerManage";
 	}
 	
 	private String uploadFile(String orignalName, byte[] fileData, String uploadPath)
@@ -325,12 +397,83 @@ public class ManagerController {
 		logger.info("saveName : " + saveName);
 		File target = new File(uploadPath, saveName);
 		FileCopyUtils.copy(fileData, target);
-		
 		return saveName;
 	}
+	
+	
+	
+	
+	
+	
+	//1:1 문의 interceptor
+	@RequestMapping(value = "interceptor")
+	public String interCeptor( Model model) {
+		
+		//interceptor?user_id=${sessionId }
+		System.out.println("2.interceptor 컨트롤러 왔다네");
  
+		System.out.println("interCeptor  Test End");
+		System.out.println("postHadle");
+		return "manageMja/interceptor";
+	}
+
+	
+	//소비자가 보는 문의내역
+	@RequestMapping(value = "questions")
+	public String questions(Model model, HttpServletRequest request) {
+		System.out.println("questions 컨트롤러");
+		String user_id = (String) request.getSession().getAttribute("sessionId");
+		System.out.println("user_id  : " + user_id);
+		List<Faq> faqs = managerService.questions(user_id);
+
+		int tot = faqs.size();
+		System.out.println("tot : " + tot);
+		if(faqs == null) tot = 0;
+		model.addAttribute("tot", tot);
+		model.addAttribute("faqList", faqs);
+		return "manageMja/questions";
+	}
+	
+	@RequestMapping(value = "faqLogin")
+	public String faqNotLongin(Model model, HttpServletRequest request){
+		System.out.println("faqLongin 컨트롤러 ");
+		
+		return "manageMja/faqLogin";
+	}
 	
 	
 	
 	
+	
+	
+	
+	
+	//faq
+	@RequestMapping(value = "questionDetail")
+	public String questionDetail(Model model) {
+		System.out.println("2.interCeptor questionDetail 시작");
+		//존재: 1, 비존재: 0
+		return "questionDetail";
+	}
+	
+ 
+//	@RequestMapping(value = "faqLongin")
+//	public String faqNotLongin(String user_id, Model model){
+//		System.out.println("faqLongin 컨트롤러 ");
+//		
+//		return "manageMja/faqNotLongin";
+//	}
+	
+
+	
+//	@RequestMapping(value = "/excepDown")
+//	public void excelDown(Member member, Model model) {
+//		//목록조회
+//		List<Member> memberList = managerService.memberKeyword(member);
+//		
+//		//웨크북 생성
+//		Workbook wb = new HSSFWorkbook();
+//
+//		
+//	}
 }

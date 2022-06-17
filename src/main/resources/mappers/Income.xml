@@ -4,13 +4,13 @@
 
 <mapper namespace="com.oracle.S20220604.domain">
 
-	<select id="mjIncome" resultType="IncomeVO">
+	<select id="mjIncome" resultType="MonthIncome">
 		select pay_date as dd, sum(pay_tot) as income from payment group by pay_date order by pay_date
 	</select>
 	
-	<select id="mjMonthIncome" parameterType="IncomeVO" resultType="IncomeVO">
+	<select id="mjMonthIncome" parameterType="MonthIncome" resultType="MonthIncome">
 		<![CDATA[
-			select b.rn as incomedate, nvl(a.income, 0) as tot                    
+			select b.rn as incomedatem, nvl(a.income, 0) as totm                    
               from (select to_char(pay_date, 'dd') as dd, sum(pay_tot) as income 
                       from payment
                      where to_char(pay_date, 'yyyy') = #{year}
@@ -22,9 +22,9 @@
 		]]>
 	</select>
 	
-	<select id="mjYearIncome" parameterType="IncomeVO" resultType="IncomeVO">
+	<select id="mjYearIncome" parameterType="YearIncome" resultType="YearIncome">
 	<![CDATA[
-		select b.rn as incomedate, nvl(a.income, 0) as tot
+		select b.rn as incomedatey, nvl(a.income, 0) as toty
 	      from  (select to_char(pay_date,  'mm') as mm, sum(pay_tot) as income 
                    from payment
                   where to_char(pay_date, 'yyyy') = #{year}
@@ -33,5 +33,20 @@
         where a.mm(+) = b.rn
         order by b.rn
 	]]>
+	</select>
+	
+	<select id="mjIncomList" parameterType="SellerIncome" resultType="SellerIncome">
+		select rr.seller, rr.income, mb.user_name, mb.sell_name, mb.sell_tel, mb.sell_num, mb.sell_addr1, mb.sell_addr2
+          from (select sum(tot) income, od.user_id as seller
+                  from   (select mypage.pay_tot_num odnum, product.pro_num, product.user_id, mypage.quantity * product.pro_price tot
+                            from mypage, product
+                           where mypage.pro_num = product.pro_num) od, payment pay
+          		 where od.odnum = pay.pay_tot_num
+            	   and   to_char(pay.pay_date, 'yyyy')=#{year}
+                   and   to_char(pay.pay_date, 'mm')= #{month}
+                 group by od.user_id) rr
+	     left join member mb
+           on rr.seller = mb.user_id
+        order by  rr.income desc
 	</select>
 </mapper>

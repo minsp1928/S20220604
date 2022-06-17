@@ -1,0 +1,21 @@
+@charset "UTF-8";
+.container {
+	font-family: 'Noto Sans KR';
+	padding: 20px;
+}
+
+#selltbl {
+	text-align: center;
+}
+#fisrt{
+	display: inline-block;
+}
+#one{
+	float: left;
+}
+#second{
+	display: inline-block;
+}
+#two{
+	float: left;
+}

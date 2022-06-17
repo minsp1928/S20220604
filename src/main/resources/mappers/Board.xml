@@ -29,4 +29,8 @@
 	<select id="mjBannerBoard" resultType="Board">
 		select * from board order by board_num desc
 	</select>
+	
+	<delete id="mjNoticeDelete" parameterType="int">
+		delete from board where board_num = #{board_num}
+	</delete>
 </mapper>

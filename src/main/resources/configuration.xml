@@ -14,11 +14,17 @@
 		<typeAlias alias="Board" 			type="com.oracle.S20220604.model.Board"/>
 		<typeAlias alias="Coupon" 			type="com.oracle.S20220604.model.Coupon"/>
 		<typeAlias alias="Faq" 				type="com.oracle.S20220604.model.Faq"/>
-		<typeAlias alias="IncomeVO" 		type="com.oracle.S20220604.model.IncomeVO"/>
+		<typeAlias alias="MonthIncome" 		type="com.oracle.S20220604.model.MonthIncome"/>
+		<typeAlias alias="YearIncome" 		type="com.oracle.S20220604.model.YearIncome"/>
+		<typeAlias alias="SellerIncome" 	type="com.oracle.S20220604.model.SellerIncome"/>
 		<typeAlias alias="MemberChk" 		type="com.oracle.S20220604.model.MemberChk"/>
+<<<<<<< HEAD
 		
 		<typeAlias alias="Chatting" 		type="com.oracle.S20220604.domain.Chatting"/>
 		<typeAlias alias="ReadCheck" 		type="com.oracle.S20220604.model.ReadCheck"/>
 		<typeAlias alias="Participant" 		type="com.oracle.S20220604.model.Participant"/>
+=======
+		<typeAlias alias="MemberDetail" 	type="com.oracle.S20220604.model.MemberDetail"/>
+>>>>>>> origin/manager-mja
 	</typeAliases>
 </configuration>

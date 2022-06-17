@@ -1,0 +1,14 @@
+@charset "UTF-8";
+.container {
+	font-family: 'Noto Sans KR';
+	padding: 20px;
+}
+div#one{
+	margin-top: 30px;
+	margin-bottom: 30px;
+}
+ 
+ div#two{
+ 	margin-top:10px;
+ 	text-align: center;
+ }

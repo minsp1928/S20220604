@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.oracle.S20220604.dao.mja.ManageJpaRepository;
 import com.oracle.S20220604.domain.CouponJpa;
+import com.oracle.S20220604.domain.FaqJpa;
 
 @Transactional
 @Service
@@ -37,5 +38,10 @@ public class ManageJpaService {
 		CouponJpa insert = manageJpaRepository.save(couponJpa);
 		return insert.getUser_id();
 	}
-	
+
+	public FaqJpa faqSubmit(FaqJpa faqJpa) {
+		System.out.println("faqSubmit 서비스");
+		FaqJpa newFaq = manageJpaRepository.save(faqJpa);
+		return newFaq;
+	}
 }
