@@ -20,4 +20,7 @@ public class Coupon {
 	private String pageNum;
 	private int start;
 	private int end;
+	
+	//시환님 조회용
+	private String to_date;
 }
