@@ -12,6 +12,7 @@ import com.oracle.S20220604.dao.ashmjb.ChattingDao;
 import com.oracle.S20220604.domain.Chatting;
 import com.oracle.S20220604.model.Message;
 import com.oracle.S20220604.model.Participant;
+import com.oracle.S20220604.model.Product;
 
 @Service
 @Transactional
@@ -76,5 +77,30 @@ public class ChattingServiceImpl implements ChattingService {
 		
 		return msgnaeyong;
 	}
-
+	
+	@Override
+	public List<Chatting> keywordList(Chatting chatting) {
+		List<Chatting> keywordList = null;
+		System.out.println("ChattingServiceImpl keywordList Start...");
+		if(chatting.getKeyword()!= null) {
+			keywordList = chattingDao.keywordList(chatting);
+			System.out.println("ChattingServiceImpl keywordList keywordList.size() -> "+ keywordList.size());
+		}
+		return keywordList;
+	}
+	@Override
+	public void insertParti(Participant parti) {
+		System.out.println("ChattingServiceImpl insertParti Start...");
+		int result = chattingDao.insertParti(parti);
+		System.out.println("ChattingServiceImpl  참여자등록 인서트문 결과 : "+ result);
+		
+	}
+	
+	@Override
+	public void insertChatWithCeller(Product product) {
+		System.out.println("ChattingServiceImpl insertChatWithCeller Start...");
+		chattingDao.insertChatWithCeller(product);
+		System.out.println("ChattingServiceImpl insertChatWithCeller after...");
+		
+	}
 }

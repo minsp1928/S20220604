@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 import com.oracle.S20220604.domain.Chatting;
 import com.oracle.S20220604.model.Message;
 import com.oracle.S20220604.model.Participant;
+import com.oracle.S20220604.model.Product;
 @Repository
 public class ChattingDaoImpl implements ChattingDao {
 	@Autowired
@@ -81,7 +82,7 @@ public class ChattingDaoImpl implements ChattingDao {
 		List<Chatting> showList = null;
 		System.out.println("ChattingDaoImpl showList Start ... ");
 		try {
-			System.out.println("user_id : "+ chatting.getUser_id());
+			System.out.println("ChattingDaoImpl showList user_id : "+ chatting.getUser_id());
 			if(chatting.getRoom_type2() != 0	) {
 				showList = session.selectList("akChattingShowList12", chatting);
 				
@@ -113,6 +114,51 @@ public class ChattingDaoImpl implements ChattingDao {
 		}
 		return msgnaeyong;
 	}
-
+	
+	@Override
+	public List<Chatting> keywordList(Chatting chatting) {
+		List<Chatting> keywordList = null;
+		System.out.println("ChattingDaoImpl keywordList Start...");
+//		if(chatting.getKeyword() == null) chatting.setKeyword("%");
+		try {
+			keywordList = session.selectList("akKeywordList", chatting);
+			System.out.println("ChattingDaoImpl after keywordList -> "+ keywordList.size());
+		} catch (Exception e) {
+			System.out.println("ChattingDaoImpl keywordList Exception..->"+ e.getMessage());
+		}
+			
+		return keywordList;
+	}
+	@Override
+	public int insertParti(Participant parti) {
+		int result = 0;
+		System.out.println("ChattingDaoImpl insertParti start...");
+		System.out.println("ChattingDaoImpl insertParti parti.getRoom_num() : "+ parti.getRoom_num());
+		System.out.println("ChattingDaoImpl insertParti parti.getUser_id() : "+ parti.getUser_id());
+		int count = session.selectOne("akCountParti", parti);
+		
+		System.out.println("ChattingDaoImpl 참여자목록 count : "+ count);
+		if(count == 0) {
+			result = session.insert("akInsertParticipant", parti);
+			System.out.println("ChattingDaoImpl session.insert result2 : "+result);
+		}
+		else {
+			result = 0;
+		}
+		return result;
+	}
+	
+	@Override
+	public void insertChatWithCeller(Product product) {
+// 		매퍼는 chatting으로 연결했다.
+		System.out.println("ChattingDaoImpl insertChatWithCeller start ...");
+		System.out.println("ChattingDaoImpl chatWithCeller product.getPro_title : "+ product.getPro_title());
+		System.out.println("ChattingDaoImpl chatWithCeller 판매자 ID product.getUser_id : "+ product.getUser_id());
+		System.out.println("ChattingDaoImpl chatWithCeller 로그인 ID product.getLogin_user_id : " + product.getLogin_user_id() );
+		
+		session.selectOne("akInsertChatWithCeller", product);
+		System.out.println("ChattingDaoImpl insertChatWithCeller after!! ");
+		
+	}
 
 }

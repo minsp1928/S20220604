@@ -10,7 +10,10 @@
 <body>	
 	<div>
 		<c:forEach var="list" items="${openChatList }">
-		<div>	사진: <img alt="" src="${pageContext.request.contextPath}/upload/${list.pic_change }"> 제목 : ${list.room_name} </div>
+			<div>
+				<img alt="" src="${pageContext.request.contextPath}/upload/${list.pic_change }"> ${list.room_name} 
+				<a href="insertParti?room_num=${list.room_num}">${list.room_name}</a> 
+			</div>
 			<hr>
 		</c:forEach>
 			<button onclick="location.href='openChatCreate'">오픈채팅만들기</button>

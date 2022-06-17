@@ -5,6 +5,7 @@ import java.util.List;
 import com.oracle.S20220604.domain.Chatting;
 import com.oracle.S20220604.model.Message;
 import com.oracle.S20220604.model.Participant;
+import com.oracle.S20220604.model.Product;
 
 public interface ChattingDao {
 	Chatting 		save(Chatting chatting);
@@ -18,4 +19,10 @@ public interface ChattingDao {
 	List<Message>	 msgnaeyong(int room_num);
 
 	int 			saveParticipant(Participant pt);
+
+	int 			insertParti(Participant parti);
+
+	List<Chatting>  keywordList(Chatting chatting);
+
+	void 			insertChatWithCeller(Product product);
 }

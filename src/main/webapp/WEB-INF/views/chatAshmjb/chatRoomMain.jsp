@@ -242,10 +242,13 @@
 					</li>
 					
 				</ul>
-				<div class="chatRoomsearchdiv">
-				      <span class="icon"><i class="fa fa-search"></i></span>
-				      <input type="search" class="chatRoomsearch" id="chatRoomsearch" />
-				</div>
+				<form action="chat">
+					<div class="chatRoomsearchdiv">
+					      <span class="icon"><i class="fa fa-search">	</i></span>
+					      <input type="text" name="keyword" value="${keyword }" class="chatRoomsearch" id="chatRoomsearch" required="required" />
+						<button type="submit">검색</button>
+					</div>
+				</form>
 			</div>
 			
 			<input type="hidden" id="room_type" value="">

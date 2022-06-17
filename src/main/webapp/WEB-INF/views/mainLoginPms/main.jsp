@@ -44,6 +44,7 @@
 	<br>
 	<br>
 	<button onclick="location.href='chat'">채팅버튼</button>
+	<button onclick="location.href='chatWithCeller'">판매자 문의하기</button>
 	<h4>베스트 상품</h4><p>
 	<div class="product_items1">
 		<div class="row"> 

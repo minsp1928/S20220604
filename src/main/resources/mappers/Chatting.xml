@@ -47,4 +47,28 @@
 		order by	 m.msg_num 
 		
 	</select>
+	
+	<select id="akKeywordList" parameterType="Chatting" resultType="Chatting">
+		select c.*
+		from 	chatting c, Member m
+		where 	room_name like '%' || #{keyword} || '%'
+		and	 	m.user_id = #{user_id}
+	</select>
+	
+	<select id="akCountParti" parameterType="Participant" resultType="int">
+		select count(user_id)
+		from participant
+		where room_num = #{room_num} and user_id = #{user_id}
+	</select>
+	
+	<select id="akInsertChatWithCeller" parameterType="Product" statementType="CALLABLE">
+		{
+			call chat_to_celler(
+								#{pro_num, 		 mode = IN, jdbcType=INTEGER},
+								#{user_id, 		 mode = IN, jdbcType=VARCHAR},
+								#{pro_title, 	 mode = IN, jdbcType=VARCHAR},
+								#{login_user_id, mode = IN, jdbcType=VARCHAR}
+								)
+		}
+	</select>
 </mapper>

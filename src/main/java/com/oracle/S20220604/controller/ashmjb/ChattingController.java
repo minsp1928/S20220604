@@ -22,6 +22,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.oracle.S20220604.domain.Chatting;
 import com.oracle.S20220604.model.Message;
+import com.oracle.S20220604.model.Participant;
+import com.oracle.S20220604.model.Product;
 import com.oracle.S20220604.service.ashmjb.ChattingService;
 import com.oracle.S20220604.service.ashmjb.Paging;
 
@@ -40,56 +42,76 @@ public class ChattingController {
 	}
 	
 	@RequestMapping("/chat") // room_type : 1 or 2
-	public ModelAndView chat(HttpServletRequest request) {
+	public ModelAndView chat(HttpServletRequest request, Chatting chatting) {
 		System.out.println("ChattingController chat start");
 		String session_id = (String) request.getSession().getAttribute("sessionId");
-		System.out.println("session_id : "+session_id);
+		System.out.println("ChattingController chat session_id : "+session_id);
 		if(session_id == null) {
 			System.out.println("==null");
-			request.getSession().setAttribute("session_id", "namwoo");
+			request.getSession().setAttribute("sessionId", "namwoo");
 		}
 		
 		else if(request.getSession().getAttribute("sessionId") != null){
 			System.out.println("!=null");
 		}
-		System.out.println("-------------session.getAttriuser_id----------"+request.getSession().getAttribute("user_id"));
+		System.out.println("------------session_id------"+session_id);
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("user_id", request.getSession().getAttribute("sessionId").toString());
-		Chatting chatting = new Chatting();
+//		Chatting chatting = new Chatting();
+		System.out.println("chatting.getKeyword()=> "+chatting.getKeyword());
 		chatting.setRoom_type(1);
 		chatting.setRoom_type2(2);
-		chatting.setUser_id(request.getSession().getAttribute("sessionId").toString());
-		List<Chatting> showList =  cs.showList(chatting);
+		chatting.setUser_id(session_id);
+		
+		
+		if(chatting.getKeyword() != null) {
+			List<Chatting> keywordList =  cs.keywordList(chatting);
+			System.out.println("chattingcontroller chat showList.size()-> "+ keywordList.size());
+			mv.addObject("showList", keywordList);
+		}else {
+			List<Chatting> showList =  cs.showList(chatting);
+			System.out.println("chattingcontroller chat showList.size()-> "+ showList.size());
+			mv.addObject("showList", showList);
+		}
 //		List<Chatting> showList = cs.showList(user_id_test);
-		System.out.println("chattingcontroller chat showList.size()-> "+ showList.size());
-		mv.addObject("showList", showList);
+		
 		mv.setViewName("/chatAshmjb/chatRoomMain");
 		return mv;
 	}
 	
 	@RequestMapping("/chat1") // room_type : 3
-	public ModelAndView chat1(HttpServletRequest request, HttpSession session) {
-		System.out.println("ChattingController chat start");
+	public ModelAndView chat1(HttpServletRequest request, Chatting chatting) {
+		System.out.println("ChattingController chat1 판매자와채팅 start");
+		
+		String session_id = (String) request.getSession().getAttribute("sessionId");
 		
 		if(request.getSession().getAttribute("sessionId") == null) {
 			System.out.println("user_id getSession ==null");
-			session.setAttribute("session_id", "namwoo");
+			request.getSession().setAttribute("sessionId", "namwoo");
 		}
-		
 		else if(request.getSession().getAttribute("sessionId") != null){
 			System.out.println("user_id getSession !=null");
 		}
 		ModelAndView mv = new ModelAndView();
-		mv.addObject("user_id", session.getAttribute("sessionId").toString());
-		Chatting chatting = new Chatting();
+		
+		mv.addObject("user_id", request.getSession().getAttribute("sessionId").toString());
 		chatting.setRoom_type(3);
 		chatting.setRoom_type2(0);
-		System.out.println("user_id"+ session.getAttribute("sessionId").toString());
-		List<Chatting> showList =  cs.showList(chatting);
-		if(showList != null) {
-			System.out.println("chattingcontroller chat showList.size()-> "+ showList.size());
+		chatting.setUser_id(session_id);
+		
+		System.out.println("user_id"+ session_id);
+		
+		if(chatting.getKeyword() != null) {
+			List<Chatting> keywordList =  cs.keywordList(chatting);
+			System.out.println("chattingcontroller chat showList.size()-> "+ keywordList.size());
+			mv.addObject("showList", keywordList);
+		}else {
+			List<Chatting> showList =  cs.showList(chatting);
+			if(showList != null) {
+				System.out.println("chattingcontroller chat showList.size()-> "+ showList.size());
+			}
+			mv.addObject("showList", showList);
 		}
-		mv.addObject("showList", showList);
 		mv.setViewName("/chatAshmjb/chatRoomMain");
 		return mv;
 	}
@@ -226,6 +248,55 @@ public class ChattingController {
         return resultMap;
 		        
     }
+	// 오픈채팅리스트에서 방이름 누르면 room_num을 들고 참여자 목록에 인서트
+		@RequestMapping(value = "insertParti")
+		public ModelAndView insertParti(Participant parti,HttpServletRequest request) {
+			ModelAndView mv = new ModelAndView();
+			parti.setRoom_num(Integer.parseInt(request.getParameter("room_num")) ); 
+			System.out.println("ChattingController parti.getRoom_num : "+ parti.getRoom_num());
+			System.out.println("ChattingController createOpenChat Start... ");
+			String user_id = (String) request.getSession().getAttribute("sessionId");
+			if(request.getSession().getAttribute("sessionId") == null) {
+				System.out.println("user_id getSession ==null");
+				request.getSession().setAttribute("sessionId", "namwoo");
+				parti.setUser_id(user_id);
+			}
+			else if(request.getSession().getAttribute("sessionId") != null){
+				System.out.println("user_id getSession !=null");
+				parti.setUser_id(user_id);
+			}
+			//cs.count(parti);
+			
+			 cs.insertParti(parti);
+			mv.setViewName("redirect:chat");
+			return mv;
+		}	
+		
+		@RequestMapping("chatWithCeller")
+		public ModelAndView chatWithCeller(HttpServletRequest request) {
+			ModelAndView mv = new ModelAndView();
+			System.out.println("ChattingController chatWithCeller Start... ");
+			
+			String user_id = (String) request.getSession().getAttribute("sessionId");
+			// request로 넘겨받은 값 셋팅하기 -- 우선 하드코딩
+			int pro_num = 1001;
+			String p_pro_user_id = "lover27";
+			String pro_title = "경북  사과";
+			
+			Product product = new Product();
+			product.setLogin_user_id(user_id);
+			product.setPro_num(pro_num);
+			product.setUser_id(p_pro_user_id);
+			product.setPro_title(pro_title);
+			System.out.println("ChattingController chatWithCeller product.getPro_title : "+ product.getPro_title());
+			System.out.println("ChattingController chatWithCeller 판매자 ID product.getUser_id : "+ product.getUser_id());
+			System.out.println("ChattingController chatWithCeller 로그인 ID product.getLogin_user_id : " + product.getLogin_user_id() );
+			
+			cs.insertChatWithCeller(product); // 이름은 바꿔도 됨
+			mv.setViewName("redirect:chat1");
+			return mv;
+			
+		}
 		
 	
 	
