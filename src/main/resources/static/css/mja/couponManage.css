@@ -1,0 +1,10 @@
+@charset "UTF-8";
+
+.container {
+	font-family: 'Noto Sans KR';
+	padding: 20px;
+}
+ 
+#two input {
+	text-decoration: none;
+}

@@ -22,11 +22,10 @@
 		  textbox_elem.focus();
 		}
 	}
-	function imgChange() {
-		// 아작스 실시간으로 이미지 받아내는거
-		// 찍힐위치는 .chatImg
+	function testclick() {
+		var imgsrc = document.getElementById('chatImg').src;
+		alert(imgsrc);
 	}
-	
 </script>
 </head>
 <body>
@@ -35,19 +34,16 @@
 		<h1>오픈 채팅방 만들기</h1>
 		<img alt="채팅방 이미지" src="${defaultChatImg }" class="chatImg" id="chatImg" name=""><p>
 		<label class="picChange2" for="picChange">사진변경</label>
-		<input id="picChange" class="picChange" type="file" name="file" />
-		<!-- <button class="picChange2" name="" onclick="location.href='#'">사진 변경</button> --><p>
-		<!-- ?? 나름 고민했는데 이게 왜 필요한걸깤ㅋㅋㅋㅋㅋㅋ 디비에 사진은 저장 안되게 되있는데??  -->
-		
+		<input id="picChange" class="picChange" type="file" name="file" accept=".jpg,.jpeg,.gif,.png"/>
 		<input type="text" class="createChatRoomName" name="room_name" placeholder="오픈채팅방 이름을 입력하세요." onfocus="this.placeholder=''" onblur="this.placeholder='오픈채팅방 이름을 입력하세요.'"><p>
 		비밀번호 <input type="checkbox" id="pwdCheckbox" name="" onclick="toggleTextbox(this)">
 		<input type="password" class="chatRoomPwd" id="chatRoomPwd" name="room_pawd" placeholder="비밀번호를 입력하세요." onfocus="this.placeholder=''" onblur="this.placeholder='비밀번호를 입력하세요.'"><p>
-	<!-- 	<button class="createNicknameBtn" name="" onclick="location.href='#'" type="submit">생성하기</button>-->
 		<button class="createNicknameBtn" name="" type="submit" >생성하기</button>
 	
 		<input type="hidden" name="room_type" value="2">
 	</div>
 </form>
+<button id="testbtn" onclick="testclick()">테스트 버튼</button>
 </body>
 <script type="text/javascript">
 	function readImage(input) {

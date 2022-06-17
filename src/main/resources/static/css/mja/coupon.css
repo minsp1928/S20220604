@@ -1,0 +1,26 @@
+@charset "UTF-8";
+
+
+.container {
+	font-family: 'Noto Sans KR';
+	padding: 40px;
+}
+div#one{
+	padding: 80px;
+}
+h5.card-title {
+    font-size: 11px;
+    text-align: center;
+    color: 
+}
+
+p.card-text {
+    font-size: 12px;
+    text-align: center;
+}
+
+button.btn.btn-primary.btn-sm {
+    color: #f4f1e9;
+    border: none;
+    background-color: #b0d282;
+}

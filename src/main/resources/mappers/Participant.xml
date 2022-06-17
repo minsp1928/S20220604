@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.oracle.S20220604.ParticipantMapper">
+	<insert id="akInsertParticipant" parameterType="Participant">
+		insert into participant
+		values (#{room_num}, #{user_id})
+	</insert>
+	
+	<select id="akSelectUser_id" resultType="int">
+		select max(room_num)
+		from chatting
+	</select>
+</mapper>

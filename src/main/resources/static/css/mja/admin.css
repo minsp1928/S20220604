@@ -1,0 +1,61 @@
+@charset "UTF-8";
+
+#sidebar {
+	padding-top: 60px;
+	font-family: 'Noto Sans KR';
+}
+
+#main{
+	padding: 60px;
+	font-family: 'Noto Sans KR';
+}
+
+#one {
+	margin-bottom: 10px;
+}
+
+#member h3 {
+	font-size: 20px;
+	color: #1c3316;
+}
+
+#memberStatus {
+	align-items: center;
+}
+ 
+ 
+#one {
+	margin-bottom: 10px;
+}
+#memberStatus h3 {
+	font-size: 15px;
+}
+#seller {
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+
+#seller h3{
+	font-size: 20px;
+	color: #1c3316;
+}
+
+#sellTbl {
+	text-align: center;
+}
+
+#sellTbl input {
+	color: #b0d282; 
+}
+#new {
+	margin-bottom: 20px;
+}
+#date {
+	float: left;
+	font-size: 15px;
+}
+
+ 
+#newtbl {
+	text-align: center;
+}

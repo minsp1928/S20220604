@@ -4,7 +4,7 @@
 <mapper namespace="com.oracle.S20220604.MessageMapper">
 	<insert id="akInsertMessage" parameterType="Message">
 		insert into 
-		message (room_num, msg_num, msg_type, send_user_id, content, msg_time )
-		values (#{room_num}, seq_message_num.nextval, 1, #{send_user_id, jdbcType=VARCHAR}, #{content, jdbcType=VARCHAR}, sysdate )
+		message (room_num, msg_num, msg_type, send_user_id, content, msg_time, msg_pic )
+		values (#{room_num}, (select NVL(max(msg_num),0 ) +1 from message where room_num = #{room_num}), #{msg_type}, #{send_user_id, jdbcType=VARCHAR}, #{content, jdbcType=VARCHAR}, sysdate ,#{msg_pic})
 	</insert>
 </mapper>

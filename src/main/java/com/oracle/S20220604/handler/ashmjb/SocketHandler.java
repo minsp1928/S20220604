@@ -15,14 +15,17 @@ import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
 
 import com.oracle.S20220604.model.Message;
+import com.oracle.S20220604.model.ReadCheck;
 import com.oracle.S20220604.service.ashmjb.MessageService;
+import com.oracle.S20220604.service.ashmjb.ReadCheckService;
 
 @Component
 public class SocketHandler extends TextWebSocketHandler {
 	
 	@Autowired
 	private MessageService ms;
-	
+//	String uploadPath = "upload/";
+	private String FILE_UPLOAD_PATH = "";
 	//웹소켓 세션을 담아둘 맵
 //			세션ID		 세션 객체
 	HashMap<String, WebSocketSession> sessionMap = new HashMap<String, WebSocketSession>();
@@ -32,6 +35,9 @@ public class SocketHandler extends TextWebSocketHandler {
 	
 	// 웹소켓 세션 ID과 Member을 담아둘 JSONObject
 	JSONObject jsonUser = null;
+	
+	@Autowired
+	private ReadCheckService rs;
 	
 	// 메소드는 메시지를 수신하면 실행
 	public void handleTextMessage(WebSocketSession session, TextMessage message ) {
@@ -52,18 +58,35 @@ public class SocketHandler extends TextWebSocketHandler {
 		jsonUser = new JSONObject(sessionUserMap);
 		System.out.printf("JSONUser: %s", jsonUser);
 		//전송 대상을 기준으로 분기
-		String yourName = (String) jsonObj.get("yourName");
-		yourName = "ALL";
+		
+		String yourName = "ALL";
 		System.out.println("SocketHandler handleTextMessage yourName -> "+ yourName);
 
 		String msgUserName = (String)jsonObj.get("userName");
 		String msgContent = (String)jsonObj.get("msg");
+		String mrn	= (String) jsonObj.get("room_num");
+		int msgRoomNum = Integer.parseInt(mrn) ;
+		String mty	= (String) jsonObj.get("room_type");
+		int msgRoomType = Integer.parseInt(mty);
+		String msgPic = (String) jsonObj.get("imgSrc");
+		System.out.println(msgPic+"<-------------------------msgPic");
+		System.out.println(msgContent+"<----------------------------msgContent");
 		Message msgserv = new Message();
 		msgserv.setContent(msgContent);
 		msgserv.setSend_user_id(msgUserName);
-		msgserv.setRoom_num(1);
+		msgserv.setRoom_num(msgRoomNum);
+		msgserv.setMsg_type(msgRoomType);
+		msgserv.setMsg_pic(msgPic);
 		int result = ms.insert(msgserv);
-		
+		String otherName = (String) jsonObj.get("otherName");
+		ReadCheck rc = new ReadCheck();
+		rc.setRoom_num(msgRoomNum);
+		rc.setRead(0);
+		rc.setUser_id(msgUserName);
+		int readCheckInsert = rs.insertMe(rc);
+		rc.setRead(1);
+		rc.setUser_id(otherName);
+		int readCheckInsert2 = rs.insertOther(rc);
 		//전체
 		if(yourName.equals("ALL")) {
 			for(String key : sessionMap.keySet()) {
@@ -106,6 +129,7 @@ public class SocketHandler extends TextWebSocketHandler {
 			String sessionId = (String) jsonObj.get("sessionId");
 			String userName = (String) jsonObj.get("userName");
 			String saveStauts = (String) jsonObj.get("saveStatus");// 삭제를 처리하기위세 세이브 스테이터스를 추가했다.
+			FILE_UPLOAD_PATH = (String) jsonObj.get("userContext");// 삭제를 처리하기위세 세이브 스테이터스를 추가했다.
 //			신규 등록 (status가 )
 			if (saveStauts.equals("Create")) {
 				sessionUserMap.put(sessionId, userName);	// 이렇게 맵에 저장 해쉬맵이니까 메모리에 저장됨
@@ -115,6 +139,8 @@ public class SocketHandler extends TextWebSocketHandler {
 	     	    System.out.println("== 1. type : userSave                          ==");
 	     	    System.out.println("== 2. sessionId : sessionUserMap.sessionId     ==");
 	     	    System.out.println("== 3. userName  : sessionUserMap.userName      ==");
+	     	    System.out.println("== 4. FILE_UPLOAD_PATH  : FILE_UPLOAD_PATH               ==");
+	     	    System.out.println("==    FILE_UPLOAD_PATH  ==>"+FILE_UPLOAD_PATH);
 	     	    System.out.println("=================================================");
 			}
 			// Delete일때
@@ -160,7 +186,11 @@ public class SocketHandler extends TextWebSocketHandler {
 					System.out.println(" 전체에 User등록 Exception-> "+ e.getMessage());
 				}
      	    }break;
+     	    default: 
+     	    	System.out.println("--------- case default ------");
+     	    	break;
 		}
+		System.out.println("switch closed");
 		
 	}
 	
