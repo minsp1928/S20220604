@@ -28,5 +28,20 @@ public class Chatting {
 	private String  room_name;
 	private int 	room_type;
 	private String 	room_pawd;
-	private String	picChange;
+	private String	pic_change;
+	
+	@Transient
+	private String search;
+	@Transient
+	private String keyword;
+	@Transient
+	private String pageNum;
+	@Transient
+	private int start;
+	@Transient
+	private int end;
+	@Transient
+	private String user_id;
+	@Transient
+	private int room_type2; //판매자채팅 타입
 }

@@ -67,7 +67,7 @@
 		
 		<div class="header_login"><!--로그인-->
 		<c:choose>
-			<c:when test="${user_id ne null }"><!--user_id가 있다면-->
+			<c:when test="${sessionId ne null }"><!--sessionId가 있다면-->
 				<div id="shopping_bascket">
 				<a href="#">장바구니 이미지 넣으세영</a><!--장바구니로 이동-->
 				</div>
