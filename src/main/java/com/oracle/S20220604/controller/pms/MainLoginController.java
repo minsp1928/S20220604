@@ -66,6 +66,14 @@ public class MainLoginController {
 		}
 		@RequestMapping(value = "header2")
 		public String header2() {
+<<<<<<< HEAD
+=======
+			
+			return "base/header2";
+		}
+		@RequestMapping(value = "main")
+		public String main() {
+>>>>>>> origin/chat-ashmjb
 			
 			return "base/header2";
 		}

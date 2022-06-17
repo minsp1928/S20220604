@@ -11,7 +11,11 @@
 		select *
 		from (
 		select rownum rn, a.*
+<<<<<<< HEAD
 		from (select * from chatting order by room_num) a
+=======
+		from (select * from chatting where room_type = 1 or room_type = 2 order by room_num) a
+>>>>>>> origin/chat-ashmjb
 		)
 		where rn between #{start} and #{end}
 	</select>
