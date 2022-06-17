@@ -7,7 +7,7 @@ import lombok.Setter;
 @Setter
 public class Product_Info {
 
-   private int pro_type1;
-   private int pro_type2;
-   private String pro_content;
+	private int pro_type1;
+	private int pro_type2;
+	private String pro_content;
 }

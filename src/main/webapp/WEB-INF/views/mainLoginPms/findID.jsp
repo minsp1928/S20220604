@@ -63,7 +63,7 @@
 
 	<div id="background_modal" class="background_modal">
 		<div class="modal_contents" style="background-color: white;">
-		<!-- <h4><b>유저의 아이디는</b><span class="close">&times;</span></h4> -->
+		<h4><b>유저의 아이디는</b><span class="close">&times;</span></h4>
 			<br>
 			<h2 id="id_value"></h2>
 			<br>
@@ -77,10 +77,10 @@
 				<a href="${pageContext.request.contextPath}/findID">아이디찾기 </a> / <a href="${pageContext.request.contextPath}/findPW">비밀번호찾기 </a> 
 				<p>이름</p>
 				<input type="text" name="inputName" id="inputName" class="custom-control-input"
-					 placeholder="이름을 입력해주세요" onfocus="this.placeholder=''" onblur="this.placeholder='이름을 입력해주세요'">
+					 placeholder="이름을 입력해주세요" onfocus="this.placeholder=''" onblur="this.placeholder='Search'">
 				<p>이메일</p>
 				<input type="text" name="inputEmail" id="inputEmail" class="custom-control-input"
-					 placeholder="이메일을 입력해주세요" onfocus="this.placeholder=''" onblur="this.placeholder='이메일을 입력해주세요'">
+					 placeholder="이메일을 입력해주세요" onfocus="this.placeholder=''" onblur="this.placeholder='Search'">
 				<!-- <input type="submit" class="idSearch" value="확인"><p> -->
 				<button id="findID_btn" type="button" onclick="searchID()">확인</button><p>
 		<!-- </form> -->

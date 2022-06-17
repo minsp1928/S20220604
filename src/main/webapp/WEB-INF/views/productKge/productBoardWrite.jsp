@@ -60,11 +60,11 @@
 		<jsp:param value="" name=""/>
 	</jsp:include>
 		<h2>상품 등록</h2>
-		<form action="productWrite" method="post" name="pbw" enctype="multipart/form-data"> <!-- pbw=productboardwrite -->
+		<form action="productBoardWrite" method="post" name="pbw" enctype="multipart/form-data"> <!-- pbw=productboardwrite -->
 			<div  class="productBoardWriteTable">
 			<table>
 				<tr><th>상품 대분류</th><td>
-				<select name="pro_type1" id="pt1" onclick="ProInfotype()" >   <!-- 상품 대분류(pro_type1) -->
+				<select name="pt1" id="pt1" onchange="ProInfotype()" >   <!-- 상품 대분류(pro_type1) -->
 					<c:forEach var="pro_type1" items="${proInfoTy1List}">
 						<option value="${pro_type1.pro_type1}">${pro_type1.pro_content}</option>
 					</c:forEach>
@@ -78,19 +78,16 @@
 			
 			</tr>
 			<tr><th><input type="hidden" name="user_id" value="${user_id}"></td></tr>
-			<tr><th>상품 이름</th>
+			<tr><th>상품판매글 제목</th>
 				<td class="td1"><input type="text" name="pro_title" required="required"></td></tr>
 			<tr><th>판매가격</th>
-			<td class="td1"><input type="number" name="pro_price"required="required">원</td></tr>
+			<td class="td1"><input type="curren" name="pro_price"required="required">원</td></tr>
 			<tr><th>상품판매 메인사진</th>
-			<td class="td1"><input type="file" name="pro_photoImg" required="required"></td></tr>
-			<tr><th>상품 상세글</th>
-			<td class="td1"><input type="text" name="pro_write" required="required">
-							<!-- <textarea name="pro_write" rows="5" cols="50"/>--></td></tr>
+			<td class="td1"><input type="file" name="pro_photo" required="required"></td></tr>
+			<tr><th>글 상세</th>
+			<td class="td1"><input type="text" name="pro_write" required="required"></td></tr>
 			<tr><th>상품판매 상세사진</th>
-			<td class="td1"><input type="file" name="pro_picImg" required="required"></td></tr>
-			<tr><th>재고</th>
-			<td class="td1"><input type="number" name="amount" required="required"></td></tr>
+			<td class="td1"><input type="file" name="pro_pic" required="required"></td></tr>
 			<tr><td colspan="2"><input type="submit" value="확인"></td></tr>
 			</table>
 			</div>

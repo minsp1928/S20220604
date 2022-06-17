@@ -75,13 +75,13 @@
 				
 				<p>이름</p>
 				<input type="text" name="inputName" id="inputName" class="custom-control-input"
-					 placeholder="이름을 입력해주세요" onfocus="this.placeholder=''" onblur="this.placeholder='이름을 입력해주세요'">
+					 placeholder="이름을 입력해주세요" onfocus="this.placeholder=''" onblur="this.placeholder='Search'">
 				<p>아이디</p>
 				<input type="text" name="inputId" id="inputId" class="custom-control-input"
-					 placeholder="아이디를 입력해주세요" onfocus="this.placeholder=''" onblur="this.placeholder='아이디를 입력해주세요'">
+					 placeholder="아이디를 입력해주세요" onfocus="this.placeholder=''" onblur="this.placeholder='Search'">
 				<p>이메일</p>
 				<input type="text" name="inputEmail" id="inputEmail" class="custom-control-input"
-					 placeholder="이메일을 입력해주세요" onfocus="this.placeholder=''" onblur="this.placeholder='이메일을 입력해주세요'">
+					 placeholder="이메일을 입력해주세요" onfocus="this.placeholder=''" onblur="this.placeholder='Search'">
 				<!-- <input type="submit" class="idSearch" value="확인"><p> -->
 				<button id="findPW_btn" type="button" onclick="searchPW()">확인</button><p>
 <!-- 		</form> -->

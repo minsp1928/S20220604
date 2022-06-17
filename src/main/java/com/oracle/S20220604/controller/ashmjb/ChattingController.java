@@ -80,8 +80,7 @@ public class ChattingController {
 		
 		String savedName = uploadFile(file.getOriginalFilename(), file.getBytes(), uploadPath);
 		System.out.println("savedName : "+savedName);
-		chatting.setPicChange(savedName);
-		/* chatting.setPicChange(file.getOriginalFilename()); */
+		chatting.setPicChange(file.getOriginalFilename());
 		cs.insert(chatting);
 		
 //		mv.addObject("savedName", savedName);

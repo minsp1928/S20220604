@@ -10,37 +10,6 @@
 <meta charset="UTF-8">
 <title>MyProductList</title>
 <link href="css/myProductList.css" rel="stylesheet" type="text/css">
-<script type="text/javascript" src="js/jquery.js"></script>
-<script type="text/javascript"
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script type="text/javascript">
-	var contextPath='${pageContext.request.contextPath}';
-	var src='${pageContext.request.contextPath}/images/';
-	var contextPath='${pageContext.request.contextPath}';
-
-	function getProductDelete(Vpro_num) {
-		alert("pro_num->"+Vpro_num);
-		
-		$.ajax(
-				{
-					url:"<%=context%>/ProductDelete",	
-					data:{pro_num : Vpro_num},
-					dataType:'text',
-					success:function(data) {
-						if(data =='1') 
-						alert("ajax getProductDelete 성공");
-						$('#proList'+Vpro_num).remove();
-					}
-				}
-		);
-	}
-	// 수정 페이지로 이동
-	function getProductModifyForm(vPro_num) {
-		alert("getProductModifyForm pro_num->"+vPro_num);
-		var sendData = 'pro_num='+vPro_num;
-		location.href="productModifyForm?"+sendData;
-	}
-</script>
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/base/header.jsp" flush="true">
@@ -57,16 +26,14 @@
 				</tr>
 				<c:if test="${listSize > 0 }">
 					<c:forEach var="listMyProduct" items="${listMyProduct}">
-						<tr id="proList${listMyProduct.pro_num}">
+						<tr>
 						 	<td>${listMyProduct.pro_num}</td> 
 						 	<td>${listMyProduct.pro_title}</td>
 							<td>${listMyProduct.pro_date}</td>
 							<td>${listMyProduct.amount}</td>
 							<td>${listMyProduct.sell_amount}</td>
-							<td>
-								<button class="Tbtn" onclick="getProductModifyForm(${listMyProduct.pro_num})">수정</button>
-								<button class="Tbtn" onclick="getProductDelete(${listMyProduct.pro_num})">삭제</button>
-							</td>
+							<td><button class="Tbtn" onclick="location.href='productBoardModify?pro_num=${listMyProduct.pro_num}'">수정</button>
+								<button class="Tbtn" onclick="location.href='delete?pro_num=${listMyProduct.pro_num}'">삭제</button></td>
 								
 						</tr>
 					</c:forEach>

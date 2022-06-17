@@ -34,11 +34,12 @@
 		<h2>이용약관 동의</h2>
 		<hr>
 		<div class="checkbox_group" style="line-height: 21px;">
-			<label for="chkAll" style="">이거사조 마켓 이용약관, 개인정보 수집 및 이용에 전체동의 합니다</label><br><br>
 			<input type="checkbox" id="chkAll" name="chkAll" onclick="checkAll()">
+			<label for="chkAll" style="">이거사조 마켓 이용약관, 개인정보 수집 및 이용에 전체동의 합니다</label><br><br>
 				
-			<label for="chk1">(필수) 마켓사조 이용약관 동의</label>
+			
 			<input type="checkbox" id="chk1" name="chk1" class="nomal" required="required">
+			<label for="chk1">(필수)마켓사조 이용약관 동의</label>
 				<div style="height:120px;width:120px;border:1px solid #ccc;font:16px/26px Georgia, Garamond, Serif;overflow:auto;">
 				<br>
 				여러분을 환영합니다.
@@ -162,8 +163,8 @@
 				<br>
 				</div>
 			
-			<label for="chk2" style="font-size: 14pt; font-weight: 700; box-sizing: border-box;">(필수) 개인정보 수집 및 이용 동의</label>
 			<input type="checkbox" id="chk2" name="chk2" class="nomal" required="required">
+			<label for="chk2" style="font-size: 14pt; font-weight: 700; box-sizing: border-box;">(필수)개인정보 수집 및 이용 동의</label>
 				<div id="checkbox" style="height:120px;width:60%;border:1px solid #666;font_size:12px; color: #666;  font-family: 'Noto Sans KR'; overflow:auto;">
 				<br>
 				<p>개인정보보호법에 따라 marketsajo에 회원가입 신청하시는 분께 수집하는 개인정보의 항목, 개인정보의 수집 및 이용목적, 개인정보의 보유 및 이용기간, 동의 거부권 및 동의 거부 시 불이익에 관한 사항을 안내 드리오니 자세히 읽은 후 동의하여 주시기 바랍니다.
@@ -215,8 +216,8 @@
 				<br>
 				</div>
 		</div>
-		<input type="button" id="disagree" value="취소"  onclick = "location.href = '${pageContext.request.contextPath}/main' ">
-		<input type="submit" id="agree"    value="다음단계">
+		<button id="disagree" onclick = "location.href = '${pageContext.request.contextPath}/main' ">취소</button>
+		<input type="submit" id="agree"  value="다음단계">
 
 		
 	</form>		

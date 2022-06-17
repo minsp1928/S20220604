@@ -4,22 +4,18 @@
 
 <mapper namespace="com.oracle.S20220604.ProductMapper">
 
-	<!-- 내 상품 리스트 -->
-	<select id="geProductMylist" parameterType="String" resultType="Product">
+	<select id="tkProductMylist" parameterType="String" resultType="Product">
 		SELECT *
 		FROM product
 		WHERE user_id=#{user_id}
-		and pro_status = 1 
 	</select>
 	
-	<!-- 대분류 get -->
 	<select id="geProinfoListAll" resultType="Product_Info">
 		SELECT *
 		FROM product_info
 		WHERE pro_type2 = 999
 	</select>
 	
-	<!-- 중분류 get -->
 	<select id="geProinfoList2All" parameterType="int" resultType="Product_Info">
 	<![CDATA[
 		SELECT pro_type2, pro_content
@@ -28,139 +24,6 @@
         AND   PRO_TYPE2 <> 999
         ]]>
 	</select>
-	
-	<!-- 상품 등록하기 -->
-	<insert id="geProductInsert" parameterType="Product" >
-		INSERT INTO product VALUES
-								 (seq_pro_num.nextval, 
-								 #{pro_type1}, 
-								 #{pro_type2}, 
-								 #{user_id}, 
-								 #{pro_price}, 
-								 #{pro_title}, 
-								 #{pro_write}, 
-								 #{pro_photo}, 
-								 #{pro_pic}, 
-								 sysdate, 
-								 #{amount}, 
-								 0, 
-								 1)
-	</insert>
-	
-	<!-- 상품 삭제하기 -->
-	<delete id="geProductDelete" parameterType="int">
-		update product set pro_status = 2 where pro_num=#{pro_num}
-	</delete>
-	
-	<!-- 총 삼품 갯수 -->
-	<select id="kgeProductTotal"  parameterType="Product" resultType="int">
-    
-		SELECT Count(*) FROM product 
-		where pro_status = 1
-		And pro_type1    = #{pro_type1}
-        <choose>
-		    <when test="pro_type2 != '999'">And pro_type2 = #{pro_type2}</when>
-		</choose>
-        <choose>
-		    <when test="pro_type2 == '999'">And pro_type2 != #{pro_type2}</when>
-		</choose>
-	</select>
-	
-	<!-- 상품 목록 -->
-	<select id="geProductListBypro_type1" parameterType="Product" resultType="Product">
-	
-	    SELECT *
-		FROM (
-		        SELECT rownum rn ,  a.*
-		        FROM  (select * from product 
-				        where pro_status = 1 
-				        and   pro_type1    = #{pro_type1} 
-				       <choose>
-						    <when test="pro_type2 != '999'">And pro_type2 = #{pro_type2}</when>
-						</choose>
-				        <choose>
-						    <when test="pro_type2 == '999'">And pro_type2 != #{pro_type2}</when>
-						</choose>
-		        		order by pro_num
-		        		) a
-		     )
-		WHERE  rn between #{start} AND  #{end}
-	</select>
-	
-	<!-- 제품 상세 페이지 -->
-	 <select id="geProductDetail" parameterType="int" resultType="Product">
-		SELECT p.*,m.sell_name, m.sell_photo FROM product p , member m
-		WHERE p.pro_num = #{pro_num}
-		and   p.user_id = m.user_id(+)
-		and   p.pro_status = 1
-	</select> 
-	
-	<!-- checkProduct(좋아요 추가)에 넣기(아작스 사용) -->
-	<insert id="goProdcutCheckInsert" parameterType="Product">
-		INSERT INTO check_product VALUES (#{pro_num}, #{user_id})
-	</insert>
-	
-	<update id="geProductUpdate" parameterType="Product">
-		update product set pro_title=#{pro_title},
-						   pro_price=#{pro_price},
-		                   pro_photo=#{pro_photo},
-		                   pro_write=#{pro_write},
-		                   pro_pic=#{pro_pic},
-		                   amount=#{amount}
-		 where pro_num=#{pro_num}
-	</update>
-	
-	<!-- 장바구니 추가하기(메인 장바구니에 user_id가 있는지 확인하는 logic) -->
-	<select id="geProductBaskectCheck" parameterType="Product" resultType="int">
-		select basket_num from main_basket where user_id = #{user_id}
-	</select>
-	
-	<!-- 상품을 장바구니 추가하기 -->
-	<insert id="geProductInsertBasket" parameterType="Product" >
-		insert into basket values (#{basket_num}, #{pro_num}, #{quantity}, sysdate) 
-	</insert>
-	
-	<!-- 메인 장바구니 + 장바구니 추가 중 메인 장바구니 추가 -->
-	<insert id="geProductMainBasketInsert" parameterType="Product">
-		insert into main_basket values(8, #{user_id}, sysdate)
-	</insert>
-	
-	<!-- 메인 장바구니 + 장바구니 추가 중 장바구니 추가 전에 basket_num 가져오기-->
-	<select id="geProductBasket" parameterType="Product" resultType="int">
-		select basket_num from main_basket where user_id = #{user_id}
-	</select>
-	
-	<!-- 메인 장바구니 + 장바구니 추가 중 장바구니 추가 -->
-	<insert id="geProductBasketInsert" parameterType="Product">
-		insert into basket values(#{basket_num}, #{pro_num}, #{quantity}, sysdate)
-	</insert>
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	<!-- <select id="geProductmyProTot" resultType="int">
 		SELECT Count(*) FROM product
 	</select>
