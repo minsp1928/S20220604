@@ -11,7 +11,7 @@
 		select *
 		from (
 		select rownum rn, a.*
-		from (select * from chatting order by room_num) a
+		from (select * from chatting where room_type = 1 or room_type = 2 order by room_num) a
 		)
 		where rn between #{start} and #{end}
 	</select>
