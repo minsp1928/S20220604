@@ -1,11 +1,26 @@
 @charset "UTF-8";
 
 /* profileCreate.jsp */
+a {
+	color: black;
+	text-decoration: none;
+}
+
+a:hover {
+	color: #0f5132;
+	text-decoration: none;
+}
+a:after{
+	color:black;
+	text-decoration: none;
+}
+
 
 .newOpenChat {		/* div 클래스 지정 */
 	text-align: center;
 	width: 100%;
 	height: 100%;
+	font-family: 'Noto Sans KR';
 }
 
 .newOpenChat .chatImg{	/* 프로필 이미지 출력 */
@@ -47,4 +62,97 @@
 	width: 90%;
 	height: 5vh;
 	border-radius: 20px;
+}
+
+.pageNum {
+	text-align: center;
+	padding: 0px;
+	margin-left: auto;
+	margin-right: auto;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.windowCloseBtn {
+	
+}
+
+.createOpenChatBtnDiv{
+	text-align: right;
+	width: 100%;
+	height: 40px;
+}
+
+.btn {
+  width: 130px;
+  height: 40px;
+  color: #fff;
+  border-radius: 5px;
+  padding: 10px 25px;
+  font-family: 'Lato', sans-serif;
+  font-weight: 500;
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  display: inline-block;
+   box-shadow:inset 2px 2px 2px 0px rgba(255,255,255,.5),
+   7px 7px 20px 0px rgba(0,0,0,.1),
+   4px 4px 5px 0px rgba(0,0,0,.1);
+  outline: none;
+}
+
+.openChatBtn {
+  width: 130px;
+  height: 40px;
+  line-height: 42px;
+  padding: 0;
+  border: none;
+  background: rgb(255,27,0);
+background: linear-gradient(0deg, rgb(153 189 86) 0%, rgb(154 191 85) 100%);
+font-family: 'Noto Sans KR';
+}
+.openChatBtn:hover {
+  color: #a6d377;
+  background: transparent;
+   box-shadow:none;
+}
+.openChatBtn:before,
+.openChatBtn:after{
+  content:'';
+  position:absolute;
+  top:0;
+  right:0;
+  height:2px;
+  width:0;
+  background: #a6d377;
+  box-shadow:
+   -1px -1px 5px 0px #fff,
+   7px 7px 20px 0px #0003,
+   4px 4px 5px 0px #0002;
+  transition:400ms ease all;
+}
+.openChatBtn:after{
+  right:inherit;
+  top:inherit;
+  left:0;
+  bottom:0;
+}
+.openChatBtn:hover:before,
+.openChatBtn:hover:after{
+  width:100%;
+  transition:800ms ease all;
+}
+.ListImg{
+	width: 50px;
+    border-radius: 36px;
+    height: 50px;
+}
+.ListWrap{
+	display: flex;
+}
+.ListAtag{
+	margin-top: 15px;
+    margin-left: 10px;
+    font-family: 'Noto Sans KR';
 }

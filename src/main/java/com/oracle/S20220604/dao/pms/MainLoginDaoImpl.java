@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.ui.Model;
 
+import com.oracle.S20220604.model.Banner;
 import com.oracle.S20220604.model.Member;
 import com.oracle.S20220604.model.Product;
 
@@ -19,7 +20,15 @@ public class MainLoginDaoImpl implements MainLoginDao {
 	@Override
 	public Member selectLogin(Member member) {//로그인
 		System.out.println("MainLoginDaoImpl selectLogin start");
-		return session.selectOne("pms_selectLogin", member);
+		
+		/* return session.selectOne("pms_selectLogin", member); */
+		try {
+			member = session.selectOne("pms_selectLogin", member);
+			System.out.println("MainLoginDaoImpl selectLogin user_id->"+member.getUser_id());
+		} catch (Exception e) {
+			System.out.println("MainLoginDaoImpl selectLogin Exception->"+e.getMessage());
+		}
+		return member;
 	}
 
 	@Override
@@ -37,13 +46,15 @@ public class MainLoginDaoImpl implements MainLoginDao {
 	@Override
 	public Member findPw(Member member) { //비밀번호 찾기
 		System.out.println("MainLoginDaoImpl findPw start");
+		Member m = null;
 		try {
-			member = session.selectOne("pms_findPw",member);
+			m = session.selectOne("pms_findPw",member);
+			System.out.println("MainLoginDaoImpl findPw member.getUser_pw()"+member.getUser_id());
 			System.out.println("MainLoginDaoImpl findPw member.getUser_pw()"+member.getUser_pw());
 		} catch (Exception e) {
 			System.out.println("MainLoginDaoImpl pms_findPw Exception->"+e.getMessage());
 		}
-		return member;
+		return m;
 	}
 
 
@@ -185,6 +196,23 @@ public class MainLoginDaoImpl implements MainLoginDao {
 			System.out.println("MainLoginDaoImpl searchKeyword Exception->"+e.getMessage());
 		}
 		return searchKeyword;
+	}
+
+	@Override
+	public List<Banner> bannerList() {
+		System.out.println("MainLoginDaoImpl bannerList 시작");
+		 List<Banner> bannerList = null;
+		try {
+			System.out.println("bannerList try문 들어가나용");
+			bannerList = session.selectList("msBannerList");
+			System.out.println("bannerList try문 나가나용");
+			System.out.println("MainLoginDaoImpl bannerList.size()->"+bannerList.size());//값을 담아왔는지 확인용
+		} catch (Exception e2) {
+			System.out.println("MainLoginDaoImpl bannerList Exception->" + e2.getMessage());
+			
+		}
+		
+		return bannerList;
 	}
 	
 	

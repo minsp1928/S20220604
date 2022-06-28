@@ -15,22 +15,30 @@ public class ReadCheckDaoImpl implements ReadCheckDao {
 	@Override
 	public int insertMe(ReadCheck rc) {
 		int result = 0;
+		System.out.println("Dao insertMe Start");
+		System.out.println("Dao insertMe rc.getRoom_num -> "+rc.getRoom_num());
 		try {
 			result = session.insert("akInsertReadCheckMe", rc);
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
+		System.out.println("result -> "+result);
+		System.out.println("Dao insertMe End");
 		return result;
 	}
 
 	@Override
 	public int insertOther(ReadCheck rc) {
 		int result = 0;
+		System.out.println("Dao insertOther Start");
+		System.out.println("Dao insertOther rc.getRoom_num -> "+rc.getRoom_num());
 		try {
 			result = session.insert("akInsertReadCheckOther", rc);
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
+		System.out.println("result -> "+result);
+		System.out.println("Dao insertOther End");
 		return result;
 	}
 	

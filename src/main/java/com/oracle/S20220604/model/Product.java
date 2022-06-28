@@ -40,7 +40,7 @@ public class Product {
 	private String sell_name;
 	private String sell_photo;
 	
-	// 로그인유저아이디 프로시저용	
-	private String login_user_id;
+	// 로그인유저아이디 프로시저용
+	private String login_user_id; 
 	
 }

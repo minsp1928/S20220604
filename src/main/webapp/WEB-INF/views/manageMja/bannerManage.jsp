@@ -11,10 +11,12 @@
 <link href="css/mja/bannerManage.css" rel="stylesheet" type="text/css">
 </head>
 <body>
-<jsp:include page="/WEB-INF/views/base/header.jsp" flush="true"/>
+<jsp:include page="/WEB-INF/views/base/header2.jsp" flush="true">
+	<jsp:param value="" name=""/>
+</jsp:include>
 <div class="container">
-	<div class="row">
-		<div class="col-lg-2">
+	<div class="row">	
+		<div class="col-md-2" id="sidebar">
    			<a href="adminMain" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
      				<svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"/></svg>
      					<span class="fs-4">Admin</span>
@@ -23,53 +25,56 @@
    			<ul class="nav nav-pills flex-column mb-auto">
 		      <li class="nav-item">
 		        <a href="sellManage?month=0&year=0" class="nav-link link-dark">
-		          <svg class="bi me-2" width="16" height="16"><use xlink:href="#home"/></svg>
+		          <svg class="bi me-2" width="16" height="16"></svg>
 		          	판매관리
 		        </a>
 		      </li>
 		      <li>
 		        <a href="memberManage" class="nav-link link-dark">
-		          <svg class="bi me-2" width="16" height="16"><use xlink:href="#speedometer2"/></svg>
+		          <svg class="bi me-2" width="16" height="16"></svg>
 		          	회원관리
 		        </a>
 		      </li>
 		      <li>
 		        <a href="noticeManage" class="nav-link link-dark">
-		          <svg class="bi me-2" width="16" height="16"><use xlink:href="#table"/></svg>
+		          <svg class="bi me-2" width="16" height="16"></svg>
 		         	공  지
 		        </a>
 		      </li>
 		      <li>
 		        <a href="couponManage" class="nav-link link-dark">
-		          <svg class="bi me-2" width="16" height="16"><use xlink:href="#grid"/></svg>
+		          <svg class="bi me-2" width="16" height="16"></svg>
 		          	쿠  폰
 		        </a>
 		      </li>
 		      <li>
 		        <a href="bannerManage" class="nav-link link-dark">
-		          <svg class="bi me-2" width="16" height="16"><use xlink:href="#people-circle"/></svg>
+		          <svg class="bi me-2" width="16" height="16"></svg>
 		         	배  너
 		        </a>
 		      </li>
 		      <li>
 		        <a href="faqManage" class="nav-link link-dark">
-		          <svg class="bi me-2" width="16" height="16"><use xlink:href="#people-circle"/></svg>
+		          <svg class="bi me-2" width="16" height="16"></svg>
 		         	1:1문의
 		        </a>
 		      </li>
 		      <li>
-		        <a href="#" class="nav-link link-dark">
-		          <svg class="bi me-2" width="16" height="16"><use xlink:href="#people-circle"/></svg>
+		        <a href="chat?user_id&admin" class="nav-link link-dark">
+		          <svg class="bi me-2" width="16" height="16"></svg>
 		         	채  팅
 		        </a>
 		      </li>
 		    </ul>	 
 		</div>
-		<div class="col-10 col-lg-8 offset-lg-1" id="one">	
+		
+		<div class="col-md-10" id="main">
+		<div id="subject">
+			<h3>배너리스트</h3> 
+		</div>
 			<div>
-				<h3>배너리스트</h3>
 				<c:set var="num" value="1"></c:set>
-				<table class="table">
+				<table class="table" id="bannerCreate">
 					<tr><th>번호</th><th>카테고리</th><th>배너명</th><th>삭제</th></tr>
 					<c:forEach var="bn" items="${banners }">
 					<tr>
@@ -85,43 +90,40 @@
 			</div>
 			
 			<p>
-			
-			<div>
-				<h3>배너등록</h3>
-					<form name="createBn" action="createBanner" method="post" enctype="multipart/form-data">
-						<table class="table">
-							<tr>
-								<th>배너명</th><td colspan="2"><input type="text"	name="bn_name" required="required"></td>
-							</tr>
-							<tr>
-								<th>카테고리</th><td><input type="button"    value="쿠폰" 	onclick="coupon()"></td>
-			 						           <td><input type="button"    value="공지" onclick="getBoardNum()"></td>
-							</tr>
-							<tr>
-								<th>공지글</th><td colspan="2"><div id="board"></div></td>
-							</tr>
-							<tr>
-								<th>배너이미지</th><td colspan="2"><input type="file" name="file"></td>
-							</tr>
-							<tr>
-								<td colspan="3"><input type="submit" value="등록" onclick="bannerChk()">
-									<input type="hidden" id="bn_category" name="bn_category" >
-									<input type="hidden" id="board_num" name="board_num" >
-								</td>
-							</tr>
-						</table>
-					</form>
-				</div>
-			</div>
+ 
+		<div id="subject">
+			<h3>배너등록</h3> 
+		</div>
+			<form name="createBn" action="createBanner" method="post" enctype="multipart/form-data">
+				<table class="table" id="bannerTbl">
+					<tr>
+						<th>카테고리</th><td><input type="button"    value="쿠폰" 	onclick="coupon()"></td>
+	 						           <td><input type="button"    value="공지" onclick="getBoardNum()"></td>
+					</tr>
+					<tr>
+						<th>배너명</th><td colspan="2"><input type="text"	name="bn_name" required="required"></td>
+					</tr>
+					<tr>
+						<th>공지글</th><td colspan="2"><div id="board"></div></td>
+					</tr>
+					<tr>
+						<th>배너이미지</th><td colspan="2"><input type="file" name="file">
+						<input type="hidden" id="bn_category" name="bn_category" >
+						<input type="hidden" id="board_num" name="board_num" ></td>
+					</tr>
+				</table>
+			</form>
+			<input id="createBtn" type="button" value="등록" onclick="bannerChk()"> 
 		</div>
 	</div>
+</div>
 
 <script type="text/javascript">
 	
 	function coupon() {
 		$('#boardSelect').remove();
-		alert("coupon");
-		$('#bn_category').val('1');
+	//	alert("coupon");
+		$('#bn_category').val('2');
 		$('#board_num').val('1');
 	}
 	
@@ -129,7 +131,7 @@
 		$('#boardSelect').remove();
 		var str  = "";
 		var str2 = "";
-		$('#bn_category').val('2');
+		$('#bn_category').val('1');
 		$.ajax(
 			{
 				url:"<%=context %>/getBoardNum",
@@ -150,17 +152,18 @@
 		);
 	}
 	
-	function bannerChk() {
+	function bannerChk() {	
 		$.ajax({
 			url:"<%=context%>/bannerChk",
 			dataType:'text',
 			success: function(data) {
-				alert(data);
+			//	alert(data);
 				if(data == '1'){
-					var form = document.createBn;
-					form.submit();
+					var createBn = document.createBn;
+					alert("배너가 등록되었습니다.");
+					createBn.submit();			
 				} else {
-					alert("배너가 모두 등록되었습니다. 삭제하시고 등록하세요");
+					alert("배너가 모두 등록되어있습니다. 삭제하시고 등록하세요");
 				}
 			}
 			
@@ -168,14 +171,14 @@
 	}
 	
 	function bannerDelete(Vnum) {
-		alert(Vnum);
+		//alert(Vnum);
 		var bn_num = Vnum;
 		$.ajax({
 			url:"<%=context%>/bannerDelete",
 			data:{num: bn_num},
 			dataType:'text',
 			success: function(data) {
-				alert(data);
+				//alert(data);
 				if(data == '1'){
 					alert("배너 삭제 성공");
 					location.reload();

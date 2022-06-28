@@ -6,56 +6,88 @@
 }
 
 #main{
-	padding: 60px;
+	padding: 100px;
 	font-family: 'Noto Sans KR';
-}
-
-#one {
-	margin-bottom: 10px;
 }
 
 #member h3 {
 	font-size: 20px;
 	color: #1c3316;
 }
-
-#memberStatus {
-	align-items: center;
-}
  
- 
-#one {
-	margin-bottom: 10px;
-}
-#memberStatus h3 {
-	font-size: 15px;
-}
-#seller {
-	margin-top: 20px;
-	margin-bottom: 20px;
-}
-
-#seller h3{
-	font-size: 20px;
-	color: #1c3316;
-}
-
-#sellTbl {
+.body {
+	background-color: #f4f1e9;
+	padding: 20px;
+	border-radius: 10px;
 	text-align: center;
 }
 
-#sellTbl input {
+h3.page-title {
+    font-size: 20px;
+    color: #1c3316;
+}
+
+#memberStatus h2 {
+	font-size: 20px;
+}
+
+#memberStatus h4{
+	font-size: 15px;
+}
+
+#seller {
+	margin-top: 5px;
+	margin-bottom: 20px;
+	background-color: #f4f1e9;
+	padding: 10px;
+	border-radius: 10px;
+}
+
+ 
+#sellerFont{
+	margin-top: 20px;
+	font-size: 20px;
+	color: #1c3316;
+	font-weight: 1px;
+}
+#sellTbl {
+	text-align: center;
+	font-size: 15px;
+}
+
+.sellbtn {
+	text-align:center;
+	border: 1px solid #b0d282; 
+	background-color: white;
 	color: #b0d282; 
+	border-radius: 10px;
+	font-size: 15px;
+}
+
+#newMember {
+	background-color:	#f4f1e9;
+	padding: 15px;
+	border-radius: 10px; 
 }
 #new {
-	margin-bottom: 20px;
+	font-size: 20px;
+	color: #1c3316;
+	font-weight: 1px;
+	float: left;	
 }
+
 #date {
 	float: left;
 	font-size: 15px;
+	padding-top: 5px;
 }
 
  
 #newtbl {
 	text-align: center;
+	font-size: 15px;
+}
+
+.allnew {
+	display: inline-block;
 }

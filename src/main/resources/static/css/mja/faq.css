@@ -1,1 +1,89 @@
 @charset "UTF-8";
+.container{
+	font-family: 'Noto Sans KR';
+}
+
+#sidebar {
+	padding-top: 40px;
+	
+}
+ 
+#sidebar h4 {
+	font-size:25px;
+	font-weight: 2px;
+
+}
+
+a.link-dark.rounded {
+    text-decoration: none;
+    padding: 10px;
+} 
+#notice {
+	text-align:center;
+	padding-top: 60px;
+ 	padding-bottom: 10px;
+}
+
+#notice  h2{
+	font-size: 30px;
+	font-weight: 2px;
+	color: #1c3316;
+}
+
+.agree {
+	margin:outo;
+	display: flex;
+	justify-content: space-between;
+}
+
+#inChk {
+	width: 20px;
+}
+
+#faq-main {
+	padding-bottom: 20px;
+}
+
+#faq a {
+	text-decoration: none;
+	color: grey;
+	font-size: 20px;
+}
+#tbl-first th{
+	background-color: #f4f1e9;
+	width: 150px;
+}
+#tbl-first td{
+	font-size: 15px;
+}
+#tbl-second th {
+	background-color: #f4f1e9;
+}
+#tbl-second input {
+	text-decoration: none;
+	border: none;
+}
+
+#tbl-second textarea {
+	resize: none;
+	border: none;
+}
+#submitBtn {
+	font-size: 15px;
+	background-color:#b0d282;
+	margin-bottom: 30px;
+	border: none;
+	float: right;
+	color: white;
+	border-radius: 10px;
+}
+
+.agree input[type="checkbox"] + label span {
+position: absolute; top: 0; left:0px; display: block; font-weight: bold;}
+
+.eMail {
+	display: flex;
+	justify-content: space-between;
+	align-items: center; 
+}  
+ 

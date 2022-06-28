@@ -1,0 +1,47 @@
+@charset "UTF-8";
+
+.myProductList {
+	text-align: center;
+    font: italic;
+    color: #6c757d;
+    font-family: 'Noto Sans KR';
+    font-weight: 900;
+}
+.myProductListTable {
+	text-align: center;
+ 	line-height: 2.5;
+	width: 80%;
+	border: 1px solid #1c3316;
+	border-collapse: collapse;
+    border-radius: 25px;
+	color: #1c3316;
+	padding: 0px;
+	font-size: 18px;
+	margin-left: auto;
+	margin-right: auto;
+	    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    font-size: 23px; 
+    font-family: 'Noto Sans KR';
+}
+#listMyProduct-button {
+	background-color: #b0d282;
+    color: white;
+    border-radius: 10px;
+    float: none;
+    border-color: white;
+}
+th.listHead {
+	text-align: center;
+	padding: 3px;
+    font-size: 27px;
+    color: #6289ad;
+    font-weight: bolder;
+}
+td.prolist{
+	font-family: 'Noto Sans KR';
+    font-weight: 900;
+    color: #664d03;
+}
+

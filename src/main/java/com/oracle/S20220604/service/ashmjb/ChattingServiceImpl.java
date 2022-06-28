@@ -30,21 +30,35 @@ public class ChattingServiceImpl implements ChattingService {
 		logger.info("insert Start .. ");
 		logger.info("insert chatting.getRoom_num-> " + chatting.getRoom_num());
 		chattingDao.save(chatting);
-		Participant pt = new Participant();
-		pt.setUser_id(chatting.getUser_id());
-		int saveParticipantResult = chattingDao.saveParticipant(pt);
-		System.out.println("saveParticipantResult -> "+saveParticipantResult);
+		logger.info("insert chatting.getRoom_num->"+chatting.getRoom_num());
+		logger.info("insert chatting.getUser_id->"+chatting.getUser_id());
+		
 		return chatting.getRoom_num();
 	}
 
+
 	@Override
-	public int total() {
+	public int insertparticipant(Chatting chatting) {
+		Participant pt = new Participant();
+		pt.setUser_id(chatting.getUser_id());
+		int saveParticipantResult = chattingDao.saveParticipant(pt);
+		return chatting.getRoom_num();
+	}
+	@Override
+	public int OpenChatTotal() {
 		System.out.println("ChattingServiceImpl start total...");
-		int totCnt = chattingDao.total();
+		int totCnt = chattingDao.OpenChatTotal();
 		
 		logger.info("total" + totCnt);
 		return totCnt;
 	
+	}
+	
+	@Override
+	public int ListTotal(Chatting chatting) {
+		int totCnt = chattingDao.ListTotal(chatting);
+		
+		return totCnt;
 	}
 
 	@Override
@@ -103,4 +117,32 @@ public class ChattingServiceImpl implements ChattingService {
 		System.out.println("ChattingServiceImpl insertChatWithCeller after...");
 		
 	}
+
+	@Override
+	public List<Participant> selectParti(int room_num) {
+		System.out.println("Chatting Service parti Start");
+		List<Participant> selectParti = chattingDao.selectParti(room_num);
+		System.out.println("Chatting Service parti End");
+		return selectParti;
+	}
+	
+	   @Override
+	   public void inChatWithConsumer(Participant pt) {
+	      System.out.println("ChattingServiceImpl inChatWithConsumer Start...");
+	      chattingDao.inChatWithConsumer(pt);
+	      System.out.println("ChattingServiceImpl inChatWithConsumer after...");
+	      
+	   }
+
+	@Override
+	public int findroomNum() {
+		return chattingDao.findroomNum();
+	}
+   @Override
+   public List<Participant> selectParti3(int room_num) {
+      System.out.println("Chatting Service parti Start");
+      List<Participant> selectParti3 = chattingDao.selectParti3(room_num);
+      System.out.println("Chatting Service parti End");
+      return selectParti3;
+   }
 }

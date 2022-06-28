@@ -1,11 +1,49 @@
 @charset "UTF-8";
-
-.container {
+.container{
 	font-family: 'Noto Sans KR';
-	padding-top: 50px;
-	padding-bottom: 50px;
+}
+#sidebar {
+	padding-top: 60px;
+	
 }
  
-#subBtn {
-	float: right;
+#sidebar h4 {
+	font-size:25px;
+	font-weight: 2px;
+
+}
+
+a.link-dark.rounded {
+    text-decoration: none;
+    padding: 10px;
 } 
+
+input#floatingInput {
+    margin-bottom: 10px;
+} 
+input#floatingPassword {
+    margin-bottom: 10px;
+} 
+.login {
+	padding-top: 100px;
+	margin: 0 auto;
+	padding-bottom:10px;
+	font-size: 15px;
+}
+.login h4 {
+	font-size: 20px;
+	color: #1c3316;
+	
+}
+
+#Loginbtn {
+	margin-bottom: 80px;
+	text-align: center;
+	border: none;
+	float: right;
+	background-color: #f4f1e9;
+	width: 100px;
+	border-radius: 10px;
+}
+
+ 

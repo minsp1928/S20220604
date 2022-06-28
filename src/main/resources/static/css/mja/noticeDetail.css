@@ -1,0 +1,64 @@
+@charset "UTF-8";
+.container{
+	font-family: 'Noto Sans KR';
+}
+#sidebar {
+	padding-top: 60px;
+	font-family: 'Noto Sans KR';
+}
+ 
+#sidebar h4 {
+	font-size:25px;
+	font-weight: 2px;
+
+}
+a.link-dark.rounded {
+    text-decoration: none;
+    padding: 10px;
+} 
+
+#notice {
+	padding-top: 60px; 
+}
+ 
+#notice  h3{
+	font-size: 30px;
+	font-weight: 2px;
+	color: #1c3316;
+}
+
+#notice span {
+	color: grey;
+}
+#notice2 h6{
+	margin-bottom: 40px;
+}
+#tbl th{
+	padding-left: 2px;
+	text-align: center;
+	background-color: #f4f1e9;
+	width: 100px;
+}
+
+#tbl td {
+	padding-left: 2px;
+	text-align: left;
+}
+#tbl a{
+	color: #1c3316;
+    text-decoration: none;    
+}
+
+#tbl td:nth-child(5){
+	padding: 10px;
+}
+
+#page a{
+	
+	color: grey;
+	text-decoration: none;
+}
+
+#page {
+	padding-bottom: 60px;
+}

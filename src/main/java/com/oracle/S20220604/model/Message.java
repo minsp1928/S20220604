@@ -17,4 +17,5 @@ public class Message {
 	private Date msg_time;
 	private String msg_file;
 	private String msg_pic;
+	private String mmsg_time;
 }

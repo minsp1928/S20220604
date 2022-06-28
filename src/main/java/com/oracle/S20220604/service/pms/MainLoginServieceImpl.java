@@ -1,5 +1,7 @@
 package com.oracle.S20220604.service.pms;
 
+import static org.hamcrest.CoreMatchers.nullValue;
+
 import java.io.IOException;
 import java.util.List;
 
@@ -11,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
 import com.oracle.S20220604.dao.pms.MainLoginDao;
+import com.oracle.S20220604.model.Banner;
 import com.oracle.S20220604.model.Member;
 import com.oracle.S20220604.model.Product;
 
@@ -135,11 +138,20 @@ public class MainLoginServieceImpl implements MainLoginService {
 		System.out.println("product.getSearch --> " + product.getSearch());
 		System.out.println("product.getKeyword --> " + product.getKeyword());
 		List<Product> searchKeyword = null;
-		System.out.println("EmpServiceImpl listEmpKeyword start");
+		System.out.println("MainLoginServieceImpl searchKeyword start");
 		searchKeyword = md.searchKeyword(product);
-		System.out.println("EmpServiceImpl listEmpKeyword empList.size()->"+searchKeyword.size());
+		System.out.println("MainLoginServieceImpl searchKeyword searchKeyword.size()->"+searchKeyword.size());
 		return searchKeyword;
 }
+
+	@Override
+	public List<Banner> bannerList() {
+		System.out.println("MainLoginServieceImpl bannerList start");
+		List<Banner> bannerList = null;
+		bannerList = md.bannerList();
+		System.out.println("MainLoginServieceImpl bannerList->"+bannerList);
+		return bannerList;
+	}
 
 	
 

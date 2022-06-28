@@ -1,0 +1,65 @@
+@charset "UTF-8";
+
+section {
+	height: 590px;
+	width: 96%;
+	font-family: 'Noto Sans KR';
+	
+}
+
+.successSize {
+	height: 350px;
+	width: 50%;
+	border: 2px solid gray; 
+	position: relative;
+	top: 20%;
+	left: 25%;
+	right: 50%;
+}
+
+.info{
+	position: relative;
+	top: 30%;
+	left: 30%;
+}
+a{
+	text-decoration: none;
+}
+
+
+.mainBtn {
+	background-color: #ffca5d;
+    border: 0;
+    outline: 0;
+    color: white;
+    width: auto;
+    height: 30px;
+    padding-top: 5px;
+    text-align: center;
+    display: flex;
+    border-radius: 30px;
+    font-size: 1em;
+    font-weight: bold;
+    position: relative;
+    top: 59%;
+    left: 30%;
+}
+
+.checkBtn {
+	background-color: #ffca5d;
+    border: 0;
+    outline: 0;
+    color: white;
+    width: auto;
+    height: 30px;
+    padding-top: 5px;
+    text-align: center;
+    display: flex;
+    border-radius: 30px;
+    font-size: 1em;
+    font-weight: bold;
+    text-decoration: none;
+    position: relative;
+    top: 50%;
+    left: 50%;
+}

@@ -1,14 +1,58 @@
 @charset "UTF-8";
 
-.container {
+#sidebar {
+	padding-top: 60px;
 	font-family: 'Noto Sans KR';
-	padding: 20px;
+}
+
+#main{
+	padding: 60px;
+	font-family: 'Noto Sans KR';
+}
+#notice {
+	padding-top: 60px; 
+	text-align: center;
+	margin-bottom: 20px;
 }
  
-#one{
-	padding: 50px;
+#notice  h3{
+	font-size: 25px;
+	font-weight: 1px;
 }
-#one a{
+
+#notice span {
+	color: grey;
+}
+
+#tbl {
+	font-size: 15px;
+}
+#tbl th{
+	padding-left: 2px;
+	text-align: center;
+	background-color: #f4f1e9;
+	width: 100px;
+}
+
+#tbl td {
+	padding-left: 2px;
+	text-align: left;
+}
+#tbl a{
+	color: #1c3316;
+    text-decoration: none;
+    
+}
+
+#all {
+}
+#page a{
+	color: grey;
 	text-decoration: none;
-	color: gray;
-} 
+	float: left;
+}
+#delete a {
+	color: grey;
+	text-decoration: none;
+	float: right;
+}

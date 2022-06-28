@@ -24,7 +24,7 @@
 	}
 	function testclick() {
 		var imgsrc = document.getElementById('chatImg').src;
-		alert(imgsrc);
+	//	alert(imgsrc);
 	}
 </script>
 </head>
@@ -43,7 +43,6 @@
 		<input type="hidden" name="room_type" value="2">
 	</div>
 </form>
-<button id="testbtn" onclick="testclick()">테스트 버튼</button>
 </body>
 <script type="text/javascript">
 	function readImage(input) {

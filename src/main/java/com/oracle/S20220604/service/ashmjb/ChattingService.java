@@ -10,18 +10,31 @@ import com.oracle.S20220604.model.Product;
 public interface ChattingService {
 	int 		   insert(Chatting chatting);
 
-	int 		   total();
+	int 			insertparticipant(Chatting chatting);
+	
+	int 		   OpenChatTotal();
+	
+	int				ListTotal(Chatting chatting);
 
 	List<Chatting> openChatList(Chatting chatting);
 
 	List<Chatting>	showList(Chatting chatting);
 
 	List<Message> 	msgnaeyong(int room_num);
-
+	
 	void			insertParti(Participant parti);
 
 	List<Chatting>  keywordList(Chatting chatting);
 	
 	void			insertChatWithCeller(Product product);
+
+	List<Participant> selectParti(int room_num);
+
+	void 			inChatWithConsumer(Participant pt);
+
+	int 			findroomNum();
+
+	List<Participant> selectParti3(int room_num);
+
 
 }

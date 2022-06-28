@@ -1,26 +1,44 @@
 @charset "UTF-8";
 
-.container {
-	font-family: 'Noto Sans KR';
-	padding: 20px;
+#sidebar {
+   padding-top: 60px;
+   font-family: 'Noto Sans KR';
+}
+
+#main{
+   padding: 100px;
+   font-family: 'Noto Sans KR';
 }
  
-#sellTbl {
-	text-align: center;
-}
- 
-#newtbl {
-	text-align: center;
+#subject h1 {
+   font-size: 25px;
+   margin-bottom: 20px;
 }
 
-#one {
-	margin-bottom: 20px;
+#tbl th {
+   text-align: center;
+   background-color: #f4f1e9;
 }
 
-#two {
-	margin-bottom: 20px;
+#tbl textarea {
+   resize: none;
+   border: none;
 }
 
-#three {
-	margin-bottom: 20px;
+#tbl a {
+   text-decoration: none;
+   color:  grey;
+}
+
+#tbl button {
+   text-align: center;
+   border: 1px solid #b0d282;
+   color: #b0d282;
+   background-color: white;
+   border-radius: 10px;
+   margin: 0 auto;
+}
+
+#tbl tr:nth-child(5) {
+   border-bottom: 0 solid white;
 }

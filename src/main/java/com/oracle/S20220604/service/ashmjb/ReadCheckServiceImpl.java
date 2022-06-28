@@ -12,11 +12,17 @@ public class ReadCheckServiceImpl implements ReadCheckService {
 	private ReadCheckDao rd;
 	@Override
 	public int insertMe(ReadCheck rc) {
+		System.out.println("insertMe Start");
+		System.out.println("rc.getRoom_num -> "+rc.getRoom_num());
+		System.out.println("rc.getUser_id -> "+rc.getUser_id());
 		int result = rd.insertMe(rc);
 		return result;
 	}
 	@Override
 	public int insertOther(ReadCheck rc) {
+		System.out.println("insertMe Start");
+		System.out.println("rc.getRoom_num -> "+rc.getRoom_num());
+		System.out.println("rc.getUser_id -> "+rc.getUser_id());
 		int result = rd.insertOther(rc);
 		return result;
 	}

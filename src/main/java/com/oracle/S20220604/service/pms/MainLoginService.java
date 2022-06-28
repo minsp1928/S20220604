@@ -7,6 +7,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.oracle.S20220604.model.Banner;
 import com.oracle.S20220604.model.Member;
 import com.oracle.S20220604.model.Product;
 
@@ -38,6 +39,8 @@ public interface MainLoginService {
 	List<Product> NewProductlist(Product product);
 	//검색 리스트
 	List<Product> searchKeyword(Product product);
+	//메인 배너리스트
+	List<Banner> bannerList();
 
 	
 

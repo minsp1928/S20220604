@@ -14,3 +14,24 @@
 	font-weight: bold;
 	font-family: 'Noto Sans KR';
 }
+.btn btn-primary {
+	color: #fff;
+    background-color: #d3dfa4; 
+    border-color: #d3dfa4; 
+}
+#item_a{
+	font-size:20px;
+	text-decoration: none;
+	font-weight: 1px;
+	font-family: 'Noto Sans KR';
+}
+#item_context{
+	font-size:15px;
+ 	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	color: gray;
+	opacity: 0.7;
+	font-family: 'Noto Sans KR';
+	
+}

@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.ui.Model;
 
+import com.oracle.S20220604.model.Banner;
 import com.oracle.S20220604.model.Member;
 import com.oracle.S20220604.model.Product;
 
@@ -34,5 +35,7 @@ public interface MainLoginDao {
 	List<Product> NewProductlist(Product product);
 
 	List<Product> searchKeyword(Product product);
+
+	List<Banner> bannerList();
 
 }

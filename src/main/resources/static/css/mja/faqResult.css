@@ -1,0 +1,39 @@
+@charset "UTF-8";
+.container{
+	font-family: 'Noto Sans KR';
+}
+#sidebar {
+	padding-top: 60px;
+	
+}
+ 
+#sidebar h4 {
+	font-size:25px;
+	font-weight: 2px;
+
+}
+ 
+#sidebar ul {
+	border: 1px;
+}
+
+#notice {
+	padding-top: 60px;
+ 	padding-bottom: 10px;
+}
+
+#notice  h2{
+	font-size: 30px;
+	font-weight: 1px;
+}
+#notice hr {
+	color: #1c3316; 
+	height: 2px;	
+}
+ 
+ 
+.result{
+	text-align:center;
+	padding: 20px;
+	margin-bottom: 30px;
+}

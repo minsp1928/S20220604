@@ -18,42 +18,43 @@
                      <img alt="로고푸터이미지" src="/img/logo_sajomarket_footer.png" id="logofooter_img"> 
                 </a>
             </div>
-            <div id="footer_info">
-            	상호명 및 호스팅 서비스 : 이거사조(주)<br>
-                sajomarket@gmail.com
-            </div>
         </div>
 
         <div id="footer_right">
-            <div id="footer_right_top">
-                <div id="footer_teamName">
-                    <div id="footer_PL">
-			                        조장<br>
-			                        박민서
-                    </div>
-                    <div id="footer_PTM">
-			                        강민주 <br>
-			                        박건우 
-                    </div>
-                    <div id="footer_PTM">
-			                        김고은<br>
-			                        안성현
-                    </div>
-                    <div id="footer_PTM">
-			                        김민정<br>
-			                        장시환
-                    </div>
-                </div>
-                <div id="footer_admin">
-                    <a href="notice">공지사항</a><br> <!--관리자 페이지의 공지사항으로 이동-->
-                    <a href="faq?user_id=${sessionId }">1:1문의</a><br> <!--관리자 페이지의 1:1문의로 이동-->
-                </div>
+        
+           <div id="footer_info">
+               상호명 및 호스팅 서비스 : 이거사조(주)<br>
+                sajomarket@gmail.com
             </div>
             <hr>
-            <div id="footer_inc">
-              	중앙정보 기술 인재 개발원 4조 <br>
-              	@BuySajo.Inc
+            
+            <div id="footer_center">
+               <div id="footer_inc">
+                    중앙정보 기술 인재 개발원 4조 <br>
+                    @BuySajo.Inc
+               </div>
+               <div id="footer_right_top">
+                   <div id="footer_teamName">
+                       <div id="footer_PL">
+                       <span>조장</span> 
+                       <span>박민서</span>
+                       <span>부조장</span>
+                       <span>강민주</span>
+                       </div>
+                       <div id="footer_PTM">
+                           <span>김고은</span> 
+                           <span>김민정</span>  
+                           <span>박건우</span>  
+                           <span>안성현</span>  
+                           <span>장시환</span> 
+                       </div>
+                   </div>
+               </div>
             </div>
+        </div>
+        <div id="footer_admin">
+             <a href="notice">공지사항</a><br> <!--관리자 페이지의 공지사항으로 이동-->
+             <a href="faq?user_id=${sessionId }">1:1문의</a><br> <!--관리자 페이지의 1:1문의로 이동-->
         </div>
     </footer>
     

@@ -1,0 +1,148 @@
+@charset "UTF-8";
+
+.productBoardWriteTable {
+	text-align: justify;
+ 	line-height: 3.0;
+	width: 50%;
+	border: 1px solid #1c3316;
+	border-collapse: collapse;
+	border-radius: 20px;
+	color: #1c3316;
+	padding: 7px;
+	font-size: 20px;
+	margin-left: auto;
+	margin-right: auto;
+	    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    font-family: 'Noto Sans KR';
+    height: fit-content; 
+    margin-bottom: 25px;
+}
+.boardTable{
+	text-align: center;
+    line-height: 1.5;
+    width: 80%;
+    border-collapse: collapse;
+    color: #1c3316;
+    padding: 0px;
+    font-size: 18px;
+    margin-left: auto;
+    margin-right: auto;
+    /* display: flex; */
+    flex-wrap: wrap;
+    font-family: 'Noto Sans KR';
+    max-width: 1920px;
+}
+#boardWriteLeft {
+	text-align: left;
+	color: #b0d282;
+	font-family: 'Noto Sans KR';
+}
+#boardWriteRight {
+	width: 100%;
+	height: 52px;
+	text-decoration: underline;
+	text-align: right;
+	font-size: 20px;
+	font-family: 'Noto Sans KR';
+}
+
+#mPhoto{
+	width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+#pro_photoImg{
+	display: none;	
+}
+#pro_photoImg_label{
+	width: 30%;
+    background: white;
+    display: flex;
+}
+#pro_photoImg_preview{
+	height: 60px;
+}
+
+
+#pro_photoImg_preview{
+	height: 50px;
+}
+#pro_picImg{
+	display: none;
+}
+#pro_picImg_label{
+	width: 30%;
+    background: white;
+    display: flex;
+}
+#d_photo_name{
+	width: 68%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+select #pt1 {
+    width: 100%;
+    text-align: center;
+    border-radius: 10px;
+    font-family: 'Noto Sans KR';
+}
+
+select #pt2_option {
+    width: 100%;
+    text-align: center;
+    border-radius: 10px;
+    font-family: 'Noto Sans KR';
+}
+
+table{
+	display: flex;
+	justify-content: center;
+	border: none;
+	font-family: 'Noto Sans KR';
+}
+
+h2{
+	text-align: center;
+	font-family: 'Noto Sans KR';
+}
+
+
+#pt1 {
+	width: 100%;
+	text-align: center;
+	border-radius: 10px;
+	font-family: 'Noto Sans KR';
+}
+
+#pt2_foreach {
+	width: 100%;
+	text-align: center;
+	border-radius: 10px;
+	font-family: 'Noto Sans KR';
+}
+#write_Submit_Button {
+	float: right;
+	border-radius: 10px;
+	background-color: #1c3316;
+	color: white;
+	width: 100%;
+	text-align: center;
+    height: auto;
+    font-size: 22px;
+    font-family: 'Noto Sans KR';
+}
+#pageTitle{
+	margin-top: 5px;
+	margin-bottom: 5px;	
+	font-family: 'Noto Sans KR';
+	color: #3b5a60;
+	font-weight: 900;
+    font-size: 40px;
+}
+#file-upload-button{
+	height: 30px;
+}

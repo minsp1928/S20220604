@@ -5,21 +5,29 @@
 <head>
 <meta charset="UTF-8">
 <title>myPageTopLine</title>
-<link href="css/myPageTopLine.css" rel="stylesheet" type="text/css">
+<link href="css/pkw/myPageTopLine.css" rel="stylesheet" type="text/css">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100&display=swap" rel="stylesheet">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+<script type="text/javascript">
+	var userId = "<%=(String)session.getAttribute("sessionId")%>";
+	if ("null" == userId ) {
+	/* 	alert("로그인 후 접근가능합니다."); */
+		location.href="/login";
+	}
 
+</script>
 </head>
 <body>
 	<myPageTopLine>
-		<div class="myPageTopLine_userMode">
-			<button id="userMode_button">쇼퍼</button>
-			<button id="userMode_button">메이커</button>
+
+		<div class="myPageTopLine_user">
+			<button class="shopper_button" onclick = "location.href = '${pageContext.request.contextPath}/shopperMyPage' " id="shopper_button">쇼퍼</button>
+			<button class="maker_button" onclick = "location.href = '${pageContext.request.contextPath}/makerMyPage' " id="maker_button">메이커</button>
 		</div>
 		<div class="myPageTopLine_chat">
-			<button id="chat_button">채팅</button>
+			<button onclick = "location.href = '${pageContext.request.contextPath}/chat?&user_id=${user_id}' " id="chat_button">채팅</button>
 		</div>
 	</myPageTopLine>
 	

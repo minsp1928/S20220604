@@ -2,77 +2,121 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.oracle.S20220604.ChattingMapper">
-	<select id="akChattingTotal" resultType="int">
-		select count(*) from
-		chatting
+   <select id="akChattingTotal" parameterType="Chatting" resultType="int">
+      select    count(*) 
+      from   chatting
+      <choose>
+         <when test="room_type != 3">where room_type = 1 or room_type = 2</when>
+      </choose>
+      <choose>
+         <when test="room_type == 3">where room_type = 3</when>
+      </choose>
+   </select>
+   
+   <select id="akChattingOpenChatTotal" resultType="int">
+      select    count(*)
+      from   chatting
+      where   room_type = 2      
+   </select>
+   
+   <select id="akChattingList" parameterType="Chatting" resultType="Chatting">
+      select *
+      from (
+      select rownum rn, a.*
+      from (select * from chatting where  room_type = 2 order by room_num desc) a
+      )
+      where rn between #{start} and #{end}
+   </select>
 
-	</select>
-	<select id="akChattingList" parameterType="Chatting" resultType="Chatting">
-		select *
-		from (
-		select rownum rn, a.*
-<<<<<<< HEAD
-		from (select * from chatting order by room_num) a
-=======
-		from (select * from chatting where room_type = 1 or room_type = 2 order by room_num) a
->>>>>>> origin/chat-ashmjb
-		)
-		where rn between #{start} and #{end}
-	</select>
-
-	<select id="akChattingShowList12" parameterType="Chatting" resultType="Chatting">
-		select	c.room_num, c.room_name, c.pic_change , c.room_type
-		from 	chatting c, participant p
-		where 	c.room_num = p.room_num
-		And 	p.user_id in(select user_id
-		                 	 from member
-		                	 where user_id = #{user_id})
+   <select id="akChattingShowList12" parameterType="Chatting" resultType="Chatting">
+      select   c.room_num, c.room_name, c.pic_change , c.room_type
+      from    chatting c, participant p
+      where    c.room_num = p.room_num
+      And    p.user_id in(select user_id
+                           from member
+                          where user_id = #{user_id})
         group by c.room_num, c.room_name, c.pic_change , c.room_type   
         having c.room_type = 1 or c.room_type = 2
-		order by c.room_num desc 
-	</select>
-	
-	
-	<select id="akChattingShowList3" parameterType="Chatting" resultType="Chatting">
-		select	distinct c.room_num, c.room_name, c.pic_change , c.room_type
-		from 	chatting c, participant p
-		where 	c.room_num = p.room_num
-		And 	p.user_id in(select user_id
-		                 	 from member
-		                	 where user_id = #{user_id})
-		And     c.room_type = #{room_type}               	 
-		order by c.room_num desc 
-	</select>
-	
-	<select id="akMsgNaeYong" parameterType="int" resultType="Message">
-		select  	 distinct m.*
-		from       	 message m , participant p 
-		where   	 m.room_num =#{room_num}
-		order by	 m.msg_num 
-		
-	</select>
-	
-	<select id="akKeywordList" parameterType="Chatting" resultType="Chatting">
-		select c.*
-		from 	chatting c, Member m
-		where 	room_name like '%' || #{keyword} || '%'
-		and	 	m.user_id = #{user_id}
-	</select>
-	
-	<select id="akCountParti" parameterType="Participant" resultType="int">
-		select count(user_id)
-		from participant
-		where room_num = #{room_num} and user_id = #{user_id}
-	</select>
-	
-	<select id="akInsertChatWithCeller" parameterType="Product" statementType="CALLABLE">
-		{
-			call chat_to_celler(
-								#{pro_num, 		 mode = IN, jdbcType=INTEGER},
-								#{user_id, 		 mode = IN, jdbcType=VARCHAR},
-								#{pro_title, 	 mode = IN, jdbcType=VARCHAR},
-								#{login_user_id, mode = IN, jdbcType=VARCHAR}
-								)
-		}
-	</select>
+      order by c.room_num desc 
+   </select>
+   
+   
+   <select id="akChattingShowList3" parameterType="Chatting" resultType="Chatting">
+      select   distinct c.room_num, c.room_name, c.pic_change , c.room_type
+      from    chatting c, participant p
+      where    c.room_num = p.room_num
+      And    p.user_id in(select user_id
+                           from member
+                          where user_id = #{user_id})
+      And     c.room_type = #{room_type}                   
+      order by c.room_num desc 
+   </select>
+   
+   <select id="akMsgNaeYong" parameterType="int" resultType="Message">
+      select      distinct m.room_num, 
+                m.msg_num, 
+                m.msg_type, 
+                m.send_user_id,
+                m.content, 
+                to_char(m.msg_time, 'pm hh:mi')as "mmsg_time",
+                m.msg_pic,
+                m.msg_file
+      from           message m , participant p 
+      where       m.room_num =#{room_num}
+      order by    m.msg_num 
+   </select>
+   
+   <select id="akSelectParti" parameterType="int" resultType="Participant">
+      select      distinct p.*
+      from      participant p, chatting c
+      where      p.room_num = c.room_num
+      and         p.room_num = #{room_num}
+      and         c.room_type = 1
+   </select>
+   
+   <select id="akKeywordList" parameterType="Chatting" resultType="Chatting">
+      select c.*
+      from    chatting c, Member m
+      where    room_name like '%' || #{keyword} || '%'
+      and       m.user_id = #{user_id}
+   </select>
+   
+   <select id="akCountParti" parameterType="Participant" resultType="int">
+      select count(user_id)
+      from participant
+      where room_num = #{room_num} and user_id = #{user_id}
+   </select>
+   
+   <select id="akInsertChatWithCeller" parameterType="Product" statementType="CALLABLE">
+      {
+         call chat_to_celler(
+                        #{pro_num,        mode = IN, jdbcType=INTEGER},
+                        #{user_id,        mode = IN, jdbcType=VARCHAR},
+                        #{pro_title,     mode = IN, jdbcType=VARCHAR},
+                        #{login_user_id, mode = IN, jdbcType=VARCHAR}
+                        )
+      }
+   </select>
+   
+      <select id="akInChatWithConsumer" parameterType="Participant" statementType="CALLABLE">
+         {
+            call chat_to_consumer(
+                           #{con_user_id,    mode = IN,     jdbcType=VARCHAR},
+                           #{user_id,      mode = IN,     jdbcType=VARCHAR},
+                           #{room_num,    mode = OUT,       jdbcType=INTEGER}
+                           )
+         }
+   </select>
+   
+   <select id="akFindRoom_num" resultType="int">
+         select max(room_num)
+      from participant
+   </select>
+      <select id="akSelectParti3" parameterType="int" resultType="Participant">
+      select      distinct p.*
+      from      participant p, chatting c
+      where      p.room_num = c.room_num
+      and         p.room_num = #{room_num}
+      and         c.room_type = 3
+   </select>
 </mapper>

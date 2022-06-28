@@ -9,4 +9,7 @@ public class Participant {
 
 	private String user_id;
 	private int room_num;
+	
+	// 버퍼용
+	private String con_user_id;
 }

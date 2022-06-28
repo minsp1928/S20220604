@@ -2,7 +2,6 @@ package com.oracle.S20220604.service.mja;
 
 import java.util.List;
 
-import com.oracle.S20220604.domain.CouponJpa;
 import com.oracle.S20220604.domain.FaqJpa;
 import com.oracle.S20220604.model.Banner;
 import com.oracle.S20220604.model.Board;

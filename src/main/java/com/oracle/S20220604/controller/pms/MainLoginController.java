@@ -32,6 +32,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.oracle.S20220604.model.Banner;
 import com.oracle.S20220604.model.Member;
 import com.oracle.S20220604.model.Product;
 import com.oracle.S20220604.service.kge.Paging;
@@ -66,23 +67,17 @@ public class MainLoginController {
 		}
 		@RequestMapping(value = "header2")
 		public String header2() {
-<<<<<<< HEAD
-=======
 			
 			return "base/header2";
 		}
-<<<<<<< HEAD
-=======
-		@RequestMapping(value = "main")
-		public String main() {
->>>>>>> origin/chat-ashmjb
-			
-			return "base/header2";
-		}
->>>>>>> 23b083b4aca25bc4caf87bca7ddbedee8c9379c5
 		@RequestMapping(value = "main")  //메인페이지
 		   public String main(Product product, String curreuntPage, Model model) {
 		      System.out.println("MainLoginController product_bestTop4list Start...");
+		      //배너리스트
+		      List<Banner> bannerList = ms.bannerList();
+		      Banner b1 = bannerList.get(0);
+		      Banner b2 = bannerList.get(1);
+		      Banner b3 = bannerList.get(2);
 		      
 		      // 상품 목록 리스트 - 상품 갯수
 		      int total2 = ms.total2(product);
@@ -102,10 +97,16 @@ public class MainLoginController {
 			  for(Product product3 : listNew4Product) {
 				  System.out.println("MainLoginController product_newTop4list product2.getPro_title()->"+product3.getPro_title());  
 				  System.out.println("MainLoginController product_newTop4list product2.getPro_price()->"+product3.getPro_price());  
-				  System.out.println("MainLoginController product_newTop4list product2.getPro_price()->"+product3.getPro_photo());  
+ 				  System.out.println("MainLoginController product_newTop4list product2.getPro_price()->"+product3.getPro_photo());  
 		  } 
 			
-				  
+			  model.addAttribute("bannerList",bannerList);//메인 배너 리스트 (순서대로)
+			  System.out.println("MainLoginController bannerList->"+bannerList.size());  
+
+			  model.addAttribute("b1", b1);
+			  System.out.println("MainLoginController bannerList  b1->"+ b1);  
+			  model.addAttribute("b2", b2);
+			  model.addAttribute("b3", b3);
 		      model.addAttribute("product", product);
 		      model.addAttribute("product_bestTop4list", listBest4Product); //여기서 모델에 전체 리스트를 담아주는것-> 민서는 베스트, 뉴 따로 리스트 만들어야함
 		      model.addAttribute("product_newTop4list", listNew4Product); //여기서 모델에 전체 리스트를 담아주는것-> 민서는 베스트, 뉴 따로 리스트 만들어야함
@@ -135,6 +136,7 @@ public class MainLoginController {
 				
 				return "mainLoginPms/findPW";
 			}
+
 	//--------------------------login start----------------------------\\
 	/*
 	 * @RequestMapping(value = "loginbtn") public void login(Member member, Model
@@ -186,7 +188,12 @@ public class MainLoginController {
 			public Member findIdCheck(Member member, Model model) {
 				System.out.println("MainLoginController findIdBtn start...");
 			    Member member3 = ms.findIdCheck(member);
-				
+				if(member3 == null) {
+					member3 = new Member();
+					System.out.println(member3);
+					member3.setUser_id("failUser");
+					System.out.println("일치하는 회원정보가 없음 아이디");
+				}
 				return member3;
 						
 			}
@@ -197,11 +204,13 @@ public class MainLoginController {
 			@ResponseBody
 			public Member findPwCheck(HttpServletRequest request, Member member, Model model) {
 				System.out.println("MainLoginController findPwBtn Start..");
-				Member member5 = ms.findPwCheck(member);
-				if(member5 == null) {
-					System.out.println("일치하는 회원정보가 없음");
-					return member5;
-				}else {
+				System.out.println("MainLoginController findPwBtn"+member.getUser_id());
+				System.out.println("MainLoginController findPwBtn"+member.getUser_name());
+				System.out.println("MainLoginController findPwBtn"+member.getEmail());
+
+				Member member5 = new Member();
+				member5 = ms.findPwCheck(member);
+				if(member5 != null) {
 					System.out.println("비밀번호 찾아옴");
 					System.out.println("MainLoginController findPwBtn member.getUser_pw()(just check)->"+member.getUser_pw());
 					System.out.println("MainLoginController mailiSending...");
@@ -239,13 +248,18 @@ public class MainLoginController {
 					} catch (Exception e) {
 						//안되는경우 : 보안설정 열어주기, 2단계인증 없애주기, 백신때문에 안갈 수도 있음
 						System.out.println(e);//문제가 있을경우
-						model.addAttribute("check",2); //메일전달 실패
+						// model.addAttribute("check",2); //메일전달 실패
+						member5.setUser_id("failUser");
 					}
 					
 					
-						}
-					return member5;			
-			
+				}else {
+					member5 = new Member();
+					System.out.println(member5);
+					member5.setUser_id("failUser");
+					System.out.println("일치하는 회원정보가 없음");
+				}
+				return member5;	
 			}
 			
 		
@@ -374,28 +388,29 @@ public class MainLoginController {
 			  } 
 			
 			
-				  
+			  model.addAttribute("titless",1);  
 		      model.addAttribute("product", product);
 		      model.addAttribute("listProduct", BestProductlist); //여기서 모델에 전체 리스트를 담아주는것-> 민서는 베스트, 뉴 따로 리스트 만들어야함
 		      model.addAttribute("pg", pg);
 		      model.addAttribute("total", total2);
-		      return "productKge/productBoard";
+		      return "mainLoginPms/bestNewBoard";
 			
 		}
-	//-----------------------------------전체 베스트 상품 목록으로 넘어가기(베스트 정보를 담아서 프로덕트 보드로 넘기기)------------------------------------
+	//-----------------------------------전체  신상품 목록으로 넘어가기(베스트 정보를 담아서 프로덕트 보드로 넘기기)------------------------------------
 			@GetMapping(value = "/productBoardNew")
 			public String productBoardNew(Product product, String curreuntPage, Model model) {
 			      System.out.println("MainLoginController productBoardNew Start...");
+			      
+			      
+			      // 베스트 상품 목록 리스트 - 상품 목록
+			      
+			      List<Product> NewProductlist = ms.NewProductlist(product);
 			      
 			      // 상품 목록 리스트 - 상품 갯수
 			      int total2 = ms.total2(product);
 			      Paging pg = new Paging(total2, curreuntPage);
 			      product.setStart(pg.getStart());
 			      product.setEnd(pg.getEnd());
-			      
-			      // 베스트 상품 목록 리스트 - 상품 목록
-			      
-			      List<Product> NewProductlist = ms.NewProductlist(product);
 			  
 			      System.out.println("MainLoginController productBoardBest listBest4Product.size()->"+NewProductlist.size());
 					
@@ -405,12 +420,12 @@ public class MainLoginController {
 				  } 
 				
 				
-					  
+				  model.addAttribute("titless",2);
 			      model.addAttribute("product", product);
 			      model.addAttribute("listProduct", NewProductlist); //여기서 모델에 전체 리스트를 담아주는것-> 민서는 베스트, 뉴 따로 리스트 만들어야함
 			      model.addAttribute("pg", pg);
 			      model.addAttribute("total", total2);
-			      return "productKge/productBoard";
+			      return "mainLoginPms/bestNewBoard";
 				
 			}
 	//-----------------------------------검색------------------------------------
@@ -424,7 +439,6 @@ public class MainLoginController {
 			      product.setStart(pg.getStart());
 			      product.setEnd(pg.getEnd());
 			      
-			      // 베스트 상품 목록 리스트 - 상품 목록
 			      
 			      List<Product> searchKeyword = ms.searchKeyword(product);
 			  

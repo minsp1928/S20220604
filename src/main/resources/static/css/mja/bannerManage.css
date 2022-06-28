@@ -1,9 +1,53 @@
 @charset "UTF-8";
-.container {
+#sidebar {
+	padding-top: 60px;
 	font-family: 'Noto Sans KR';
-	padding: 20px;
 }
 
-div#one {
-	padding: 40px;
+#main{
+	padding: 100px;
+	font-family: 'Noto Sans KR';
+}
+
+#subject h3{
+	font-size: 25px;
+	margin-bottom: 10px;
+}
+
+#bannerTbl{
+	font-size: 15px;
+	text-align: center;
+	margin-bottom: 10px;
+	border: none;
+}
+
+
+#bannerTbl th{
+	background-color: #f4f1e9; 
+}
+
+#bnDelete {
+	border: 1px solid #b0d282;
+	border-radius: 10px;
+	background-color: white;
+}
+
+#bannerCreate {
+	font-size: 15px;
+	text-align: center;
+	margin-bottom: 30px;
+	border: none;
+	text-decoration: none;
+}
+
+#bannerCreate th{
+	background-color: #f4f1e9; 
+}
+
+#createBtn {
+	border: 1px solid #b0d282;
+	border-radius: 10px;
+	background-color: white;
+	text-align: center;
+	margin: 0 auto;
 }

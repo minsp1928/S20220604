@@ -1,22 +1,67 @@
 @charset "UTF-8";
-
-.container {
+.container{
 	font-family: 'Noto Sans KR';
-	padding: 20px;
+}
+#sidebar {
+	padding-top: 60px;
+	
 }
  
-#one {
-	margin-top: 20px;
+#sidebar h4 {
+	font-size:25px;
+	font-weight: 2px;
+
 }
-#two {
-	margin-top: 10px;
-	align-items: center;
+ 
+
+a.link-dark.rounded {
+    text-decoration: none;
+    padding: 10px;
+} 
+
+#notice {
+	padding-top: 60px;
+ 
+}
+
+#notice  h2{
+	font-size: 30px;
+	font-weight: 1px;
+}
+#notice span {
+	color: grey;
+}
+#notice hr{
+	color: #1c3316; 
+	height: 2px;
 }
 #tbl th{
+	text-align: center;
+}
+#tbl td:nth-child(1){
+	text-align: center;
+}
+#tbl td:nth-child(3){
+	text-align: center;
+}
+#tbl td:nth-child(4){
+	text-align: center;
+}
+#tbl td:nth-child(5){
 	text-align: center;
 }
 #tbl a{
 	color: #1c3316;
     text-decoration: none;
     
+}
+
+#page a{
+	
+	color: grey;
+	text-decoration: none;
+}
+
+#page {
+	padding-bottom: 60px;
 }

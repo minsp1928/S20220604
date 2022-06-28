@@ -1,12 +1,50 @@
 @charset "UTF-8";
 
-.container {
+#sidebar {
+	padding-top: 60px;
 	font-family: 'Noto Sans KR';
-	padding: 20px;
+}
+
+#main{
+	padding: 60px;
+	font-family: 'Noto Sans KR';
+}
+
+#subject {
+	font-size: 20px;
+	margin-bottom: 20px;
+}
+
+img#pic {
+	width: 50px;
+	margin:  auto;
+	display: block;
+	text-align: center;
+}
+ 
+#subject h6 {
+	font-size: 20px;
+	float: left;
+	padding-top: 10px;
 }
 #memtbl{
 	text-align: center;
 } 
-#pic {
-	width: 400px;
+#memtbl th {
+	background-color: #f4f1e9;
+}
+#page {
+	text-decoration: none;
+	color:  grey;
+}
+
+#memtbl button {
+	border: 1px solid #b0d282;
+	border-radius: 10px;
+	background-color: white;
+	color:  #b0d282;
+}
+#page a {
+   text-decoration: none;
+   color: #b0d282;
 }

@@ -63,13 +63,6 @@
             			 , #{con_tel}, 1,sysdate)
 	</insert>
 
-	<!-- 총 전체 삼품 갯수 -->
-	<select id="msProductTotal"  parameterType="Product" resultType="int">
-    
-		SELECT Count(*) FROM product 
-		where pro_status = 1
-		
-	</select>
 	
 	<!--메인 베스트 상품 top4 리스트-->
 	<select id="msProductBest4list" parameterType="Product" resultType="Product">
@@ -94,20 +87,26 @@
 	</select>
 		<!--메인 베스트 상품 전체 리스트-->
 	<select id="msProductBestAllList" parameterType="Product" resultType="Product">
-
+		<![CDATA[
 		SELECT * FROM ( select * from product
                 where pro_status = 1
                 ORDER by  sell_amount Desc )
-               
+                where ROWNUM <=12
+            ]]>   
+              
 			
 	
 	</select>
 		<!--메인 신상품 상품 전체 리스트-->
 	<select id="msProductNewAllList" parameterType="Product" resultType="Product">
-
-		SELECT * FROM product 
-		where pro_status = 1
-        ORDER by pro_num Desc
+		<![CDATA[
+			SELECT * FROM product 
+					where pro_status = 1
+			        and ROWNUM <=12
+			        ORDER by  pro_num Desc
+	                 
+	     
+		]]>
 
 	</select>
 	<!--검색-->
@@ -121,6 +120,21 @@
 		       	 )
 	   WHERE rn BETWEEN #{start} and #{end}
 		<!--검색된 모든 로직을 적용시킨후에 페이징을 해줌  -->
+	</select>
+	
+	<!-- 총 전체 검색 갯수 -->
+	<select id="msProductTotal"  parameterType="Product" resultType="int">
+    
+		SELECT Count(*) FROM product 
+		where pro_status = 1
+		and pro_title like '%' || #{keyword} || '%' 
+		
+	</select>
+	
+	<!--메인 배너리스트-->
+	<select id="msBannerList" resultType="Banner">
+		select * from banner order by bn_num
+	
 	</select>
 	
 </mapper>

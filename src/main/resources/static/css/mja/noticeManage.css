@@ -1,15 +1,52 @@
 @charset "UTF-8";
-.container {
+
+#sidebar {
+	padding-top: 60px;
 	font-family: 'Noto Sans KR';
+}
+
+#main{
+	padding: 100px;
+	font-family: 'Noto Sans KR';
+}
+
+
+#notice h3{
+	font-size: 25px;
+	text-align: center;
 	padding: 20px;
 }
-div#one{
-	padding: 50px;
-} 
-#two{
+#tbl {
+	font-size: 15px;
+}
+#tbl th{
 	text-align: center;
 }
-#two a{
-	color: grey;
+#tbl td:nth-child(1){
+	text-align: center;
+}
+#tbl td:nth-child(3){
+	text-align: center;
+}
+#tbl td:nth-child(4){
+	text-align: center;
+}
+#tbl td:nth-child(5){
+	text-align: center;
+}
+
+#tbl a{
+	color: #1c3316;
+    text-decoration: none;
+    
+}
+#newnotice a{
+	color: #1c3316;
 	text-decoration: none;
+	margin-bottom: 30px;
+}
+#page a{
+	color: #1c3316;
+	text-decoration: none;
+	margin-bottom: 30px;
 }

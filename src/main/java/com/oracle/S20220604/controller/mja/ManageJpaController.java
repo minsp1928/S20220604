@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.oracle.S20220604.domain.CouponJpa;
 import com.oracle.S20220604.domain.FaqJpa;
 import com.oracle.S20220604.service.mja.ManageJpaService;
 
@@ -34,7 +33,8 @@ public class ManageJpaController {
 		System.out.println(faqJpa.getFaq_content());
 		System.out.println(faqJpa.getFaq_email());
 		FaqJpa newFaq = manageJpaService.faqSubmit(faqJpa);
-		if( newFaq != null)  return "redirect:questions";
+		model.addAttribute("faq", newFaq);
+		if( newFaq != null)  return "manageMja/faqResult";
 		else 			     return "forward:faqSubmit";
 	}
 }

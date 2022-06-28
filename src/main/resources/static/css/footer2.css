@@ -1,0 +1,128 @@
+@charset "UTF-8";
+/푸터/
+body{
+    margin: 0 auto;
+}
+footer{
+    background-color: #5d6d68;
+    justify-content: space-between;
+    display: flex;
+    margin: 0 auto;
+    margin-top: 150px;
+    background-size: 40px, 120px, 40px 40px, 120px 120px;
+    height: 170px;
+    width: 100%;
+}
+
+footer #footer_left{
+    width: 20%;
+    height: 100%;
+
+}
+
+#footer_img {
+    width:100%;
+    height:100%;
+    margin:0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    object-fit: contain;
+}
+
+footer a {
+    color: #f4f1e9;
+    text-decoration:none;
+}
+footer a:hover{
+	color: #a6d377;
+	text-decoration: none;
+}
+footer a:after{
+	color: #f4f1e9;
+	text-decoration: none;
+}
+
+#logofooter_img {
+    text-align: center;
+    height:14vh;
+    margin-top: 1vh;
+}
+
+
+footer #footer_right {
+    width:70%;
+    margin-left: -30px;
+    margin-right: 10px;
+    margin-top: 5.2vh;
+}
+
+footer #footer_info{
+    color:#f4f1e9;
+    font-size: 0.9em;
+}
+
+#footer_center{
+	display: flex;
+}
+
+footer #footer_inc{
+    color: #f4f1e991;
+    font-size: 0.7em;
+}
+
+#footer_right_top{
+    display: flex;
+    justify-content: space-between;
+    width: 60%;
+    margin-left: 5%;
+}
+
+#footer_right_top #footer_teamName{
+    width: 100%;
+    display: flex;
+    font-size: 0.7em;
+}
+
+
+#footer_PL{
+    font-size: 1.1em;
+    color: #f4f1e9;
+    line-height: 250%;
+    display: flex;
+    justify-content: space-around;
+    width: 40%;
+}
+
+#footer_PTM{
+    font-size: 1.1em;
+    color: #f4f1e9;
+    line-height: 250%;
+    display: flex;
+    justify-content: space-around;
+    width: 60%;
+    margin-left: 2vw;
+}
+
+
+footer hr{
+	color: #070a08;
+	border: 2px;
+	margin: 0 auto;
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+#footer_admin{
+	width: 10%;
+	text-align: right;
+	display: flex;
+	align-items: flex-start;
+	justify-content: center;
+	flex-direction: column;
+	font-size: 1.2em;
+	line-height: 100%;
+	margin-top: 5vh;
+}
+
+font-family: 'Noto Sans KR', sans-serif;

@@ -1,14 +1,43 @@
 @charset "UTF-8";
-.container {
+
+#sidebar {
+	padding-top: 60px;
 	font-family: 'Noto Sans KR';
-	padding: 20px;
 }
-div#one{
-	margin-top: 30px;
-	margin-bottom: 30px;
+
+#main{
+	padding: 60px;
+	font-family: 'Noto Sans KR';
 }
  
- div#two{
- 	margin-top:10px;
- 	text-align: center;
- }
+#tableData {
+	text-align: center;
+	font-size: 13px;
+}
+
+#tableData th {
+	background-color: #f4f1e9;
+}
+#search{
+	font-size: 15px;
+}
+#excelBtn{
+	float:right;
+	border-radius: 10px;
+	background-color: white;
+	border: 1px solid #b0d282;
+	width: 100px;
+	color: #b0d282;
+}
+#keyBtn {
+	float:right;
+	border-radius: 10px;
+	background-color: white;
+	border: 1px solid #b0d282;
+	width: 100px;
+	color: #b0d282;
+}
+#tableData a{
+   text-decoration: none;
+   color: #b0d282;
+}

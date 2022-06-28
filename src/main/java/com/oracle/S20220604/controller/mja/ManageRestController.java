@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.oracle.S20220604.domain.CouponJpa;
 import com.oracle.S20220604.model.Banner;
 import com.oracle.S20220604.model.Board;
 import com.oracle.S20220604.model.Coupon;
@@ -73,7 +72,7 @@ public class ManageRestController {
 		System.out.println("bannerChk 컨트롤러");
 		List<Banner> banners = managerService.bannerList();
 		int num = banners.size();
-		if(num < 4) {
+		if(num < 3) {
 			return  "1";
 		} else {
 			return  "0";
@@ -110,6 +109,7 @@ public class ManageRestController {
 		} else {
 			member.setM_level("3"); result = "3";
 		}
+		System.out.println(result);
 		int status = managerService.memberStatus(member);
 		
 		return result;

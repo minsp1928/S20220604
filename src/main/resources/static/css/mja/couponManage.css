@@ -1,10 +1,50 @@
 @charset "UTF-8";
 
-.container {
+#sidebar {
+	padding-top: 60px;
 	font-family: 'Noto Sans KR';
-	padding: 20px;
 }
- 
-#two input {
-	text-decoration: none;
+
+#main{
+	padding: 100px;
+	font-family: 'Noto Sans KR';
+}
+
+
+#couponTbl input {
+	outline: none;
+    border: none;
+}
+#list h4{
+	font-size: 20px;
+	margin-bottom: 10px;
+}
+
+#couponTbl {
+	font-size: 15px;
+	text-align: center;
+	margin-bottom: 20px;
+}
+
+
+#couponTbl th{
+	background-color: #f4f1e9; 
+}
+
+#create {
+	margin-bottom: 30px;
+}
+
+#subject h4{
+	font-size: 20px;
+	margin-bottom: 10px;
+}
+
+#submit {text-align: center;}
+#submit input {
+	border: 1px solid #b0d282;
+	border-radius: 10px;
+	background-color: white;
+	text-align: center;
+	margin: auto;
 }

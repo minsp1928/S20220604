@@ -10,7 +10,6 @@ import com.oracle.S20220604.dao.mja.BoardDao;
 import com.oracle.S20220604.dao.mja.CouponDao;
 import com.oracle.S20220604.dao.mja.FaqDao;
 import com.oracle.S20220604.dao.mja.MemberManageDao;
-import com.oracle.S20220604.domain.CouponJpa;
 import com.oracle.S20220604.domain.FaqJpa;
 import com.oracle.S20220604.model.Banner;
 import com.oracle.S20220604.model.Board;

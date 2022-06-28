@@ -1,0 +1,126 @@
+@charset "UTF-8";
+
+table {
+    overflow: scroll;
+    text-align: left;
+    font-family: 'Noto Sans KR';
+}
+
+section {
+	height: 590px;
+}
+
+.empty{
+	text-align: center;
+	position: relative;
+	right: 100px;
+	top: 50%;
+}
+
+.basic{
+	position: relative;
+	top: 2%;
+	left: 20%;
+	font-size: 1.5em;
+	width: 50%;
+	border-bottom: 1px solid black;
+	
+}
+
+.basic1{
+	width: 140px;
+}
+
+.basic2{
+	width: 550px;
+}
+
+.basic3{
+	width: 140px;
+}
+
+.body_size {
+	height: 590px;
+	width: 100%;	
+	overflow-y: scroll;
+	position: absolute;
+}
+
+.body_size::-webkit-scrollbar { 
+  width: 0;
+  display: none; 
+}
+
+.img_size {
+	height: 100px;
+	width: 100px;	
+}
+
+.for_array1{
+	width: 40%;
+	float: left;
+	height: 200px;
+	margin-bottom: 20px;
+	position: relative;
+	top: 5%;
+	left: 15%;
+
+}
+
+.for_array2{
+	width: 40%;
+	float: right;
+	height: 200px;
+	margin-bottom: 20px;
+	position: relative;
+	top: 5%;
+	right: 5%;
+	
+}
+
+.buyClick {
+	width: 30%;
+	position: relative;
+	left: 30%;
+}
+
+.button1 {
+	background-color: #ffca5d;
+    border: 0;
+    outline: 0;
+    color: white;
+    width: 50px;
+    height: 30px;
+    padding-top: 5px;
+    text-align: center;
+    display: flex;
+    border-radius: 30px;
+    font-size: 1em;
+    font-weight: bold;
+    font-family: "GangwonEdu_OTFBoldA";
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+	
+}
+
+.button2 {
+	background-color: #ffca5d;
+    border: 0;
+    outline: 0;
+    color: white;
+    width: 100px;
+    height: 30px;
+    padding-top: 5px;
+    text-align: center;
+    display: flex;
+    border-radius: 30px;
+    font-size: 1em;
+    font-weight: bold;
+    font-family: "GangwonEdu_OTFBoldA";
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+	
+}
+

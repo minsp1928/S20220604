@@ -1,0 +1,301 @@
+@charset "UTF-8";
+
+table {
+   table-layout: fixed;
+   width: 80%;
+   font-family: 'Noto Sans KR';
+}
+
+.img_size {
+   height: 100px;
+   width: 100px;
+   position: relative;
+   left: 40px;
+   margin-top: 30px;
+}
+
+.body_size {
+   height: 1080px;
+   overflow-y: scroll; 
+   width: 100%;
+   display: flex;
+   justify-content: space-around;
+}
+
+.body_size::-webkit-scrollbar { 
+  width: 0;
+  display: none; 
+}
+
+.border {
+   width: 900px;
+   box-sizing: border-box;
+   margin-top: 3%;
+   overflow-y: scroll;  
+}
+
+.border::-webkit-scrollbar { 
+  width: 0;
+  display: none; 
+}
+
+.memberTable {
+   position: relative;
+   left: 10%;
+   table-layout: fixed;
+}
+
+.memberhead {
+   position: relative;
+   left: 45%;
+   height: 50px;
+   border-bottom: solid black;
+   border-bottom-width: 2px;
+}
+
+#buyer_addr1 {
+   position: relative;
+   left: 10px;
+   font-size: 1em;
+   color: gray;
+}
+
+#buyer_addr2 {
+   position: relative;
+   left: 10px;
+   font-size: 1em;
+   color: gray;
+}
+
+.memberSpace1 {
+   position: relative;
+   border: 0px;
+}
+
+.memberTable td{
+   position: relative;
+   left: 0%;   
+}
+
+.memberTable input {
+   border: 0px;
+   width: 100%;
+   margin-top: 10px;
+}
+
+
+.productTable {
+   position:  relative;
+   left: 10%;
+   margin-top: 3%;
+   box-sizing: border-box;
+}
+
+.productHead {
+   position: relative;
+   left: 10%;
+   height: 50px;
+   border-bottom: 2px solid black;
+   border-bottom-width: 3%;
+   border-spacing: 100px;
+}
+
+.productTable input{
+   border: 0px;
+   position: relative;
+   left: 30px;
+   
+}
+
+.productHead th+th+th {
+   position: relative;
+   left: 50px;
+}
+
+.productTdSpace {
+   table-layout: fixed;
+   width: 100%;
+}
+
+.productTdSpace1 {
+   position: relative;
+   left: 30px;
+}
+
+.productTdSpace2 {
+   text-align: center
+}
+
+.productTdSpace3 {
+   text-align: center
+}
+
+
+
+.paymentHead {
+   position:  relative;
+   left: 100px;
+   margin-top: 10%;
+   margin-bottom: 10%;
+   border-bottom: 3px solid black;
+   width: 720px;
+   height: 40px;
+   text-align: center;
+}
+
+.payment1 {
+   position:  relative;
+   left: 150px;
+   color: gray;
+   bottom: 20px;
+}
+
+#pay_tot {
+   position:  relative;
+   left: 50px;
+   color: gray;
+   border: 0px;
+   bottom: 20px;
+}
+
+
+*{margin:0; padding:0;}
+a{text-decoration:none;}
+.wrap{padding:10px;}
+
+.btn_open{
+   font-weight:bold; margin:5px; padding:4px 6px; background: #ffca5d; color: white;
+   position: relative; left: 140px; bottom: 10px; border-radius: 20px; text-decoration: none;
+   }
+.pop_wrap{
+   position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(0,0,0,.5); font-size:0; text-align:center;
+   }
+.pop_wrap:after{
+   display:inline-block; height:100%; vertical-align:middle; content:'';
+   }
+.pop_wrap .pop_inner{
+   display:inline-block; padding:20px 30px; background:#fff; width:750px; vertical-align:middle; font-size:15px;
+   }
+
+.payment2 {
+   position:  relative;
+   left: 150px;
+   top: 20px;
+   color: gray;
+}
+
+.payment2-2 {
+   position:  relative;
+   left: 60px;
+   top: 20px;
+   color: gray;
+}
+
+.payment3 {
+   position:  relative;
+   left: 150px;
+   top: 20px;
+   color: gray;
+}
+
+#product_price{
+   position:  relative;
+   left: 50px;
+   top: 20px;
+   color: gray;
+   border: 0px;
+}
+
+.payment4{
+   position:  relative;
+   left: 150px;
+   top: 5px;
+   color: gray;
+}
+
+.payment4-1{
+   position: relative;
+   left: 50px;
+   top: 30px;
+   color: gray;
+}
+
+.payment4-2{
+   position:  relative;
+   top: 20px;
+   color: gray;
+}
+
+#kakao {
+   position: relative;
+   left: 10px;
+   bottom: 20px;
+}
+
+#toss{
+   position: relative;
+   right: 20px;
+   bottom: 20px;
+}
+
+#paybtn{
+   position:  relative;
+   left: 140px;
+   bottom: 10px;
+   background: #ffca5d; 
+   color: white;
+   border-radius: 30px;
+   border: 0;
+   padding: 4px 6px;
+   font-weight: bold; 
+   margin-bottom: 50px;
+}
+
+.cpBorder th{
+   border-bottom: 1px solid black;
+   width: 200px;
+}
+
+.couponSpace {
+   position:  relative;
+   bottom: 210px;
+}
+
+.couponSpace th+th {
+   position:  relative;
+   left: 100px;
+   width: 200px;
+}
+
+.coupon1 {
+   position: relative;
+   height: 70px;
+
+}
+.coupon2 {
+   text-align: center;
+   border: 0;
+   position: relative;
+   left: 20px;
+   border-collapse: collapse;
+}
+
+#CouponBtn{
+   background: #ffca5d; 
+   color: white;
+   border-radius: 30px;
+   border: 0;
+   padding: 4px 6px;
+   font-weight: bold;
+   left: 50px;
+   position: relative;
+}
+
+.btn_close {
+   background: #ffca5d; 
+   color: white;
+   border-radius: 30px;
+   border: 0;
+   padding: 4px 6px;
+   font-weight: bold;
+}

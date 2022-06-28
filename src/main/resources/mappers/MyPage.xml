@@ -1,0 +1,296 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.oracle.S20220604.model">
+
+	<select id="pkwOrderListTotal" resultType="int">
+		SELECT 	COUNT(1) 
+		FROM 	MYPAGE
+	</select>
+	
+	<select id="pkwShopperOrderList" resultType="MyPageVO">
+		SELECT	pa.pay_tot_num,
+				pr.pro_num,
+				pr.pro_photo,
+				pr.pro_title,
+                pr.user_id,
+				m.quantity,
+				pa.pay_tot,
+				TO_CHAR(pa.pay_date, 'yyyy-mm-dd') as pay_date,
+				m.order_status,
+				DECODE(m.order_status, '1', '출고준비'
+									 , '2', '취소요청중'
+									 , '3', '취소완료'
+									 , '4', '배송중'
+									 , '5', '구매확정') as order_status_nm
+		FROM	mypage m, product pr, payment pa
+		WHERE	pr.pro_num = m.pro_num
+		AND		pa.pay_tot_num = m.pay_tot_num
+		AND     m.order_status != 3
+        AND     m.order_status != 5
+		AND     pa.user_id = #{user_id}
+		ORDER BY pay_date desc
+	</select>
+		
+	<update id="updatePkwShopperOrderList" parameterType="MyPageVO">
+		UPDATE	 mypage
+		set		 order_status	= #{order_status}
+		WHERE	pay_tot_num = #{pay_tot_num}
+		AND     order_status = #{prev_order_status}		
+	</update>
+	
+	<select id="pkwShopperRefundList" resultType="MyPageVO">
+		SELECT	pa.pay_tot_num,
+				pr.pro_num,
+				pr.pro_photo,
+				pr.pro_title,
+                pr.user_id,
+				m.quantity,
+				pa.pay_tot,
+				TO_CHAR(pa.pay_date, 'yyyy-mm-dd') as pay_date,
+				m.order_status,
+				DECODE(m.order_status, '1', '출고준비'
+									 , '2', '취소요청중'
+									 , '3', '취소완료'
+									 , '4', '배송중'
+									 , '5', '구매확정') as order_status_nm
+		FROM	mypage m, product pr, payment pa
+		WHERE	pr.pro_num = m.pro_num
+		AND		pa.pay_tot_num = m.pay_tot_num
+		AND     m.order_status = 3
+		AND     pa.user_id = #{user_id}
+		ORDER BY pay_date desc
+	</select>
+		
+	<select id="pkwShopperPurchaseCompletedList" resultType="MyPageVO">
+		SELECT	pa.pay_tot_num,
+				pr.pro_num,
+				pr.pro_photo,
+				pr.pro_title,
+                pr.user_id,
+				m.quantity,
+				pa.pay_tot,
+				TO_CHAR(pa.pay_date, 'yyyy-mm-dd') as pay_date,
+				m.order_status,
+				DECODE(m.order_status, '1', '출고준비'
+									 , '2', '취소요청중'
+									 , '3', '취소완료'
+									 , '4', '배송중'
+									 , '5', '구매확정') as order_status_nm
+		FROM	mypage m, product pr, payment pa
+		WHERE	pr.pro_num = m.pro_num
+		AND		pa.pay_tot_num = m.pay_tot_num
+		AND     m.order_status = 5
+		AND     pa.user_id = #{user_id}
+		ORDER BY pay_date desc
+	</select>
+		
+	<select id="pkwShopperMyCheckProductList" resultType="MyPageVO">
+		SELECT	cpr.pro_num,
+                pr.pro_photo,
+				pr.pro_title,
+				pr.user_id,
+				pr.pro_price
+		FROM	check_product cpr, product pr
+		WHERE	pr.pro_num = cpr.pro_num
+		AND     cpr.user_id = #{user_id}
+		ORDER BY pro_num
+	</select>
+	
+	<select id="pkwShopperMyCouponList" resultType="Coupon" parameterType="Coupon">
+		SELECT	cp_num,
+				cp_category,
+                cp_name,
+				cp_price,
+				TO_CHAR(st_date, 'yyyy-mm-dd') as st_date,
+				TO_CHAR(end_date, 'yyyy-mm-dd') as end_date
+		FROM	coupon
+		WHERE   user_id = #{user_id}
+		ORDER BY end_date
+	</select>
+		
+	<select id="pkwShopperMyReviewList" resultType="MyPageVO">
+		SELECT	re.pro_num,
+				pr.pro_photo,
+				pr.pro_title,
+				pr.user_id,
+				re.re_title,
+				re.re_star
+		FROM	review re, product pr
+		WHERE	pr.pro_num = re.pro_num
+		AND		re.user_id = #{user_id}
+		ORDER BY re_star
+	</select>
+	
+	<select id="pkwShopperMyProfile" resultType="Member">
+		SELECT  m.user_id
+			   ,m.user_pw
+			   ,m.user_name
+			   ,m.email
+			   ,m.con_tel
+			   ,'/upload/' || NVL(m.user_photo, '') as user_photo
+			   ,m.con_addr1
+			   ,m.con_addr2
+ 			   ,m.sell_name
+			   ,m.sell_tel
+			   ,m.sell_photo
+			   ,m.sell_num
+			   ,m.sell_addr1
+			   ,m.sell_addr2
+			   ,m.m_level
+			   ,NVL(cl.chk, 9) as chk
+			   ,DECODE(cl.chk, 0, '승인요청중'
+							 , 1, '관리자승인완료'
+							 , 2, '반려'
+							 , ' ') as chk_nm				
+		FROM	member m
+			LEFT OUTER JOIN chk_level cl
+			ON cl.user_id = m.user_id
+		WHERE	m.user_id = #{user_id}
+	</select>
+	
+	<update id="updatePkwShopperMyProfile" parameterType="Member">
+		UPDATE	 member
+		set		 user_pw     = #{user_pw}
+				,user_name   = #{user_name}
+				,email       = #{email}
+				,con_tel     = #{con_tel}
+				<if test="user_photo != null and user_photo != ''">
+				,user_photo  = #{user_photo}
+				</if>
+				,con_addr1   = #{con_addr1}
+				,con_addr2   = #{con_addr2}
+				<!-- ,sell_name	 = #{sell_name} 
+				,sell_tel	 = #{sell_tel} 
+				,sell_photo  = #{sell_photo} 
+				,sell_num    = #{sell_num} 
+				,sell_addr1  = #{sell_addr1} 
+				,sell_addr2  = #{sell_addr2} -->
+		WHERE	user_id = #{user_id}
+	</update>
+
+	<select id="pkwMakerOrderList" resultType="MyPageVO">
+		SELECT	m.pay_tot_num,
+				pr.pro_num,
+				pr.pro_photo,
+				pr.pro_title,
+                pa.user_id,
+				m.quantity,
+				pa.pay_tot,
+				TO_CHAR(pa.pay_date, 'yyyy-mm-dd') as pay_date,
+				m.order_status,
+				DECODE(m.order_status, '1', '출고준비'
+									 , '2', '취소요청중'
+									 , '3', '취소완료'
+									 , '4', '배송중'
+									 , '5', '구매확정') as order_status_nm
+		FROM	mypage m, product pr, payment pa
+		WHERE	pr.pro_num = m.pro_num
+		AND		pa.pay_tot_num = m.pay_tot_num
+		AND     m.order_status != 3
+        AND     m.order_status != 5
+		AND     pr.user_id = #{user_id}
+		ORDER BY pay_date desc
+	</select>
+	
+	<update id="updatePkwMakerOrderList" parameterType="MyPageVO">
+		UPDATE	 mypage
+		set		 order_status	= #{order_status}
+		WHERE	pay_tot_num = #{pay_tot_num}
+		AND     order_status = #{prev_order_status}		
+	</update>
+	
+	<select id="pkwMakerRefundList" resultType="MyPageVO">
+		SELECT	m.pay_tot_num,
+				pr.pro_num,
+				pr.pro_photo,
+				pr.pro_title,
+                pa.user_id,
+				m.quantity,
+				pa.pay_tot,
+				TO_CHAR(pa.pay_date, 'yyyy-mm-dd') as pay_date,
+				m.order_status,
+				DECODE(m.order_status, '1', '출고준비'
+									 , '2', '취소요청중'
+									 , '3', '취소완료'
+									 , '4', '배송중'
+									 , '5', '구매확정') as order_status_nm
+		FROM	mypage m, product pr, payment pa
+		WHERE	pr.pro_num = m.pro_num
+		AND		pa.pay_tot_num = m.pay_tot_num
+		AND     m.order_status = 3
+		AND     pr.user_id = #{user_id}
+		ORDER BY pay_date desc
+	</select>
+		
+	<select id="pkwMakerSellCompleteList" resultType="MyPageVO">
+		SELECT	m.pay_tot_num,
+				pr.pro_num,
+				pr.pro_photo,
+				pr.pro_title,
+                pa.user_id,
+				m.quantity,
+				pa.pay_tot,
+				TO_CHAR(pa.pay_date, 'yyyy-mm-dd') as pay_date,
+				m.order_status,
+				DECODE(m.order_status, '1', '출고준비'
+									 , '2', '취소요청중'
+									 , '3', '취소완료'
+									 , '4', '배송중'
+									 , '5', '구매확정') as order_status_nm
+		FROM	mypage m, product pr, payment pa
+		WHERE	pr.pro_num = m.pro_num
+		AND		pa.pay_tot_num = m.pay_tot_num
+		AND     m.order_status = 5
+		AND     pr.user_id = #{user_id}
+		ORDER BY pay_date desc
+	</select>
+	
+	<update id="updatePkwMakerMyProfile" parameterType="Member">
+		UPDATE	 member
+		set		 sell_name   = #{sell_name}
+				,sell_tel    = #{sell_tel}
+				,sell_photo  = #{sell_photo}
+				,sell_num    = #{sell_num}
+				,sell_addr1  = #{sell_addr1}
+				,sell_addr2  = #{sell_addr2}
+		WHERE	user_id = #{user_id}
+	</update>
+
+	<insert id="insertChkLevelMyPage" parameterType="MyPageVO">
+		INSERT 
+		INTO chk_level (
+		    user_id
+		   ,chk
+		) VALUES (
+		    #{user_id}
+		   ,#{chk}
+		)
+	</insert>
+	
+
+	<update id="updateChkLevelMyPage" parameterType="MyPageVO">
+		UPDATE	chk_level
+		set		chk	= #{chk}
+		WHERE	user_id = #{user_id}
+		AND		chk = 2
+	</update>
+	
+	<select id="selectChkLevelMyPage" resultType="int">
+		SELECT	count (1)
+		FROM	chk_level
+		WHERE	user_id = #{user_id}
+	</select>
+	
+	<select id="pkwMakerMyProfileView" resultType="Member">
+		SELECT 	 m.sell_name  
+	            ,m.sell_tel   
+	            ,m.sell_photo 
+	            ,m.sell_num   
+	            ,m.sell_addr1
+	            ,m.sell_addr2
+	    FROM	member m
+	    WHERE 	m.user_id = #{user_id}
+	</select>
+</mapper>

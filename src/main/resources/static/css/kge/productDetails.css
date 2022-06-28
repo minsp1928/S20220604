@@ -1,0 +1,740 @@
+@charset "UTF-8";
+
+#css_tabs {
+    font-family: 'Noto Sans KR';
+    margin: auto;
+    
+}
+
+#tab1,#tab2,#tab3{
+   display: none;
+   font-family: 'Noto Sans KR';
+}
+/* 라벨 기본 스타일 지정 */
+#css_tabs > label {
+    display:inline-block;
+    font-variant:small-caps;
+    font-size:1.5em;
+    padding:5px;
+    text-align:center;
+    width:20%;
+    line-height:1.8em;
+    font-weight:700;
+    font-family: 'Noto Sans KR';
+    border-radius:3px 3px 0 0;
+    background:#eee;
+    color:#777;
+    border:1px solid #ccc;
+    border-width:1px 1px 0
+}
+#css_tabs > label:hover {
+    cursor:pointer
+}
+#css_tabs label[for=tab1] {
+    margin-left:1.5em
+}
+/* 선택된 라벨, 커서를 올린 라벨 스타일 지정 */
+#css_tabs input:nth-of-type(1):checked ~ label:nth-of-type(1), #css_tabs > label[for=tab1]:hover {
+    background:#1c3316;
+    color:#fff
+}
+#css_tabs input:nth-of-type(2):checked ~ label:nth-of-type(2), #css_tabs > label[for=tab2]:hover {
+    background:#1c3316;
+    color:#fff
+}
+#css_tabs input:nth-of-type(3):checked ~ label:nth-of-type(3), #css_tabs > label[for=tab3]:hover {
+    background:#1c3316;
+    color:#fff
+}
+/* 실제 내용이 담긴 div 요소 스타일 지정 */
+#tab1_content{
+   padding:2em;
+    border: 2px solid  #dadee3; 
+    border-radius: 3px;
+    width:1100px;
+    height:100%;
+    margin: auto;
+    margin-top: 30px;
+    overflow: auto;
+    object-fit: contain;
+} 
+.table {
+   margin-bottom: 4px;
+}
+#tab2_content{
+    width: 1100px;
+    height:100%;
+    margin: auto;
+    overflow: auto;
+    object-fit: contain;
+    border: 2px solid  #dadee3; 
+    border-radius: 3px;
+    margin-top: 30px;
+}
+
+#tab3_content {
+    padding:2em;
+    width:1100px;
+    height:100%;
+    margin: auto;
+    overflow: auto;
+    object-fit: contain;
+    border: 2px solid  #dadee3; 
+    border-radius: 3px;
+    margin-top: 30px;
+}
+
+
+#out {
+   width: 80%;
+   text-align: center;
+   margin: auto;
+   margin-bottom: 100px;
+}
+
+.wrapper {
+   margin: 60px auto;
+   display: inline-flex;
+}
+
+.wrapper > * {
+   display: inline-block; 
+   vertical-align: middle;
+}
+#detailPhoto {
+   display: inline-block; 
+}
+#detailText {
+   display: inline-block; 
+   width: 584px;
+   line-height:2.2;
+   font-size: 18px; 
+   margin-left: 20px;
+}
+.bb_buttons{
+   display: flex;
+   justify-content: center;
+}
+.in_bb_buttons{
+   display: flex;
+}
+
+#productimg{
+   height: 400px;
+   width: 500px;
+}
+#detail_basket_buttons{
+   width: 285px;
+   height: 53px;
+   margin-right: 5px;
+   margin-left: 0;
+    border: 3px solid #a8d17d;
+    color: #a8d17d;
+    font-weight: bold;
+}
+#wish_button{
+   width: 285px;
+   height: 53px;
+   text-decoration: none;
+   border: 3px solid #a8d17d;
+    color: #a8d17d;
+    font-weight: bold;
+}
+#detail_purchase_buttons{
+   width: 573px;
+   height: 55px;
+   margin-left: -2px;
+    margin-top: 5px;
+   text-decoration: none;
+   font-family: 'Noto Sans KR';
+   background-color: #a8d17d;
+}
+#detailimg{
+   width: 930px;
+}
+
+#a {
+   text-align: left;
+   font-family: 'Noto Sans KR';
+}
+#a_1 {
+   text-align: left;
+   font-family: 'Noto Sans KR';
+}
+
+.b {
+   text-align: left;
+   font-family: 'Noto Sans KR';
+}
+#sell_photoImg {
+   width: 30px;
+   height: 25px;
+   border: 1px white;
+   margin-left: auto;
+   margin-right: auto;
+}
+#sell_photoImg {
+   margin: 0;
+   float: right;
+}
+
+.modal {
+   position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1055;
+    display: none;
+    width: 100%;
+    height: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+    outline: 0;
+    background-color: #6c757dc2;
+}
+#modal_p{
+   height: 20%;
+   margin: 0;
+   text-align: center;
+}
+.modal_content{
+     width:400px; 
+     height:233px;
+     background:#fff; 
+     border-radius:10px;
+     position:relative; 
+     top:50%; 
+     left:50%;
+     margin-top:-100px; 
+     margin-left:-200px;
+     box-sizing:border-box; 
+     line-height:23px; 
+     cursor:pointer;
+     font-family: 'Noto Sans KR';
+}
+#modal_img{
+   margin-bottom: 10px;
+   padding-top: 10px;   
+   height: 35%;
+}
+#modal_sell_photoImg{
+   height: 42px;
+   width: 40px;
+   margin-top: 5%;
+}
+#modal-alert{
+   font-family: 'Noto Sans KR';
+   color: #898383;
+   font-size: 20px;
+   border: none;
+   margin: 0;
+}
+.modal_buttons {
+    display: inline-flex;
+    font-family: 'Noto Sans KR';
+    height: 40%;
+    width: 52%;
+    justify-content: space-around;
+}
+.modal_buttons > *{
+   display: flex; 
+   vertical-align: middle;
+   font-family: 'Noto Sans KR';
+}
+ #chat_connect_btn {
+  margin-right: 2%;
+  height: 47px;
+  font-weight: bold;
+} 
+/*  버튼 css  */
+.custom-btn {
+  color: #fff;
+  border-radius: 5px;
+  padding: 10px 25px;
+  font-family: 'Lato', sans-serif;
+  font-weight: 500;
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  display: inline-block;
+   box-shadow:inset 2px 2px 2px 0px rgba(255,255,255,.5),
+   7px 7px 20px 0px rgba(0,0,0,.1),
+   4px 4px 5px 0px rgba(0,0,0,.1);
+  outline: none;
+}
+.btn-2 {
+
+  background: linear-gradient(0deg, rgb(133 167 71) 0%, rgb(143 167 73) 100%);
+  border: none;
+  
+}
+.btn-2:before {
+  height: 0%;
+  width: 2px;
+}
+.btn-2:hover {
+  box-shadow:  4px 4px 6px 0 rgba(255,255,255,.5),
+              -4px -4px 6px 0 rgba(116, 125, 136, .5), 
+    inset -4px -4px 6px 0 rgba(255,255,255,.2),
+    inset 4px 4px 6px 0 rgba(0, 0, 0, .4);
+}
+
+/*----------------*/
+.custom-btn2 {
+  color: #fff;
+  border-radius: 5px;
+  padding: 10px 25px;
+  font-family: 'Lato', sans-serif;
+  font-weight: 500;
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  display: inline-block;
+   box-shadow:inset 2px 2px 2px 0px rgba(255,255,255,.5),
+   7px 7px 20px 0px rgba(0,0,0,.1),
+   4px 4px 5px 0px rgba(0,0,0,.1);
+  outline: none;
+}
+.btn-22 {
+  background: linear-gradient(0deg, #424e38 0%, rgb(104 114 89) 100%);
+  border: none;
+  
+}
+.btn-22:before {
+  height: 0%;
+  width: 2px;
+}
+.btn-22:hover {
+  box-shadow:  4px 4px 6px 0 rgba(255,255,255,.5),
+              -4px -4px 6px 0 rgba(116, 125, 136, .5), 
+    inset -4px -4px 6px 0 rgba(255,255,255,.2),
+    inset 4px 4px 6px 0 rgba(0, 0, 0, .4);
+}
+
+/*  css end*/
+
+
+/*  버튼2 css  */
+.basketWish-btn {
+  color: #fff;
+  border-radius: 5px;
+  padding: 10px 25px;
+  font-family: 'Lato', sans-serif;
+  font-weight: 500;
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  display: inline-block;
+   box-shadow:inset 2px 2px 2px 0px rgba(255,255,255,.5),
+   7px 7px 20px 0px rgba(0,0,0,.1),
+   4px 4px 5px 0px rgba(0,0,0,.1);
+  outline: none;
+}
+.bwBtn-2 {
+
+/*   background: linear-gradient(0deg, rgb(133 167 71) 0%, rgb(143 167 73) 100%);
+  border: none; */
+  
+}
+.bwBtn-2:before {
+  height: 0%;
+  width: 2px;
+}
+ .bwBtn-2:hover {
+  box-shadow:  4px 4px 6px 0 rgba(255,255,255,.5),
+              -4px -4px 6px 0 rgba(116, 125, 136, .5), 
+    inset -4px -4px 6px 0 rgba(255,255,255,.2),
+    inset 4px 4px 6px 0 rgba(0, 0, 0, .4);
+} 
+
+/*----------------*/
+.basketWish-btn2 {
+  color: #fff;
+  border-radius: 5px;
+  padding: 10px 25px;
+  font-family: 'Lato', sans-serif;
+  font-weight: 500;
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  display: inline-block;
+   box-shadow:inset 2px 2px 2px 0px rgba(255,255,255,.5),
+   7px 7px 20px 0px rgba(0,0,0,.1),
+   4px 4px 5px 0px rgba(0,0,0,.1);
+  outline: none;
+}
+/* .bwBtn-22 {
+  background: linear-gradient(0deg, #424e38 0%, rgb(104 114 89) 100%);
+  border: none;
+  
+} */
+.bwBtn-22:before {
+  height: 0%;
+  width: 2px;
+}
+.bwBtn-22:hover {
+  box-shadow:  4px 4px 6px 0 rgba(255,255,255,.5),
+              -4px -4px 6px 0 rgba(116, 125, 136, .5), 
+    inset -4px -4px 6px 0 rgba(255,255,255,.2),
+    inset 4px 4px 6px 0 rgba(0, 0, 0, .4);
+}
+
+/*  css end*/
+
+
+
+
+
+#make_info_btn {
+    height: 47px;
+    font-weight: bold;
+}
+
+
+.tab_type1 ul{
+   display: flex;
+   font-family: 'Noto Sans KR';
+}
+
+.tab_type1 ul li{
+   flex: 1;
+   border: 1px solid #ddd;
+   border-left: none;
+}
+.tab_type1 ul li : first-ch:first-child {
+   border-left: 1px solid #ddd;
+}
+.tab_type1 ul li a {
+   display: block;
+   height: 59px;
+   font-size: 14px;
+   color: #505050;
+   text-align: center;
+   line-height: 59px;
+   text-align: none;
+   font-family: 'Noto Sans KR';
+}
+
+   
+   a{text-decoration:none;}
+   .wrap{padding:10px;}
+   
+   .btn_open{font-weight:bold; margin:5px; padding:4px 6px; background:#000; color:#fff;}
+   .pop_wrap{position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(0,0,0,.5); font-size:0; text-align:center;}
+   .pop_wrap:after{display:inline-block; height:100%; vertical-align:middle; content:'';}
+   .pop_wrap .pop_inner{display:inline-block; padding:20px 30px; background:#fff; width:1000px; vertical-align:middle; font-size:15px;}
+
+.review_table {
+   width: 2000px;
+   height: 500px;
+   border-collapse: separate;
+    border-spacing: 0 10px; 
+}
+.product_img_size {
+   height: 100px;
+   width: 100px;
+}
+
+.member_img_size {
+   height: 20px;
+   width: 20px;
+}
+
+.review_size {
+   width: 100%;
+   left: 10%;
+}
+
+.retitle {
+   position: relative;
+   left: 450px;
+   width: 2em;
+}
+
+.review_basic {
+   position: relative;
+   top: 10%;
+   border-bottom: 2px solid black;
+   width: 80%;
+}
+
+.review_basic th+th+th {
+   position: relative;
+   left: 80px;
+}
+
+.review_basic th+th+th+th {
+   position: relative;
+   left: 130px;
+}
+
+.review_basic th+th+th+th+th {
+   position: relative;
+   left: 330px;
+}
+
+.review_content {
+   height: 100px;
+}
+
+.individual_re_title {
+   width: 100px;
+   overflow-y: scroll;
+}
+
+.individual_re_title::-webkit-scrollbar {
+   width: 0;
+   display: none;
+}
+
+.individual_re_content {
+   width: 500px;
+   overflow-y: scroll;
+}
+
+.individual_re_content::-webkit-scrollbar {
+   width: 0;
+   display: none;
+}
+
+.chatBtn {
+   background: #ffca5d;
+   color: white;
+   border-radius: 30px;
+   border: 0;
+   padding: 4px 6px;
+   font-weight: bold;
+   width: auto;
+}
+
+.wrap {
+   padding: 10px;
+}
+
+#btn_open1 {
+   background: #ffca5d;
+   color: white;
+   border-radius: 30px;
+   border: 0;
+   padding: 4px 6px;
+   font-weight: bold;
+   text-decoration: none;
+   position: relative;
+   bottom: 20px;
+   display: block;
+   right: 40px;
+   width: 3em;
+}
+
+.deleteBtn {
+   background: #ffca5d;
+   color: white;
+   border-radius: 30px;
+   border: 0;
+   padding: 4px 6px;
+   font-weight: bold;
+   width: 3em;
+   position: relative;
+   left: 20px;
+   top: 20px;
+}
+
+.updateBorder {
+   border: 1px solid black;
+   background-color: #f4f1e9;
+}
+
+.upReStar {
+   border: 0;
+   border-top: 0;
+   border-left: 1px solid black;
+   width: 500px;
+}
+
+.upReTitle {
+   border: 0;
+   border-left: 1px solid black;
+   width: 500px;
+}
+
+.upReConTent {
+   border: 0;
+   height: 200px;
+   width: 500px;
+   overflow-y: scroll;
+}
+
+.upReConTent::-webkit-scrollbar {
+   width: 0;
+   display: none;
+}
+
+.upFile {
+   border: 0;
+   width: 500px;
+   background-color: white;
+   height: 30px;
+}
+
+.updateBtn {
+   border-right: 1px solid black;
+   border-left: 1px solid black;
+   border-top: 1px solid black;
+   background-color: #f4f1e9;
+   width: 50px;
+   position: relative;
+   left: 50px;
+   top: 8px;
+}
+
+#insertBtn {
+   background: #ffca5d;
+   color: white;
+   border-radius: 30px;
+   border: 0;
+   padding: 4px 6px;
+   font-weight: bold;
+   width: 3em;
+   position: relative;
+   left: 1030px;
+   bottom: 10px;
+   text-decoration: none;
+}
+
+.insertBorder {
+   border: 1px solid black;
+   background-color: #f4f1e9;
+}
+
+.insertReStar {
+   border: 0;
+   border-top: 0;
+   border-left: 1px solid black;
+   width: 500px;
+}
+
+.insertReTitle {
+   border: 0;
+   border-left: 1px solid black;
+   width: 500px;
+}
+
+.insertReConTent {
+   border: 0;
+   height: 200px;
+   width: 500px;
+   overflow-y: scroll;
+}
+
+.insertReConTent::-webkit-scrollbar {
+   width: 0;
+   display: none;
+}
+
+.insertFile {
+   border: 0;
+   width: 500px;
+   background-color: white;
+   height: 30px;
+}
+
+.error {
+   background-color: white;
+   border-left: 1px solid black;
+}
+
+.error2 {
+   background-color: white;
+   border-left: 1px solid black;
+   height: 50px
+}
+
+.insertBtn {
+   border-right: 1px solid black;
+   border-left: 1px solid black;
+   border-top: 1px solid black;
+   background-color: #f4f1e9;
+   width: 50px;
+   position: relative;
+   left: 50px;
+   top: 8px;
+}
+
+.noReview {
+   position: relative;
+   left: 200px;
+   top: 20px;
+}
+
+.review_basic2 {
+   position: relative;
+   top: 10%;
+   right: 20%;
+   border-bottom: 2px solid black;
+   width: 80%;
+   border-bottom: 2px solid black;
+}
+
+#insertBtn2 {
+   background: #ffca5d;
+   color: white;
+   border-radius: 30px;
+   border: 0;
+   padding: 4px 6px;
+   font-weight: bold;
+   width: 3em;
+   position: relative;
+   left: 730px; top : 30px;
+   text-decoration: none;
+   top: 30px;
+}
+
+.review_size2 {
+   width: 70%;
+   position: relative;
+   left: 10%;
+   margin-bottom: 100px;
+}
+
+.btn_close {
+   background-color: #f4f1e9;
+   border: 1px solid black;
+   padding-top: 1px;
+   padding-left: 8px;
+   padding-right: 8px;
+   padding-bottom: 1px;
+   position: relative;
+   right: 150px;
+   bottom: 20px;
+   position: relative;
+}
+
+.pop_wrap {
+   position: fixed;
+   top: 0;
+   left: 0;
+   right: 0;
+   bottom: 0;
+   background: rgba(0, 0, 0, .5);
+   font-size: 0;
+   text-align: center;
+}
+
+.pop_wrap:after {
+   display: inline-block;
+   height: 100%;
+   vertical-align: middle;
+   content: '';
+}
+
+.pop_wrap .pop_inner {
+   display: inline-block;
+   padding: 20px 30px;
+   background: #fff;
+   width: 700px;
+   vertical-align: middle;
+   font-size: 15px;
+}

@@ -1,15 +1,53 @@
 @charset "UTF-8";
+.container{
+   font-family: 'Noto Sans KR';
+}
+#sidebar {
+   padding-top: 60px;
+   
+}
+ 
+#sidebar h4 {
+   font-size:25px;
+   font-weight: 2px;
 
-.container {
-	font-family: 'Noto Sans KR';
-	padding: 20px;
+}
+ 
+a.link-dark.rounded {
+    text-decoration: none;
+    padding: 10px;
 }
 
+#list {
+   text-align:center;
+   padding-top: 80px;
+}
+#list h2 {
+   font-size: 20px;
+}
 #answer {
-	background-color: #f4f1e9;
+   background-color: #f4f1e9;
 }
 
 #answer img {
-	width: 20px;
-	height: 20px;
+   width: 20px;
+   height: 20px;
 }
+
+
+#answerTbl {
+   margin-bottom: 50px;
+   vertical-align: middle;
+   font-size: 15px;
+}
+#answerTbl {
+   text-align: center;
+}
+
+#answerTbl td:nth-child(3){
+   text-align: left;
+}
+
+
+
+ 

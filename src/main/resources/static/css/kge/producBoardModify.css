@@ -1,0 +1,56 @@
+@charset "UTF-8";
+
+h2#modifyTitle{
+	margin-top: 25px;
+	margin-bottom: 25px;
+	text-align: center;
+	text-decoration: blink;
+	font-family: 'Noto Sans KR';
+	margin-left: auto;
+    margin-right: auto;
+    font-size: 35px;
+    color: #6c757d;
+}
+
+.ModifyProductDiv{
+	font-size: 20px;
+	line-height: 2.0;
+	font-family: 'Noto Sans KR';
+	margin: 0 auto;
+	display: flex;
+	justify-content: center;
+}
+#modifyTable tr td{
+	border: 1px solid black;
+	border-color: #b0d282;
+	
+}
+#modifyTable {
+	widows: 100%;
+}
+.boardModifyLeft{
+	background-color: #b0d282;
+	color: white;
+	border-color: white;
+	padding: 1%;
+	width: 250px;
+	border-radius: 0;
+}
+.boardModifyRight{
+	padding: 1% 17px;
+	width: 350px;
+	height: 55px;
+}
+input{
+	width: 100%;
+	border: none;
+}
+#modify_Submit_Button{
+	float: right;
+	border-radius: 10px;
+	background-color: #f4f1e9;
+	color: #1c3316;
+	width: 100%;
+	border-color: #1c3316;
+}
+

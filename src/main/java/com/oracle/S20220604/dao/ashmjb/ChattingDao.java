@@ -8,21 +8,31 @@ import com.oracle.S20220604.model.Participant;
 import com.oracle.S20220604.model.Product;
 
 public interface ChattingDao {
-	Chatting 		save(Chatting chatting);
+   Chatting       save(Chatting chatting);
 
-	int 			total();
+   int          OpenChatTotal();
+   
+   int				ListTotal(Chatting chatting);
 
-	List<Chatting>  openChatList(Chatting chatting);
+   List<Chatting>  openChatList(Chatting chatting);
 
-	List<Chatting>  showList(Chatting chatting);
+   List<Chatting>  showList(Chatting chatting);
 
-	List<Message>	 msgnaeyong(int room_num);
+   List<Message>    msgnaeyong(int room_num);
 
-	int 			saveParticipant(Participant pt);
+   int          saveParticipant(Participant pt);
 
-	int 			insertParti(Participant parti);
+   int          insertParti(Participant parti);
 
-	List<Chatting>  keywordList(Chatting chatting);
+   List<Chatting>  keywordList(Chatting chatting);
 
-	void 			insertChatWithCeller(Product product);
+   void          insertChatWithCeller(Product product);
+
+   List<Participant> selectParti(int room_num);
+
+   void 			inChatWithConsumer(Participant pt);
+
+   int 				findroomNum();
+
+List<Participant> selectParti3(int room_num);
 }

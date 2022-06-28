@@ -28,38 +28,24 @@ public class Member {
 	private String 	nickname;    //채팅익명이름
 	private String 	nick_photo;  //채팅익명프로필사진
 	private String  auth_status; //회원가입인증상태(인증:1)
-<<<<<<< HEAD
 	
-=======
-<<<<<<< HEAD
->>>>>>> 23b083b4aca25bc4caf87bca7ddbedee8c9379c5
 	
-=======
->>>>>>> origin/manager-mja
-	
-	//검색조회용
+	//조회용
 	private String 	search;
 	private String 	keyword;
 	private String 	startDate;
 	private String	endDate;
 	
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> 23b083b4aca25bc4caf87bca7ddbedee8c9379c5
 	//프로필사진 변경용 변수
 	private String photoChange;
+	
+	//마이페이지용
+	private int pro_num;
+	private String pro_title;
+	private int chk;
+	private String chk_nm;
 	
 
 	
 	
 }
-=======
-	//회원관리 상세페이지
-	//주문건수
-	private int orders;
-	//총주문금액
-	private int orderamount;
-	
-}
->>>>>>> origin/manager-mja

@@ -103,7 +103,7 @@
 	</update>
 	
 	<update id="mjPassReset" parameterType="String">
-		update member set user_pw = '1' where user_id = #{user_id}
+		update member set user_pw = '1111' where user_id = #{user_id}
 	</update>
 	
 	<select id="mjMemberChk" parameterType="java.lang.String" resultType="int">

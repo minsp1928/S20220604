@@ -1,0 +1,35 @@
+@charset "UTF-8";
+
+#sidebar {
+	padding-top: 60px;
+	font-family: 'Noto Sans KR';
+}
+
+#main{
+	padding: 100px;
+	font-family: 'Noto Sans KR';
+}
+
+#subject {
+	font-size: 25px;
+	margin-bottom: 10px;
+}
+#writeTbl input{
+	border:none;
+	text-decoration: none;
+
+}
+
+#writeTbl textarea {
+	resize: none;
+	border: none;
+}
+#submit {
+	text-align: center;
+	border: 1px solid #b0d282;
+	color: #b0d282;
+	background-color: white;
+	border-radius: 10px;
+	margin: 0 auto;
+}
+ 

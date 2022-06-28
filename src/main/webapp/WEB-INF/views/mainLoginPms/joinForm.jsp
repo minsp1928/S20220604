@@ -41,12 +41,12 @@
 				}
 			},
 			error : function(){
-				alert("아이디 중복 확인 ajax 실행 실패");
+			//	alert("아이디 중복 확인 ajax 실행 실패");
 				}
 			});
 		}
 	}
-/* 	/*-------------아이디 유효성-------------안됨 user_id를 못읽는중
+	/*-------------아이디 유효성-------------안됨 user_id를 못읽는중
 		$(document).ready(function() {
 		$(".user_id_confirm").blur(function(){
 			//아이디 유효성 검사 (영문소문자, 숫자만 허용)
@@ -74,7 +74,7 @@
 		            return false;
 		        }
 		})
-	}) */
+	}) 
 	
 	
 	
@@ -167,7 +167,7 @@
 		var spe = pw.search(/[`~!@@#$%^&*|₩₩₩'₩";:₩/?]/gi);
 		
 		if(!tel_rule.test(tel)){
-			alert("전화번호는 '-'없이 입력해주세요.");
+			alert("전화번호는 '-'를 포함하여 입력해주세요.");
 			return false;
 		}
 		
@@ -211,114 +211,168 @@
 <jsp:include page="/WEB-INF/views/base/header.jsp" flush="true">
 		<jsp:param value="" name=""/>
 </jsp:include>
-	<form  id="join" name="join" method="post" action="join" autocomplete="off" encType="multipart/form-data">
-		<div id="user_info">
-			<h2>기본정보</h2>
-			<hr>
-				● 아이디 
-					<input type="text" class="user_id_confirm""  id="user_id" name="user_id" required="required" placeholder="영문 소문자, 숫자를 이용해 8~20자 입력"
-					onfocus="this.placeholder=''" onblur="this.placeholder='영문 소문자, 숫자를 이용해 8~20자 입력'" 
-					pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,20}$">
-
-					<button id="id_check_btn" onclick="idCheckBtn()" value="N">아이디 중복체크</button><br>
-					<input type="hidden" id="id_check_hidden" value="N"> <!--중복확인해서 알러트로 띄워줄것-> 없으면  그대로, 있으면 reset-->
-				● 비밀번호<!--암호화하는 코드는 나중에 추가할지 정할것.-->
-					<input type="password" id="user_pw" name="user_pw"required="required" placeholder="8자리 ~ 20자리로 입력해주세요"
-					 onfocus="this.placeholder=''" onblur="this.placeholder='8자리 ~ 20자리로 입력해주세요'">
-					<label style="font-size : 11px;">영문,숫자, 특수문자를 포함해주세요</label><br>
-				● 비밀번호 확인 <!--키보드로 입력하는 순간 첫번째 비밀번호와 같은지 확인-->
-					<input type="password" class="pw_confirm" id="user_pwchk" placeholder="비밀번호확인"
-					onfocus="this.placeholder=''" onblur="this.placeholder='비밀번호를 다시 입력해주세요'"> 
-					<span id ="confirmMsg"></span> <!--확인 메세지-->
-				● 이름
-					<input type="text" id="user_name" name="user_name" required="required">
-				● 이메일<!--메일 인증을 하고싶으면 테이블에 컬럼필요, 아작스 이용.-->
-				
-						<input type="text" id="user_email" required><span id="middle">@</span><input type="text" id="email_address" list="user_email_address">
-							<datalist id="user_email_address">
-								<option value="naver.com"></option>
-								<option value="daum.com"></option>
-								<option value="google.com"></option>
-								<option value="직접입력"></option>
-							</datalist>
-							<input type="hidden" id="email" name="email" value="">
-				<!-- 	/*-------------이메일주소 가져오기--------------*/ -->		
-					<script type="text/javascript">
-								$("#user_email").blur(function(){
-									totalemail();	
-								});
-								
-								$("#email_address").change(function(){
-									totalemail();	
-								});
+	<div class="user_info">
+		<form  id="join" name="join" method="post" action="join" autocomplete="off" encType="multipart/form-data">
+			<main class="form-signin">
+				<div class="infoTxt" id="info_txt">
+				    <img class="logoImg" src="/img/logo_sajomarket.png" alt="마켓사조로고" width="72" height="57">
+				    <h1 class="h3 mb-3 fw-normal">기본정보</h1>
+					
+					<hr>
+						<div class="infoAlignf" id="info_align" >
+							<div class="infogul">＊ 아이디</div>  
+								<input type="text" class="user_id_confirm"  id="user_id" name="user_id" required="required" placeholder="영문 소문자, 숫자를 이용해 8~20자 입력"
+								onfocus="this.placeholder=''" onblur="this.placeholder='영문 소문자, 숫자를 이용해 8~20자 입력'" 
+								pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,20}$">
 			
-								function totalemail() {
-									const user_email = $("#user_email").val();
-									const middle = $("#middle").text();
-									const email_address = $("#email_address").val();
-									if(user_email != "" && email_address != "") {
-										$("#email").val(user_email+middle+email_address);
-									}
-								};
-
-					</script>
-
-
-				● 전화번호
-					<input type="text" id="con_tel" name="con_tel" class="phone" required="required" maxlength="13" placeholder="000-0000-0000"
-					onfocus="this.placeholder=''" onblur="this.placeholder='000-0000-0000'" pattern="\d{2,3}-\d{3,4}-\d{4}">
-
-				● 주소 
-					<input type="text"  id="postcode" placeholder="우편번호">
-	   				<input type="button" onclick="postcodeBtn()" value="우편번호 검색"><br>
-	   				<input type="text" name="con_addr1" id="con_addr1" placeholder="주소" readonly="readonly"><br>
-   					<input type="text" name="con_addr2" id="con_addr2" placeholder="상세주소" onfocus="this.placeholder=''" onblur="this.placeholder='상세주소'" required="required">
-				● 프로필 사진등록
-				<!--null인경우 랜덤값으로 넣어야 할텐디(1~7) how 아작스 구현할것 고니언니한티물어보자-->
-					<img id="user_photo"  name="user_photo" alt="기본 프로필 사진" style="width: 10%;">
-					<input type="hidden" id="photoChange" name="photoChange" value=""> <!--히든의값에 어떻게 값을 넣지?-->
-					<label class="photoFile1" for="photoFile">사진변경</label>
-					<input id="photoFile" class="photoFile" type="file" name="multi" />
-					<script type="text/javascript">
-						const images = [ //디폴트이미지1~7개 랜덤으로 값을 값을 정함
-							"default_profile1.png","default_profile2.png","default_profile3.png",
-							"default_profile4.png","default_profile5.png","default_profile6.png","default_profile7.png"]
-						const chosenImage = images[Math.floor(Math.random() * 6 + 1)];/*1~7의 랜덤숫자 */
-						const user_image = document.getElementById("user_photo");
-						user_image.src = 'img/'+chosenImage;
-						alert("user_image.src "+ user_image.src);
-						$("#photoChange").val(chosenImage);
-						/* bgImage.src = "img/"+chosenImage; //img 태그속성을 넣어줌
-						document.body.appendChild(bgImage); // */
-						/*프로필 사진 미리보기 */
-						function readImage(input) {
-						    // 인풋 태그에 파일이 있는 경우
-						    if(input.files && input.files[0]) {
-						        // 이미지 파일인지 검사 (생략)
-						        // FileReader 인스턴스 생성
-						        const reader = new FileReader();
-						        // 이미지가 로드가 된 경우
-						        reader.onload = function(e) {
-						            const previewImage = document.getElementById("user_photo");
-						            previewImage.src = e.target.result;
-						        }
-						        // reader가 이미지 읽도록 하기
-						        reader.readAsDataURL(input.files[0]);
-						    }
-						}
-						// input file에 change 이벤트 부여(click같은 이벤트임) 변화를 감지
-						const inputImage = document.getElementById("photoFile");
-						inputImage.addEventListener('change', function(e){
-						    readImage(e.target);
-						})
-					</script>
-				
-					<input type="button" id="disagree"  value="취소"  onclick = "location.href = '${pageContext.request.contextPath}/main' ">
-					<input type="button" id="join_btn" value="회원가입" onclick="joinBtn()">
-		<!-- 	<!--성공시 회원가입을 축하합니다알러트 뜨고 로그인화면 이동-->
+								<button class="idCheckBtn" id="id_check_btn" onclick="idCheckBtn()" value="N">중복체크</button><br>
+								<input type="hidden" id="id_check_hidden" value="N"> <!--중복확인해서 알러트로 띄워줄것-> 없으면  그대로, 있으면 reset-->
+						</div>
+						<div class="infoAlignf">
+							＊ 비밀번호
+							<div class="PswdBig">
+								<!--암호화하는 코드는 나중에 추가할지 정할것.-->
+								<div >	
+									<input class="pswdInput" type="password" id="user_pw" name="user_pw"required="required" placeholder="8자리 ~ 20자리로 입력해주세요"
+									 onfocus="this.placeholder=''" onblur="this.placeholder='8자리 ~ 20자리로 입력해주세요'">
+								</div>
+								<div class="pswdLabel">
+									<label class="pswdLabelReal" >영문,숫자, 특수문자를 포함해주세요</label><br>
+								</div>
+							</div>
+						</div>
+						<div class="infoAlignf">
+							＊ 비밀번호 확인 <!--키보드로 입력하는 순간 첫번째 비밀번호와 같은지 확인-->
+							<div >
+								<span><input type="password" class="pw_confirm"  id="user_pwchk" placeholder="비밀번호확인"
+								onfocus="this.placeholder=''" onblur="this.placeholder='비밀번호를 다시 입력해주세요'"> 
+								</span>
+								<span id ="confirmMsg"></span> <!--확인 메세지-->
+							</div>	
+						</div>
+						<div class="infoAlignb">
+							＊ 이름
+							<div class="nameInput">
+								<input type="text" class="userNameIn" id="user_name" name="user_name" required="required">
+							</div>
+						</div>
+						<div class="infoAlignb">
+						
+							＊ 이메일<!--메일 인증을 하고싶으면 테이블에 컬럼필요, 아작스 이용.-->
+							<div class="userEmail">	
+									<input type="text" class="userEmailHead" id="user_email" required>
+									<span id="middle">@</span><input type="text" class="userEmailTail" id="email_address" list="user_email_address">
+										<datalist id="user_email_address">
+											<option value="naver.com"></option>
+											<option value="daum.com"></option>
+											<option value="gmail.com"></option>
+											<option value="직접입력"></option>
+										</datalist>
+										<input type="hidden" id="email" name="email" value="">
+								</div>
+							<!-- 	/*-------------이메일주소 가져오기--------------*/ -->		
+								<script type="text/javascript">
+											$("#user_email").blur(function(){
+												totalemail();	
+											});
+											
+											$("#email_address").change(function(){
+												totalemail();	
+											});
+						
+											function totalemail() {
+												const user_email = $("#user_email").val();
+												const middle = $("#middle").text();
+												const email_address = $("#email_address").val();
+												if(user_email != "" && email_address != "") {
+													$("#email").val(user_email+middle+email_address);
+												}
+											};
 			
-		</div>
-	</form>
+								</script>
+			
+						</div>
+						<div class="infoAlignb">
+							＊ 전화번호
+							<div >
+								<input type="text"  id="con_tel" name="con_tel" class="phone" required="required" maxlength="13" placeholder="000-0000-0000"
+								onfocus="this.placeholder=''" onblur="this.placeholder='000-0000-0000'" pattern="\d{2,3}-\d{3,4}-\d{4}">
+							</div>
+						</div>
+						<div class="infoAlignc">
+							＊ 주소 
+							<div class="PostTot">
+								<div class="postCode">
+									<input type="text"  id="postcode" placeholder="우편번호"><br>	
+					   			</div>
+					   			<div class="searchBtn">
+					   				<input type="button" onclick="postcodeBtn()" value="우편번호 검색"><br>
+					   			</div>
+					   			<div>
+					   				<input type="text" class="addr1" name="con_addr1" id="con_addr1" placeholder="주소" readonly="readonly"><br>
+				   					<input type="text" class="addr2" name="con_addr2" id="con_addr2" placeholder="상세주소" onfocus="this.placeholder=''" onblur="this.placeholder='상세주소'" required="required">
+								</div>
+							</div>
+						</div>
+						<div class="infoAlignb">	
+							<div class="photoTxt">	＊ 프로필<p>&nbsp&nbsp&nbsp사진등록</div>
+							<div class="userPotoWrap">
+								<!--null인경우 랜덤값으로 넣어야 할텐디(1~7) how 아작스 구현할것 고니언니한티물어보자-->
+								<div class="userPhotoo">
+									<img class="userImg" id="user_photo"  name="user_photo" alt="기본 프로필 사진">
+									<input type="hidden" id="photoChange" name="photoChange" value=""> <!--히든의값에 어떻게 값을 넣지?-->
+									<!-- <label class="photoFile1" for="photoFile">사진변경</label> -->
+								</div>
+								<div class="potoFileeee">
+									<input id="photoFile" class="photoFile" type="file" name="multi" />
+								</div>
+									<script type="text/javascript">
+										const images = [ //디폴트이미지1~7개 랜덤으로 값을 값을 정함
+											"default_profile1.png","default_profile2.png","default_profile3.png",
+											"default_profile4.png","default_profile5.png","default_profile6.png","default_profile7.png"]
+										const chosenImage = images[Math.floor(Math.random() * 6 + 1)];/*1~7의 랜덤숫자 */
+										const user_image = document.getElementById("user_photo");
+										user_image.src = 'img/'+chosenImage;
+									//	alert("user_image.src "+ user_image.src);
+										$("#photoChange").val(chosenImage);
+										/* bgImage.src = "img/"+chosenImage; //img 태그속성을 넣어줌
+										document.body.appendChild(bgImage); // */
+										/*프로필 사진 미리보기 */
+										function readImage(input) {
+										    // 인풋 태그에 파일이 있는 경우
+										    if(input.files && input.files[0]) {
+										        // 이미지 파일인지 검사 (생략)
+										        // FileReader 인스턴스 생성
+										        const reader = new FileReader();
+										        // 이미지가 로드가 된 경우
+										        reader.onload = function(e) {
+										            const previewImage = document.getElementById("user_photo");
+										            previewImage.src = e.target.result;
+										        }
+										        // reader가 이미지 읽도록 하기
+										        reader.readAsDataURL(input.files[0]);
+										    }
+										}
+										// input file에 change 이벤트 부여(click같은 이벤트임) 변화를 감지
+										const inputImage = document.getElementById("photoFile");
+										inputImage.addEventListener('change', function(e){
+										    readImage(e.target);
+										})
+									</script>
+							</div>
+						</div> <!-- 프로필사진 디브 -->
+				</div>
+							
+			<!-- 	<!--성공시 회원가입을 축하합니다알러트 뜨고 로그인화면 이동-->
+				<div id="buttons" style="display: inline-flex;"> 
+						<input id="findID_submit-button" class="custom-btn btn-16" type="button" value="취소"  onclick = "location.href = '${pageContext.request.contextPath}/main' ">
+						<input id="login_submit-button" class="custom-btn btn-16" type="button" value="회원가입" onclick="joinBtn()">
+				</div>
+			   
+			 	<p class="202206">© 2022.06 – 2022.07</p>
+			</main>
+		</form>
+	</div>
 
 <jsp:include page="/WEB-INF/views/base/footer.jsp" flush="true">
 	<jsp:param value="" name=""/>

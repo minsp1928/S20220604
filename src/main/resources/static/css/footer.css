@@ -4,99 +4,125 @@ body{
     margin: 0 auto;
 }
 footer{
-
     background-color: #5d6d68;
-    
     justify-content: space-between;
     display: flex;
     margin: 0 auto;
-    
-
+    margin-top: 150px;
     background-size: 40px, 120px, 40px 40px, 120px 120px;
-    height: 250px;
+    height: 170px;
     width: 100%;
-   /*  transform : translateY(10%); */
 }
 
 footer #footer_left{
-    width: 30%;
+    width: 20%;
     height: 100%;
 
 }
 
 #footer_img {
-    width:30%;
-    height:80%;
+    width:100%;
+    height:100%;
     margin:0 auto;
     display: flex;
     align-items: center;
     justify-content: center;
-}
-
-#logofooter_img {
-    text-align: center;
-    width:115px;
-    height:115px;
-    object-fit:cover;
-}
-
-
-footer #footer_info{
-    color:#f4f1e9;
-    margin-left: 50px;
-    line-height: 140%;
-}
-footer #footer_right {
-    width:60%;
-    height: 100%;
-    margin-left: 50px;
-    margin-right: 50px;
-}
-
-#footer_right #footer_right_top{
-    display: flex;
-    justify-content: space-between;
-    margin-top: 6%;
-    margin-bottom: 3%;
-}
-
-#footer_right_top #footer_teamName{
-    width: 70%;
-    display: flex;
-}
-
-#footer_PTM{
-    font-size: 1.1em;
-    color: #f4f1e9;
-    margin-left: 20px;
-    line-height: 250%;
-    padding-left: 3%;
-}
-
-#footer_PL{
-    font-size: 1.1em;
-    color: #f4f1e9;
-    line-height: 250%;
-}
-
-#footer_right_top #footer_admin{
-    width: 30%;
-    font-size: 1.5em;
-    line-height: 200%;
-    margin-left: 40%;
+    object-fit: contain;
 }
 
 footer a {
     color: #f4f1e9;
     text-decoration:none;
 }
-
-hr{
-	color: #070a08;
-	border: 2px;
+footer a:hover{
+   color: #a6d377;
+   text-decoration: none;
 }
+footer a:after{
+   color: #f4f1e9;
+   text-decoration: none;
+}
+
+#logofooter_img {
+    text-align: center;
+    height:14vh;
+    margin-top: 1vh;
+}
+
+
+footer #footer_right {
+    width:70%;
+    margin-left: -30px;
+    margin-right: 10px;
+    margin-top: 5.2vh;
+}
+
+footer #footer_info{
+    color:#f4f1e9;
+    font-size: 0.9em;
+}
+
+#footer_center{
+   display: flex;
+}
+
 footer #footer_inc{
     color: #f4f1e991;
+    font-size: 0.7em;
+}
+
+#footer_right_top{
+    display: flex;
+    justify-content: space-between;
+    width: 60%;
+    margin-left: 5%;
+}
+
+#footer_right_top #footer_teamName{
+    width: 100%;
+    display: flex;
+    font-size: 0.7em;
+}
+
+
+#footer_PL{
+    font-size: 1.1em;
+    color: #f4f1e9;
+    line-height: 250%;
+    display: flex;
+    justify-content: space-around;
+    width: 40%;
+}
+
+#footer_PTM{
+    font-size: 1.1em;
+    color: #f4f1e9;
+    line-height: 250%;
+    display: flex;
+    justify-content: space-around;
+    width: 60%;
+    margin-left: 2vw;
+}
+
+
+footer hr{
+   color: #070a08;
+   border: 2px;
+   margin: 0 auto;
+   margin-top: 10px;
+   margin-bottom: 10px;
+}
+
+#footer_admin{
+   width: 10%;
+   text-align: right;
+   display: flex;
+   align-items: flex-start;
+   justify-content: center;
+   flex-direction: column;
+   font-size: 1.2em;
+   line-height: 100%;
+   margin-top: 5vh;
 }
 
 font-family: 'Noto Sans KR', sans-serif;

@@ -4,9 +4,43 @@
 
 <mapper namespace="com.oracle.S20220604.PaymentMapper">
 	
-	<select id="jshPaymentinfo" resultType="Payment">
-		select member.user_id, member.user_name, member.con_tel, member.con_addr from member
+	<select id="jshBuyerInfo" parameterType="String" resultType="Member">
+		select user_id, user_name, con_tel, con_addr1, con_addr2 from member where user_id= #{user_id}
 	</select>
-
-
+	
+	<insert id="jshInsertPayment" parameterType="Payment">
+		insert into Payment values (SEQ_PAY_TOT_NUM.nextval, #{pay_tot}, #{user_id},  #{pay_state}, 
+		                            #{pay_name},    #{pay_address},  #{pay_tell}, #{cp_state}, 
+		                            #{cp_num},      #{pay_req},      #{pay_date})	
+	</insert>
+	
+	<select id="jshBuyProductSearch" parameterType="int" resultType="Product">
+		select pro_price, pro_title, pro_photo from product where pro_num = #{pro_num}
+	</select>
+	
+	<select id="jshBuyCoupon" parameterType="Coupon" resultType="Coupon">
+		select user_id, cp_num, cp_name, cp_category, cp_price, cp_status  
+		from coupon where 	#{to_date} >= st_date and end_date >= #{to_date} and user_id=#{user_id} 
+		and	cp_status=0
+	</select>
+	
+	<update id="jshBuyCouponUpdate" parameterType="Coupon">
+		update Coupon set cp_status = 1 where user_id = #{user_id} and cp_num = #{cp_num}
+	</update>
+	
+	<update id="jshBuyProdcutUpdate" parameterType="int">
+		update product 
+		set amount = amount - 1, sell_amount = sell_amount + 1 
+		where pro_num = #{pro_num}
+	</update>
+	
+	<select id="jshSearchPayTotNum" resultType="int">
+		select MAX(PAY_TOT_NUM) from payment where user_id=#{user_id}
+	</select> 
+	
+	<insert id="jshInsertorder" parameterType="MyPageVO">
+		INSERT INTO MYPAGE (PAY_TOT_NUM, PRO_NUM, QUANTITY, ORDER_STATUS, PURCHASE_STATUS, PRODUCT_STATUS, REFUND_STATUS, REFUND_REASON) 
+		VALUES (#{pay_tot_num}, #{pro_num}, #{quantity}, '1', '1', '1', '1', '1')
+	</insert>
+	
 </mapper>
